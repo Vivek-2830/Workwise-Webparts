@@ -4,4 +4,5 @@ export interface IHomePageQuickLinksHubProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

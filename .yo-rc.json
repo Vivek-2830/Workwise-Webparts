@@ -1,7 +1,7 @@
 {
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "version": "1.14.0",
     "libraryName": "workwise-webparts",
     "libraryId": "e4dcbdae-fe01-4709-816a-e71b5e96843c",

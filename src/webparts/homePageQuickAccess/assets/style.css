@@ -1,0 +1,98 @@
+.quick-access-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    background-color: #f8f9fb;
+}
+
+.quick-access-wrapper h2 {
+    margin-bottom: 6px;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #3c7f86;
+    margin-bottom: 30px;
+}
+
+.qa-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.qa-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px 22px;
+    /* box-shadow: 0 0 0 1px #e6eef1; */
+    text-align: left;
+    transition: all .25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e6f0f3;
+}
+
+.qa-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+.qa-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.card-icon {
+    font-size: 22px;
+}
+
+.card-icon img {
+    width: 19px;
+    height: 18px;
+}
+
+.qa-card ul {
+    list-style: none;
+    padding: 0 13px;
+    margin: 0;
+}
+
+.qa-card li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.item-icon {
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.item-icon img {
+    width: 17px;
+    height: 16px;
+}
+
+.qa-card li strong {
+    display: block;
+    font-size: 14px;
+}
+
+.qa-card li p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: #4d8b90;
+}
+
+@media (max-width: 900px) {
+    .qa-cards {
+        grid-template-columns: 1fr;
+    }
+}

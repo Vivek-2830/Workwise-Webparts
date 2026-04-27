@@ -1,0 +1,71 @@
+.slick-next {
+    right: -15px;
+}
+
+.welcome-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.welcome-left {
+    max-width: 600px;
+}
+
+.welcome-user {
+    color: #00a3a3;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.welcome-left h1 {
+    font-size: 27px;
+    /* line-height: 1.2; */
+    /* margin: 10px 0 15px; */
+    font-family: sans-serif;
+}
+
+.welcome-desc {
+    color: #040404;
+    line-height: 1.2;
+    margin-bottom: 26px;
+    /* font-size: 13px; */
+    /* font-family: sans-serif; */
+}
+
+
+.welcome-right img {
+    width: 420px;
+    border-radius: 18px;
+    object-fit: cover;
+    height: 300px;
+}
+
+.welcome-right video {
+    width: 420px;
+    border-radius: 18px;
+    object-fit: cover;
+    height: 300px;
+}
+
+
+.anno-read {
+    font-weight: 600;
+    text-decoration: none;
+    color: #007680;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .welcome-container {
+        flex-direction: column;
+        padding: 30px 20px;
+    }
+
+    .welcome-left h1 {
+        font-size: 28px;
+    }
+
+}

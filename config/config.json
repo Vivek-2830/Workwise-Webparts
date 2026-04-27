@@ -9,11 +9,164 @@
           "manifest": "./src/webparts/homePageQuickLinksHub/HomePageQuickLinksHubWebPart.manifest.json"
         }
       ]
+    },
+    "home-page-announcement-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageAnnouncementPart/HomePageAnnouncementPartWebPart.js",
+          "manifest": "./src/webparts/homePageAnnouncementPart/HomePageAnnouncementPartWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-poll-request-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePagePollRequest/HomePagePollRequestWebPart.js",
+          "manifest": "./src/webparts/homePagePollRequest/HomePagePollRequestWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-events-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageEvents/HomePageEventsWebPart.js",
+          "manifest": "./src/webparts/homePageEvents/HomePageEventsWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-news-announcements-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageNewsAnnouncements/HomePageNewsAnnouncementsWebPart.js",
+          "manifest": "./src/webparts/homePageNewsAnnouncements/HomePageNewsAnnouncementsWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-userguide-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageUserguide/HomePageUserguideWebPart.js",
+          "manifest": "./src/webparts/homePageUserguide/HomePageUserguideWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-intranet-fa-qs-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageIntranetFaQs/HomePageIntranetFaQsWebPart.js",
+          "manifest": "./src/webparts/homePageIntranetFaQs/HomePageIntranetFaQsWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-policies-and-doc-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePagePoliciesAndDoc/HomePagePoliciesAndDocWebPart.js",
+          "manifest": "./src/webparts/homePagePoliciesAndDoc/HomePagePoliciesAndDocWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-quick-access-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageQuickAccess/HomePageQuickAccessWebPart.js",
+          "manifest": "./src/webparts/homePageQuickAccess/HomePageQuickAccessWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-page-banner-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubPageBanner/EmployeehubPageBannerWebPart.js",
+          "manifest": "./src/webparts/employeehubPageBanner/EmployeehubPageBannerWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-announcement-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubAnnouncement/EmployeehubAnnouncementWebPart.js",
+          "manifest": "./src/webparts/employeehubAnnouncement/EmployeehubAnnouncementWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-perkof-month-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubPerkofMonth/EmployeehubPerkofMonthWebPart.js",
+          "manifest": "./src/webparts/employeehubPerkofMonth/EmployeehubPerkofMonthWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-benefits-section-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubBenefitsSection/EmployeehubBenefitsSectionWebPart.js",
+          "manifest": "./src/webparts/employeehubBenefitsSection/EmployeehubBenefitsSectionWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-hr-team-contact-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubHrTeamContact/EmployeehubHrTeamContactWebPart.js",
+          "manifest": "./src/webparts/employeehubHrTeamContact/EmployeehubHrTeamContactWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-our-values-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubOurValues/EmployeehubOurValuesWebPart.js",
+          "manifest": "./src/webparts/employeehubOurValues/EmployeehubOurValuesWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-internal-vacancies-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubInternalVacancies/EmployeehubInternalVacanciesWebPart.js",
+          "manifest": "./src/webparts/employeehubInternalVacancies/EmployeehubInternalVacanciesWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-hr-quicklinks-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubHrQuicklinks/EmployeehubHrQuicklinksWebPart.js",
+          "manifest": "./src/webparts/employeehubHrQuicklinks/EmployeehubHrQuicklinksWebPart.manifest.json"
+        }
+      ]
+    },
+    "employeehub-hrfa-qs-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeehubHrfaQs/EmployeehubHrfaQsWebPart.js",
+          "manifest": "./src/webparts/employeehubHrfaQs/EmployeehubHrfaQsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "HomePageQuickLinksHubWebPartStrings": "lib/webparts/homePageQuickLinksHub/loc/{locale}.js",
-    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "HomePageAnnouncementPartWebPartStrings": "lib/webparts/homePageAnnouncementPart/loc/{locale}.js",
+    "HomePagePollRequestWebPartStrings": "lib/webparts/homePagePollRequest/loc/{locale}.js",
+    "HomePageEventsWebPartStrings": "lib/webparts/homePageEvents/loc/{locale}.js",
+    "HomePageNewsAnnouncementsWebPartStrings": "lib/webparts/homePageNewsAnnouncements/loc/{locale}.js",
+    "HomePageUserguideWebPartStrings": "lib/webparts/homePageUserguide/loc/{locale}.js",
+    "HomePageIntranetFaQsWebPartStrings": "lib/webparts/homePageIntranetFaQs/loc/{locale}.js",
+    "HomePagePoliciesAndDocWebPartStrings": "lib/webparts/homePagePoliciesAndDoc/loc/{locale}.js",
+    "HomePageQuickAccessWebPartStrings": "lib/webparts/homePageQuickAccess/loc/{locale}.js",
+    "EmployeehubPageBannerWebPartStrings": "lib/webparts/employeehubPageBanner/loc/{locale}.js",
+    "EmployeehubAnnouncementWebPartStrings": "lib/webparts/employeehubAnnouncement/loc/{locale}.js",
+    "EmployeehubPerkofMonthWebPartStrings": "lib/webparts/employeehubPerkofMonth/loc/{locale}.js",
+    "EmployeehubBenefitsSectionWebPartStrings": "lib/webparts/employeehubBenefitsSection/loc/{locale}.js",
+    "EmployeehubHrTeamContactWebPartStrings": "lib/webparts/employeehubHrTeamContact/loc/{locale}.js",
+    "EmployeehubOurValuesWebPartStrings": "lib/webparts/employeehubOurValues/loc/{locale}.js",
+    "EmployeehubInternalVacanciesWebPartStrings": "lib/webparts/employeehubInternalVacancies/loc/{locale}.js",
+    "EmployeehubHrQuicklinksWebPartStrings": "lib/webparts/employeehubHrQuicklinks/loc/{locale}.js",
+    "EmployeehubHrfaQsWebPartStrings": "lib/webparts/employeehubHrfaQs/loc/{locale}.js"
   }
 }

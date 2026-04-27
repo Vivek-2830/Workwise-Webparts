@@ -1,0 +1,137 @@
+/* ================= EVENTS ================= */
+
+/* .events-panel {
+    width: 55%;
+} */
+
+/* .events-scroll {
+    max-height: 535px;
+    overflow-y: auto;
+    padding-right: 8px;
+    padding-left: 6px;
+} */
+
+.events-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.events-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.events-scroll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.events-scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.event-Meeting {
+    height: 54px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    margin-bottom: 18px;
+    position: relative;
+    border-right: 4px solid #1aa3a3;
+}
+
+.event-Business {
+    height: 54px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    margin-bottom: 18px;
+    position: relative;
+    border-right: 4px solid #0a3d62;
+}
+
+.event-Training {
+    height: 54px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    margin-bottom: 18px;
+    position: relative;
+    border-right: 4px solid #ffa07a;
+}
+
+/* .event-card.active {
+    border-left: 4px solid #1aa3a3;
+} */
+
+.event-date {
+    text-align: center;
+    /* min-width: 50px; */
+}
+
+.event-date h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.event-date span {
+    font-size: 12px;
+    color: #999;
+}
+
+.event-info p {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.event-time {
+    margin: 0;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 9px;
+}
+
+.event-info a {
+    font-size: 13px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+}
+
+.event-tag {
+    margin-left: auto;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #fff;
+    width: 56px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.week {
+    background: #0aa3a3;
+}
+
+.Business {
+    background: #0a3d62;
+}
+
+.Training {
+    background: #ffa07a;
+}

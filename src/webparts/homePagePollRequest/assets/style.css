@@ -1,0 +1,226 @@
+.Poll-card {
+    width: 315px;
+    background: #005a5f;
+    color: #fff;
+    border-radius: 16px;
+    padding: 18px 18px 22px;
+    margin-bottom: 30px;
+}
+
+.Poll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+.Poll-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.arrow {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* ===== Poll Chart ===== */
+
+.Poll-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 28px 0 22px;
+}
+
+.Poll {
+    width: 181px;
+    height: 181px;
+    border-radius: 50%;
+    background:
+        conic-gradient(#5fffd6 0deg 110deg,
+            /* Good */
+            #d9c6ff 110deg 200deg,
+            /* Excellent */
+            #ffd2a8 200deg 260deg,
+            /* Bad */
+            #29c7d9 260deg 360deg
+            /* Average */
+        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Poll-inner {
+    width: 151px;
+    height: 128px;
+    background: #005a5f;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 32px;
+}
+
+.Poll-inner h2 {
+    /* margin: 0; */
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.Poll-inner p {
+    /* margin: 4px 0 0; */
+    font-size: 12px;
+    opacity: 0.9;
+    margin-top: -15px;
+}
+
+.PollButton{
+    margin-top: 15px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff;
+}
+
+
+/* ===== Legend ===== */
+
+.legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 30px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.good {
+    background: #5fffd6;
+}
+
+.excellent {
+    background: #d9c6ff;
+}
+
+.avg {
+    background: #29c7d9;
+}
+
+.bad {
+    background: #ffd2a8;
+}
+
+/* ------------------------------------------------------------------------ */
+
+.user-widget {
+    width: 315px;
+    background: #E0EFF0;
+    border-radius: 16px;
+    padding: 22px 20px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.hello {
+    margin: 0;
+    font-size: 18px;
+}
+
+.hello-underline {
+    width: 28px;
+    height: 3px;
+    background: #1aa3a3;
+    margin: 6px 0 14px;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.context {
+    display: flex;
+    align-items: center;
+}
+
+.context img {
+    margin-right: 11px;
+    width: 19px;
+    height: 19px;
+}
+
+.user-widget hr {
+    border: none;
+    border-top: 1px solid #cfdede;
+    margin: 16px 0;
+}
+
+.user-widget h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
+.fav-list {
+    padding-left: 16px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.fav-list li {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.fav-list li.active {
+    color: #1aa3a3;
+    font-weight: 600;
+}
+
+.views-all {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #007680;
+    text-decoration: none;
+}
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.app-card {
+    background: #fff;
+    border: 1px solid #1aa3a3;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #1aa3a3;
+    cursor: pointer;
+}
+
+.next-i {
+    width: 15px;
+    height: 15px;
+}
