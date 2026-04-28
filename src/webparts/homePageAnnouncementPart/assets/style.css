@@ -69,3 +69,67 @@
     }
 
 }
+
+
+
+
+
+.tbl-label {
+    width: 20%;
+    padding: 10px;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background: #fbfbfb;
+  }
+  
+  .tbl-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .tbl-field input,
+  .tbl-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .upload-btn {
+    background: #0078d4;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .preview-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .preview-item {
+    position: relative;
+  }
+  
+  .remove-icon {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: red;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 2px 5px;
+  }
+  
+  button {
+    background: #0078d4;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+  }

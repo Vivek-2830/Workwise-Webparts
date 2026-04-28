@@ -9,6 +9,7 @@ import * as moment from 'moment';
 export interface IHomePageNewsAnnouncementsState {
   NewsAnnouncementsData: any;
   NewsFilterdData: any;
+ 
 }
 
 require('../assets/style.css');
@@ -21,7 +22,8 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
     
     this.state = {
       NewsAnnouncementsData: "",
-      NewsFilterdData: ""
+      NewsFilterdData: "",
+      
     };
 
   }

@@ -59,6 +59,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
           {
             this.state.hasVoted ?
               <>
+                <h3>{this.state.question}</h3>
+
                 <canvas id="pollChart" height="250"></canvas>
 
               </> : <>
