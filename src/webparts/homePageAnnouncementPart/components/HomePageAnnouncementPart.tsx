@@ -6,11 +6,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { sp } from '@pnp/sp/presets/all';
-import { Announced, Dialog, PrimaryButton } from 'office-ui-fabric-react';
+import { Announced, DefaultButton, Dialog, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 export interface IHomePageAnnouncementPartState {
   AnnouncementsData: any;
   AddAnnouncementDialog: boolean;
+  AddAnnouncementDataDiaolg: boolean;
   Title: any;
   Description: any;
   Source: any;
@@ -20,17 +21,27 @@ export interface IHomePageAnnouncementPartState {
   UploadImages: any;
   UploadVideo: any;
   AllAnnouncementDocuments: any;
+  file: any;
 }
 
 require('../assets/style.css');
+require("../assets/fabric.min.css");
 
 const AddAnnouncementDetailsDialogContentProps = {
   title: "Add Announcement Details",
 };
 
+const AddAnnouncementDataDialogContentProps = {
+  title: "Add Announcements"
+}
+
 const addmodelProps = {
   className: "Add-Dialog"
 };
+
+const addmodelProps2 = {
+  className: "Add-Data-Dialog"
+}
 
 export default class HomePageAnnouncementPart extends React.Component<IHomePageAnnouncementPartProps, IHomePageAnnouncementPartState> {
 
@@ -41,6 +52,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     this.state = {
       AnnouncementsData: "",
       AddAnnouncementDialog: true,
+      AddAnnouncementDataDiaolg: true,
       Title: "",
       Description: "",
       Source: "",
@@ -49,7 +61,8 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
       Videos: [],
       UploadImages: [],
       UploadVideo: [],
-      AllAnnouncementDocuments: []
+      AllAnnouncementDocuments: [],
+      file: ""
     };
 
   }
@@ -145,6 +158,223 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
         </Slider>
 
+        <Dialog
+          hidden={this.state.AddAnnouncementDialog}
+          onDismiss={() =>
+            this.setState({
+              AddAnnouncementDialog: true,
+            })
+          }
+          dialogContentProps={AddAnnouncementDetailsDialogContentProps}
+          modalProps={addmodelProps}
+          maxWidth={1500}
+        >
+
+          <div className='AddAnnouncmentData'>
+            <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddAnnouncementDataDiaolg : false })}/>
+          </div>
+
+          <div className="news-container">
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Source</th>
+                  <th>Images</th>
+                  <th>Link</th>
+                  <th>Videos</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {
+                  this.state.AnnouncementsData.length > 0 &&
+                    this.state.AnnouncementsData.map((item) => {
+                      return (
+                        <tr key={item.ID}>
+                          <td className="title">{item.Title}</td>
+                          <td>{item.Description}</td>
+                          <td>{item.Source}</td>
+                          <td>
+                            {
+                              item.Images ? (
+                                <img src={item.Images} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
+                              ) : (
+                                "No Image"
+                              )
+                            }
+                          </td>
+                          <td>
+                            <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
+                          </td>
+                          <td>
+                            {
+                             item.Videos ? (
+                              <a
+                                href={item.Videos.Url || item.Videos}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                 Watch Video
+                              </a>
+                              ) : (
+                                "No Video"
+                              )
+                            }
+                          </td>
+
+                          <td>
+                            <div style={{ display: "flex", gap: "8px" }}>
+
+                              <IconButton
+                                iconProps={{ iconName: "Edit" }}
+                                title="Edit"
+                                ariaLabel="Edit"
+                                
+                              />
+                             
+                              <IconButton
+                                iconProps={{ iconName: "Delete" }}
+                                title="Delete"
+                                ariaLabel="Delete"
+                               
+                              />
+
+                            </div>
+                          </td>
+
+                        </tr>
+                      );
+                    })
+                }
+
+              </tbody>
+            </table>
+          </div>
+
+        </Dialog>
+
+        <Dialog 
+          hidden={this.state.AddAnnouncementDataDiaolg}
+          onDismiss={() =>
+            this.setState({
+              AddAnnouncementDataDiaolg: true,
+              Title: "",
+              Description: "",
+              Source: "",
+              Images: [],
+              Link: "",
+              Videos: [],
+              UploadImages: [],
+              UploadVideo: ""
+            })
+          }
+          dialogContentProps={AddAnnouncementDataDialogContentProps}
+          modalProps={addmodelProps2}
+          maxWidth={1500}
+        >
+          <div className="ms-Grid-row">
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Announcement Title'
+                  type='text'
+                  onChange={(value) => 
+                    this.setState({ Title: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Description'
+                  type='text'
+                  multiline rows={3}
+                  onChange={(value) => 
+                    this.setState({ Description: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Source'
+                  type='text'
+                  onChange={(value) => 
+                    this.setState({ Source: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <input
+                  aria-label='Upload Image'
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) =>
+                    this.setState({ UploadImages: e.target.files[0] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Link'
+                  type='text'
+                  onChange={(value) => 
+                    this.setState({ Link: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Video'
+                  type='text'
+                  onChange={(value) => 
+                    this.setState({ Videos: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+                <div className='Announcement-Submit'>
+                  <div className='Submit-Button'>
+                    <PrimaryButton
+                      text='Submit'
+                      onClick={() => this.AddAnnouncementData()}
+                    />
+                  </div>
+
+                  <div className='Cancel-Button'>
+                    <DefaultButton
+                      text='Cancel'
+                      onClick={() =>
+                        this.setState({ AddAnnouncementDataDiaolg: true })
+                      }
+                    />
+                  </div>
+
+                </div>
+            </div>
+
+          </div>
+        </Dialog>
+
       </section>
     );
   }
@@ -228,7 +458,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
             Source: item.Source || "",
             Images: imageUrl,
             Videos: videoUrl || videoColumnUrl,
-            Link: item.Link ? (item.Link.Url ? item.Link.Url : item.Link) : ""
+            Link: item.Link 
           });
 
         });
@@ -236,6 +466,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
         this.setState({
           AnnouncementsData: AllData
         });
+        console.log(this.state.AnnouncementsData);
       }
 
     } catch (error) {
@@ -245,32 +476,32 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
   public async AddAnnouncementData() {
     try {
-  
+
       if (this.state.Title.length === 0) {
         alert("Title is required");
         return;
       }
-  
+
       let imageColumnValue: any = null;
-  
+
       if (this.state.UploadImages && this.state.UploadImages.length > 0) {
-  
+
         const fileObj = this.state.UploadImages[0];
         const file = fileObj.content; // ✅ FIX
-  
+
         const uploadResult = await sp.web
           .getFolderByServerRelativeUrl("SiteAssets")
           .files.add(file.name, file, true);
-  
+
         const fileUrl = uploadResult.data.ServerRelativeUrl;
-  
+
         // ✅ FIX (NO stringify)
         imageColumnValue = {
           fileName: file.name,
           serverRelativeUrl: fileUrl
         };
       }
-  
+
       const itemAddResult = await sp.web.lists
         .getByTitle("Announcements")
         .items.add({
@@ -278,19 +509,19 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           Description: this.state.Description,
           Source: this.state.Source,
           Link: this.state.Link,
-  
+
           Images: imageColumnValue,
-  
-          Videos: this.state.UploadVideo
+
+          Videos: this.state.Videos
             ? {
-                Url: this.state.UploadVideo,
-                Description: "Video"
-              }
+              Url: this.state.Videos,
+              Description: "Video"
+            }
             : null
         });
-  
+
       const itemId = itemAddResult.data.Id;
-  
+
       // Attachments (optional)
       if (this.state.UploadImages && this.state.UploadImages.length > 0) {
         for (const fileObj of this.state.UploadImages) {
@@ -300,15 +531,71 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
             .attachmentFiles.add(fileObj.name, fileObj.content);
         }
       }
-  
+
       alert("Announcement added successfully!");
-  
-      this.setState({ AddAnnouncementDialog: true });
+
+      this.setState({ AddAnnouncementDataDiaolg: true });
       this.getannouncement();
-  
+
     } catch (error) {
       console.error("Error adding announcement:", error);
     }
   }
+
+  // public async AddAnnouncementData() {
+  //   try {
   
+  //     if (!this.state.Title || this.state.Title.trim().length === 0) {
+  //       alert("Please enter Title");
+  //       return;
+  //     }
+  
+  //     let imageJson: any = null;
+  
+  //     if (this.state.Images) {
+  
+  //       const file = this.state.Images;
+  
+  //       const uploadResult = await sp.web
+  //         .getFolderByServerRelativePath("SiteAssets")
+  //         .files.addUsingPath(file.name, file, { Overwrite: true });
+  
+  //       const fileUrl = uploadResult.data.ServerRelativeUrl;
+  
+  //       // ✅ NO JSON.stringify HERE
+  //       imageJson = {
+  //         type: "thumbnail",
+  //         fileName: file.name,
+  //         serverUrl: window.location.origin,
+  //         serverRelativeUrl: fileUrl
+  //       };
+  //     }
+  
+  //    const annodata =  await sp.web.lists.getByTitle("Announcements").items.add({
+  //       Title: this.state.Title,
+  //       Description: this.state.Description,
+  //       Source: this.state.Source,
+  //       Link: this.state.Link,
+  
+  //       // ⚠️ FIX for Hyperlink column
+  //       Videos: this.state.Videos
+  //         ? {
+  //             Url: this.state.Videos,
+  //             Description: "Video"
+  //           }
+  //         : null,
+  
+  //       Images: imageJson
+  //     });
+      
+  //     this.setState({ AnnouncementsData : annodata });
+  //     this.setState({ AddAnnouncementDataDiaolg: true });
+  //     this.getannouncement();
+  
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     alert("Something went wrong");
+  //   }
+  // }
+
 }

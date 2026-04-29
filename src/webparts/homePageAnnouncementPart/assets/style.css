@@ -71,65 +71,60 @@
 }
 
 
+.news-container {
+  width: 100%;
+  overflow-x: auto;
+  font-family: Arial, sans-serif;
+}
 
+.news-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
 
+.news-table thead {
+  background-color: #f5f5f5;
+}
 
-.tbl-label {
-    width: 20%;
-    padding: 10px;
-    font-weight: 600;
-    border: 1px solid #ccc;
-    background: #fbfbfb;
-  }
-  
-  .tbl-field {
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .tbl-field input,
-  .tbl-field textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  .upload-btn {
-    background: #0078d4;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .preview-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  
-  .preview-item {
-    position: relative;
-  }
-  
-  .remove-icon {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: red;
-    color: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 10px;
-    padding: 2px 5px;
-  }
-  
-  button {
-    background: #0078d4;
-    color: white;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
+.news-table th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+.news-table td {
+  padding: 12px;
+  vertical-align: top;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.news-table .title {
+  font-weight: bold;
+  color: #333;
+}
+
+.news-table img {
+  width: 120px;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.news-table a {
+  color: #0078d4;
+  text-decoration: none;
+}
+
+.news-table a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Scroll style like your UI */
+.news-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
