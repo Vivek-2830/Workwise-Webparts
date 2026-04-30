@@ -22,6 +22,7 @@ export interface IHomePageAnnouncementPartState {
   UploadVideo: any;
   AllAnnouncementDocuments: any;
   file: any;
+  previewImage: any
 }
 
 require('../assets/style.css');
@@ -58,9 +59,10 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
       Source: "",
       Images: [],
       Link: "",
-      Videos: [],
+      Videos: "",
       UploadImages: [],
       UploadVideo: [],
+      previewImage: "",
       AllAnnouncementDocuments: [],
       file: ""
     };
@@ -71,7 +73,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     const {
       description,
       isDarkTheme,
-      environmentMessage,
       hasTeamsContext,
       userDisplayName
     } = this.props;
@@ -127,7 +128,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
                     {item.Link && (
                       <div className='announcement-read'>
-                        <a href={item.Link} className='anno-read' target="_blank" rel="noopener noreferrer">
+                        <a href={item.Link.Url} className='anno-read' target="_blank" rel="noopener noreferrer">
                           Read more...
                         </a>
                       </div>
@@ -264,11 +265,11 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               Title: "",
               Description: "",
               Source: "",
-              Images: [],
+              // Images: [],
               Link: "",
-              Videos: [],
-              UploadImages: [],
-              UploadVideo: ""
+              Videos:"",
+              //UploadImages: [],
+              //UploadVideo: ""
             })
           }
           dialogContentProps={AddAnnouncementDataDialogContentProps}
@@ -316,14 +317,14 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
             <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
               <div className='Add-Form'>
+                <label><b>Upload Image</b></label><br />
+
                 <input
-                  aria-label='Upload Image'
                   type="file"
                   accept="image/*"
-                  onChange={(e: any) =>
-                    this.setState({ UploadImages: e.target.files[0] })
-                  }
+                  onChange={(e: any) => this.handleImageChange(e)}
                 />
+
               </div>
             </div>
 
@@ -356,7 +357,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                   <div className='Submit-Button'>
                     <PrimaryButton
                       text='Submit'
-                      onClick={() => this.AddAnnouncementData()}
+                      onClick={() => this.AddAnnouncementInfo()}
                     />
                   </div>
 
@@ -474,73 +475,125 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     }
   }
 
-  public async AddAnnouncementData() {
-    try {
+  // public async AddAnnouncementData() {
+  //   try {
 
-      if (this.state.Title.length === 0) {
-        alert("Title is required");
-        return;
-      }
+  //     if (this.state.Title.length === 0) {
+  //       alert("Title is required");
+  //       return;
+  //     }
 
-      let imageColumnValue: any = null;
+  //     let imageColumnValue: any = null;
+
+  //     if (this.state.UploadImages && this.state.UploadImages.length > 0) {
+
+  //       const fileObj = this.state.UploadImages[0];
+  //       const file = fileObj.content; // ✅ FIX
+
+  //       const uploadResult = await sp.web
+  //         .getFolderByServerRelativeUrl("SiteAssets")
+  //         .files.add(file.name, file, true);
+
+  //       const fileUrl = uploadResult.data.ServerRelativeUrl;
+
+  //       // ✅ FIX (NO stringify)
+  //       imageColumnValue = {
+  //         fileName: file.name,
+  //         serverRelativeUrl: fileUrl
+  //       };
+  //     }
+
+  //     const itemAddResult = await sp.web.lists
+  //       .getByTitle("Announcements")
+  //       .items.add({
+  //         Title: this.state.Title,
+  //         Description: this.state.Description,
+  //         Source: this.state.Source,
+  //         Link: this.state.Link,
+
+  //         Images: imageColumnValue,
+
+  //         Videos: this.state.Videos
+  //           ? {
+  //             Url: this.state.Videos,
+  //             Description: "Video"
+  //           }
+  //           : null
+  //       });
+
+  //     const itemId = itemAddResult.data.Id;
+
+  //     // Attachments (optional)
+  //     if (this.state.UploadImages && this.state.UploadImages.length > 0) {
+  //       for (const fileObj of this.state.UploadImages) {
+  //         await sp.web.lists
+  //           .getByTitle("Announcements")
+  //           .items.getById(itemId)
+  //           .attachmentFiles.add(fileObj.name, fileObj.content);
+  //       }
+  //     }
+
+  //     alert("Announcement added successfully!");
+
+  //     this.setState({ AddAnnouncementDataDiaolg: true });
+  //     this.getannouncement();
+
+  //   } catch (error) {
+  //     console.error("Error adding announcement:", error);
+  //   }
+  // }
+
+  public async AddAnnouncementInfo() {
+    if(this.state.Title.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const announcement = await sp.web.lists.getByTitle("Announcements").items.add({
+        Title: this.state.Title,
+        Description: this.state.Description,
+        Source: this.state.Source,
+        Link: this.state.Link
+        ? {
+            Url: this.state.Link,
+            Description: this.state.Link
+          }
+        : null,
+
+      Videos: this.state.Videos
+        ? {
+            Url: this.state.Videos,
+            Description: "Video"
+          }
+        : null
+      });
 
       if (this.state.UploadImages && this.state.UploadImages.length > 0) {
 
-        const fileObj = this.state.UploadImages[0];
-        const file = fileObj.content; // ✅ FIX
-
-        const uploadResult = await sp.web
-          .getFolderByServerRelativeUrl("SiteAssets")
-          .files.add(file.name, file, true);
-
-        const fileUrl = uploadResult.data.ServerRelativeUrl;
-
-        // ✅ FIX (NO stringify)
-        imageColumnValue = {
-          fileName: file.name,
-          serverRelativeUrl: fileUrl
-        };
+        const file = this.state.UploadImages[0];
+  
+        await sp.web.lists
+          .getByTitle("Announcements")
+          .items.getById(announcement.data.Id)
+          .attachmentFiles.add(file.name, file);
       }
+  
 
-      const itemAddResult = await sp.web.lists
-        .getByTitle("Announcements")
-        .items.add({
-          Title: this.state.Title,
-          Description: this.state.Description,
-          Source: this.state.Source,
-          Link: this.state.Link,
-
-          Images: imageColumnValue,
-
-          Videos: this.state.Videos
-            ? {
-              Url: this.state.Videos,
-              Description: "Video"
-            }
-            : null
-        });
-
-      const itemId = itemAddResult.data.Id;
-
-      // Attachments (optional)
-      if (this.state.UploadImages && this.state.UploadImages.length > 0) {
-        for (const fileObj of this.state.UploadImages) {
-          await sp.web.lists
-            .getByTitle("Announcements")
-            .items.getById(itemId)
-            .attachmentFiles.add(fileObj.name, fileObj.content);
-        }
-      }
-
-      alert("Announcement added successfully!");
-
+      // this.setState({ AnnouncementsData: announcement });
       this.setState({ AddAnnouncementDataDiaolg: true });
       this.getannouncement();
 
-    } catch (error) {
-      console.error("Error adding announcement:", error);
     }
   }
+
+  handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      this.setState({
+        UploadImages: [file],
+        previewImage: URL.createObjectURL(file)
+      });
+    }
+  };
 
   // public async AddAnnouncementData() {
   //   try {
