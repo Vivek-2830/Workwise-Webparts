@@ -471,7 +471,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e: any) => this.handleImageChange(e)}
+                  onChange={(e: any) => this.handleUpdateImageChange(e)}
                 />
 
             {
@@ -689,6 +689,18 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     }
   };
 
+  handleUpdateImageChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        EditUploadImages: [file],
+        previewImage: URL.createObjectURL(file)
+      });
+    }
+  
+  }
+
   public async EditAnnouncementInfo(ID) {
     let EditAnnouncement = this.state.AnnouncementsData.filter((item) => {
       if (item.ID == ID) {
@@ -725,8 +737,8 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
       const updateItem = await sp.web.lists.getByTitle("Announcements").items.getById(CurrentAnnouncementDetailsID).update(updateannouncement);
 
-      if (this.state.EditUploadImages && this.state.EditUploadImages.length > 0) {
-        const file = this.state.EditUploadImages[0];
+      if (this.state.UploadImages && this.state.UploadImages.length > 0) {
+        const file = this.state.UploadImages[0];
 
         const itemRef = sp.web.lists
           .getByTitle("Announcements")
