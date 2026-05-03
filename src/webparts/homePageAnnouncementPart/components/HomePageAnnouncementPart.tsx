@@ -207,13 +207,13 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Source</th>
-                  <th>Images</th>
-                  <th>Link</th>
-                  <th>Videos</th>
-                  <th>Actions</th>
+                  <th style={{ width: '20%' }}>Title</th>
+                  <th style={{ width: '30%' }}>Description</th>
+                  <th style={{ width: '30%' }}>Source</th>
+                  <th style={{ width: '15%' }}>Images</th>
+                  <th style={{ width: '15%' }}>Link</th>
+                  <th style={{ width: '15%' }}>Videos</th>
+                  <th style={{ width: '15%' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -420,7 +420,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={UpdateAnnouncementDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          maxWidth={1500}
+          maxWidth={800}
         >
           <div className='ms-Grid-row'>
 

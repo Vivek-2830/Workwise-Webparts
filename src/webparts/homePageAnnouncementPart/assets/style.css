@@ -128,3 +128,22 @@
   max-height: 400px;
   overflow-y: auto;
 }
+
+.AddAnnouncemt {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+}
+
+.AddAnnouncmentData {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: right;
+}
+
+.Announcement-Submit {
+  display: flex;
+  justify-content: left;
+  margin-top: 20px;
+  gap: 10px;
+}

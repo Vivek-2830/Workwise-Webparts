@@ -6,6 +6,7 @@ import { sp } from '@pnp/sp/presets/all';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Announced, DefaultButton, Dialog, Icon, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 export interface IHomePageUserguideState {
   EssentialLearningsData: any;
@@ -13,7 +14,32 @@ export interface IHomePageUserguideState {
 
 require('../assets/style.css');
 
-export default class HomePageUserguide extends React.Component<IHomePageUserguideProps, IHomePageUserguideState> {
+const AddAnnouncementDetailsDialogContentProps = {
+  title: "Add Announcement Details",
+};
+
+const AddAnnouncementDataDialogContentProps = {
+  title: "Add Announcements"
+}
+
+const UpdateAnnouncementDetailsDialogContentProps = {
+  title: "Update Announcement Details"
+}
+
+const updatemodelProps = {
+  className: "Update-Dialog"
+};
+
+const addmodelProps = {
+  className: "Add-Dialog"
+};
+
+const addmodelProps2 = {
+  className: "Add-Data-Dialog"
+}
+
+
+xport default class HomePageUserguide extends React.Component<IHomePageUserguideProps, IHomePageUserguideState> {
 
   constructor(props: IHomePageUserguideProps, state: IHomePageUserguideState) {
   
