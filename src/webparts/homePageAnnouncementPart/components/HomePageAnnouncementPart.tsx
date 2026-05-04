@@ -268,7 +268,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                               iconProps={{ iconName: "Delete" }}
                               title="Delete"
                               ariaLabel="Delete"
-                              onClick={() => this.DeleteAnnouncementInfo(item.DeleteAnnouncementID)}
+                              onClick={() => this.DeleteAnnouncementInfo(item.ID)}
                             />
 
                           </div>
@@ -474,14 +474,26 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
                 />
 
-            {
-              this.state.EditUploadImages != '' && (
-                <div className="Attached-img">
-                  <p>{this.state.EditUploadImages.split('/').pop()}</p>
-                  <Icon iconName="Cancel" onClick={() => { this.setState({ EditUploadImages: '' }) }}></Icon>
-                </div>
-              )
-            }
+                {
+                  this.state.EditUploadImages && (
+                    <div className="Attached-img">
+
+                      {/* ✅ Handle BOTH string + file */}
+                      <p>
+                        {
+                          typeof this.state.EditUploadImages === "string"
+                            ? this.state.EditUploadImages.split('/').pop()
+                            : this.state.EditUploadImages[0]?.name
+                        }
+                      </p>
+
+                      <Icon
+                        iconName="Cancel"
+                        onClick={() => this.setState({ EditUploadImages: "" })}
+                      />
+                    </div>
+                  )
+                }
 
               </div>
             </div>
@@ -695,7 +707,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     if (file) {
       this.setState({
         EditUploadImages: [file],
-        previewImage: URL.createObjectURL(file)
+        // previewImage: URL.createObjectURL(file)
       });
     }
   
@@ -737,21 +749,41 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
       const updateItem = await sp.web.lists.getByTitle("Announcements").items.getById(CurrentAnnouncementDetailsID).update(updateannouncement);
 
-      if (this.state.UploadImages && this.state.UploadImages.length > 0) {
-        const file = this.state.UploadImages[0];
+      // if (this.state.EditUploadImages && this.state.EditUploadImages.length > 0) {
+      //   const file = this.state.EditUploadImages[0];
 
+      //   const itemRef = sp.web.lists
+      //     .getByTitle("Announcements")
+      //     .items.getById(CurrentAnnouncementDetailsID);
+
+      //   const attachments = await itemRef.attachmentFiles();
+
+      //   for (let att of attachments) {
+      //     await itemRef.attachmentFiles.getByName(att.FileName).delete();
+      //   }
+
+      //   await itemRef.attachmentFiles.add(file.name, file);
+      // }
+
+      if (Array.isArray(this.state.EditUploadImages) && this.state.EditUploadImages.length > 0) {
+
+        const file = this.state.EditUploadImages[0];
+  
         const itemRef = sp.web.lists
           .getByTitle("Announcements")
           .items.getById(CurrentAnnouncementDetailsID);
-
+  
+        // delete old attachments
         const attachments = await itemRef.attachmentFiles();
-
+  
         for (let att of attachments) {
           await itemRef.attachmentFiles.getByName(att.FileName).delete();
         }
-
+  
+        // add new file
         await itemRef.attachmentFiles.add(file.name, file);
       }
+  
 
       this.setState({ EditAnnouncementDataDialog: true });
       this.getannouncement();

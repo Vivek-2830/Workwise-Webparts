@@ -4,6 +4,7 @@ import { IHomePagePollRequestProps } from './IHomePagePollRequestProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
 import { Chart } from 'chart.js';
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePagePollRequestState {
   options: any;
@@ -14,6 +15,9 @@ export interface IHomePagePollRequestState {
   counts: any;
   SurveyData: any;
   SurveyResponseData: any;
+  AdduserwidgetDialog: boolean;
+  AdduserwidgetDataDialog: boolean;
+
 }
 
 require('../assets/style.css');
@@ -31,7 +35,9 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       TotalResponses: "",
       counts: "",
       SurveyData: "",
-      SurveyResponseData: ""
+      SurveyResponseData: "",
+      AdduserwidgetDialog: true,
+      AdduserwidgetDataDialog: true
     };
 
 
@@ -102,14 +108,16 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
 
         </div>
 
-
         {/* ---------------------------------------------------------------- */}
-
 
         <div className="user-widget">
 
           <h3 className="hello">Hello {userDisplayName}</h3>
           <div className="hello-underline"></div>
+
+          {/* <div>
+            <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddAnnouncementDialog: false })} /> 
+          </div> */}
 
 
           <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
