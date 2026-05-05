@@ -145,6 +145,22 @@
           "manifest": "./src/webparts/employeehubHrfaQs/EmployeehubHrfaQsWebPart.manifest.json"
         }
       ]
+    },
+    "home-page-video-section-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageVideoSection/HomePageVideoSectionWebPart.js",
+          "manifest": "./src/webparts/homePageVideoSection/HomePageVideoSectionWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-page-all-video-page-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageAllVideoPage/HomePageAllVideoPageWebPart.js",
+          "manifest": "./src/webparts/homePageAllVideoPage/HomePageAllVideoPageWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -167,6 +183,8 @@
     "EmployeehubOurValuesWebPartStrings": "lib/webparts/employeehubOurValues/loc/{locale}.js",
     "EmployeehubInternalVacanciesWebPartStrings": "lib/webparts/employeehubInternalVacancies/loc/{locale}.js",
     "EmployeehubHrQuicklinksWebPartStrings": "lib/webparts/employeehubHrQuicklinks/loc/{locale}.js",
-    "EmployeehubHrfaQsWebPartStrings": "lib/webparts/employeehubHrfaQs/loc/{locale}.js"
+    "EmployeehubHrfaQsWebPartStrings": "lib/webparts/employeehubHrfaQs/loc/{locale}.js",
+    "HomePageVideoSectionWebPartStrings": "lib/webparts/homePageVideoSection/loc/{locale}.js",
+    "HomePageAllVideoPageWebPartStrings": "lib/webparts/homePageAllVideoPage/loc/{locale}.js"
   }
 }

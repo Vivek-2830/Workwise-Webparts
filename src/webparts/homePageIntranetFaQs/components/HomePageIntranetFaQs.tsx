@@ -11,7 +11,7 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
-import { Dialog, IconButton, PrimaryButton } from 'office-ui-fabric-react';
+import { DefaultButton, Dialog, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 export interface IHomePageIntranetFaQsState {
   FaqsAnswersData: any;
@@ -36,7 +36,7 @@ const AddAIntranetfaqDataDialogContentProps = {
   title: "Add Intranet"
 }
 
-const UpdateAnnouncementDetailsDialogContentProps = {
+const UpdateIntranetFaqDetailsDialogContentProps = {
   title: "Update Intranet Details"
 }
 
@@ -89,6 +89,10 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
           <h2>Intranet FAQs</h2>
 
+          <div className='AddAnnouncemt'>
+            <PrimaryButton text='Add FAQs' onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
+          </div>
+
           {
             this.state.FaqsAnswersData.length > 0 &&
             this.state.FaqsAnswersData.map((item) => {
@@ -125,7 +129,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
           }
           dialogContentProps={AddIntranetFaqDetailsDialogContentProps}
           modalProps={addmodelProps}
-          maxWidth={1500}
+          minWidth={1500}
         >
 
           <div className='AddAnnouncmentData'>
@@ -136,12 +140,8 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Description</th>
-                  <th style={{ width: '30%' }}>Source</th>
-                  <th style={{ width: '15%' }}>Images</th>
-                  <th style={{ width: '15%' }}>Link</th>
-                  <th style={{ width: '15%' }}>Videos</th>
+                  <th style={{ width: '20%' }}>Questions</th>
+                  <th style={{ width: '30%' }}>Answers</th>
                   <th style={{ width: '15%' }}>Actions</th>
                 </tr>
               </thead>
@@ -152,36 +152,8 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
                   this.state.FaqsAnswersData.map((item) => {
                     return (
                       <tr key={item.ID}>
-                        <td className="title">{item.Title}</td>
-                        <td>{item.Description}</td>
-                        <td>{item.Source}</td>
-                        <td>
-                          {
-                            item.Images ? (
-                              <img src={item.Images} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
-                            ) : (
-                              "No Image"
-                            )
-                          }
-                        </td>
-                        <td>
-                          <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
-                        </td>
-                        <td>
-                          {
-                            item.Videos ? (
-                              <a
-                                href={item.Videos.Url || item.Videos}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Watch Video
-                              </a>
-                            ) : (
-                              "No Video"
-                            )
-                          }
-                        </td>
+                        <td className="title">{item.Questions}</td>
+                        <td  dangerouslySetInnerHTML={{ __html: item.Answers }}></td>
 
                         <td>
                           <div style={{ display: "flex", gap: "8px" }}>
@@ -190,14 +162,14 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
                               iconProps={{ iconName: "Edit" }}
                               title="Edit"
                               ariaLabel="Edit"
-                              // onClick={() => this.setState({ EditIntranetFaqDataDiaolg: false, CurrentIntranetFaqID: item.ID }, () => this.EditAnnouncementInfo(item.ID))}
+                              onClick={() => this.setState({ EditIntranetFaqDataDiaolg: false, CurrentIntranetFaqID: item.ID }, () => this.EditIntranetFaqDetails(item.ID))}
                             />
 
                             <IconButton
                               iconProps={{ iconName: "Delete" }}
                               title="Delete"
                               ariaLabel="Delete"
-                              // onClick={() => this.DeleteAnnouncementInfo(item.ID)}
+                              onClick={() => this.DeleteIntranetFaqItems(item.ID)}
                             />
 
                           </div>
@@ -210,6 +182,123 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
               </tbody>
             </table>
+          </div>
+
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.AddIntranetFaqDataDialog}
+          onDismiss={() =>
+            this.setState({
+              AddIntranetFaqDataDialog: true,
+              Questions: "",
+              Answers: ""
+            })
+          }
+          dialogContentProps={AddAIntranetfaqDataDialogContentProps}
+          modalProps={addmodelProps2}
+          minWidth={1100}
+        >
+          <div className="ms-Grid-row">
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Announcement Title'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Answers: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Submit'
+                    onClick={() => this.AddIntranetFaqItems()}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ AddIntranetFaqDataDialog: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.EditIntranetFaqDataDiaolg}
+          onDismiss={() =>
+            this.setState({
+              EditIntranetFaqDataDiaolg: true,
+              EditQuestions: "",
+              EditAnswers: ""
+            })
+          }
+          dialogContentProps={UpdateIntranetFaqDetailsDialogContentProps}
+          modalProps={updatemodelProps}
+          minWidth={1100}
+        >
+          <div className='ms-Grid-row'>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Announcement Title'
+                  type='text'
+                  value={this.state.EditQuestions}
+                  onChange={(value) =>
+                    this.setState({ EditQuestions: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Update'
+                    onClick={() => this.UpdateAnnouncementDetails(this.state.CurrentIntranetFaqID)}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ EditIntranetFaqDataDiaolg: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+
           </div>
 
         </Dialog>
@@ -244,6 +333,57 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
     }).catch((error) => {
       console.log("Error fetching FAQs items: ", error);
     });
+  }
+
+  public async AddIntranetFaqItems() {
+    if (this.state.Questions.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const announcement = await sp.web.lists.getByTitle("Intranet FAQ").items.add({
+        Questions: this.state.Questions,
+        Answers: this.state.Answers
+      });
+
+      this.setState({ AddIntranetFaqDataDialog: true });
+      this.getFAQs();
+
+    }
+  }
+
+  public async EditIntranetFaqDetails(ID) {
+    let Editfaq = this.state.FaqsAnswersData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(Editfaq);
+    this.setState({
+      EditQuestions: Editfaq[0].Questions,
+      EditAnswers: Editfaq[0].Answers
+    });
+  }
+
+  public async UpdateAnnouncementDetails(CurrentIntranetFaqID) {
+    try {
+      const updatefaq: any = {
+        Questions: this.state.EditQuestions,
+        Answers: this.state.EditAnswers,
+      };
+
+      const updateItem = await sp.web.lists.getByTitle("Intranet FAQ").items.getById(CurrentIntranetFaqID).update(updatefaq);
+
+      this.setState({ EditIntranetFaqDataDiaolg: true });
+      this.getFAQs();
+
+    } catch (error) {
+      console.log("Error Updating details :", error);
+    }
+  }
+
+  public async DeleteIntranetFaqItems(DeleteIntranetFaqID) {
+    const deleteinfo = await sp.web.lists.getByTitle("Intranet FAQ").items.getById(DeleteIntranetFaqID).delete();
+    this.setState({ FaqsAnswersData: deleteinfo });
+    this.getFAQs();
   }
 
 }

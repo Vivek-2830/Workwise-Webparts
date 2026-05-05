@@ -96,19 +96,19 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
           {
             this.state.QuickLinkAllData.length > 0 &&
             this.state.QuickLinkAllData.map((item) => {
-              let imagePath = "";
-              let ImageInfo = JSON.parse(item.Icons);
-              if (ImageInfo && ImageInfo["serverRelativeUrl"]) {
-                imagePath = ImageInfo["serverRelativeUrl"];
-              }
-              else {
-                imagePath = `${this.props.context.pageContext.site.absoluteUrl}/Lists/Quick Links Hub/Attachments/${item.ID}/${ImageInfo.fileName}`;
-              }
+              // let imagePath = "";
+              // let ImageInfo = JSON.parse(item.Icons);
+              // if (ImageInfo && ImageInfo["serverRelativeUrl"]) {
+              //   imagePath = ImageInfo["serverRelativeUrl"];
+              // }
+              // else {
+              //   imagePath = `${this.props.context.pageContext.site.absoluteUrl}/Lists/Quick Links Hub/Attachments/${item.ID}/${ImageInfo.fileName}`;
+              // }
 
               return (
                 <div className="link-card">
                   <a href={item.Link.Url} style={{ textDecoration: "none" }}>
-                    <img src={imagePath} />
+                    <img src={item.Icons} />
                     <p>{item.Title}</p>
                   </a>
                 </div>
@@ -131,7 +131,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
         >
 
           <div className='AddQuickdata'>
-            <PrimaryButton className='AddQuicklnfo' text='Add Data' onClick={() => this.setState({ AddQuicklinksDataDialog : false })} />
+            <PrimaryButton className='AddQuicklnfo' text='Add Data' onClick={() => this.setState({ AddQuicklinksDataDialog: false })} />
           </div>
 
           <div className="news-container">
@@ -148,18 +148,11 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                 {
                   this.state.QuickLinkAllData.length > 0 &&
                   this.state.QuickLinkAllData.map((item) => {
+
                     return (
                       <tr key={item.ID}>
                         <td className="title">{item.Title}</td>
-                        <td>
-                          {
-                            item.Icons ? (
-                              <img src={item.Icons} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
-                            ) : (
-                              "No Icons"
-                            )
-                          }
-                        </td>
+                        <td><img src={item.Icons} /></td>
                         <td>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
@@ -178,7 +171,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                               iconProps={{ iconName: "Delete" }}
                               title="Delete"
                               ariaLabel="Delete"
-                              onClick={() => this.DeleteQuicklinkinfo(this.state.DeleteQuickLinkDataID)}
+                              onClick={() => this.DeleteQuicklinkinfo(item.ID)}
                             />
 
                           </div>
@@ -279,8 +272,8 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
               EditQuicklinksDataDialog: true,
               EditTitle: "",
               EditLink: "",
-              EditIcons: "",
-              EditUploadIcons: "",
+              EditIcons: [],
+              EditUploadIcons: [],
             })
           }
           dialogContentProps={UpdateQuickLinkDetailsDialogContentProps}
@@ -313,10 +306,19 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                 />
 
                 {
-                  this.state.EditUploadIcons != '' && (
-                    <div className="Attached-img">
-                      <p>{this.state.EditUploadIcons.split('/').pop()}</p>
-                      <Icon iconName="Cancel" onClick={() => { this.setState({ EditUploadIcons: '' }) }}></Icon>
+                  this.state.EditUploadIcons && (
+                    <div className='Attached-img'>
+                      <p>
+                        {
+                          typeof this.state.EditUploadIcons === "string"
+                            ? this.state.EditUploadIcons.split('/').pop()
+                            : this.state.EditUploadIcons[0]?.name
+                        }
+                      </p>
+                      <Icon
+                        iconName="Cancel"
+                        onClick={() => this.setState({ EditUploadIcons: "" })}
+                      />
                     </div>
                   )
                 }
@@ -377,7 +379,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
       "Title",
       "Icons",
       "Link"
-    ).get().then((data) => {
+    ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
       console.log(links);
       console.log(data);
@@ -386,7 +388,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
           AllData.push({
             ID: item.ID ? item.ID : "",
             Title: item.Title ? item.Title : "",
-            Icons: item.Icons ? item.Icons : "",
+            Icons: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icons ? JSON.parse(item.Icons).serverRelativeUrl : require(`../assets/Access.png`),
             Link: item.Link ? item.Link : ""
           });
         });
@@ -443,27 +445,27 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
     if (file) {
       this.setState({
         EditUploadIcons: [file],
-        previewImage: URL.createObjectURL(file)
+        // previewImage: URL.createObjectURL(file)
       });
     }
-  
+
   }
 
   public async EditAnnouncementInfo(ID) {
-      let EditQuicklinksdata = this.state.QuickLinkAllData.filter((item) => {
-        if (item.ID == ID) {
-          return item;
-        }
-      });
-      console.log(EditQuicklinksdata);
-      this.setState({
-        EditTitle: EditQuicklinksdata[0].Title,
-        EditLink: EditQuicklinksdata[0].Link.Url,
-        EditUploadIcons: EditQuicklinksdata[0].Icons,
+    let EditQuicklinksdata = this.state.QuickLinkAllData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(EditQuicklinksdata);
+    this.setState({
+      EditTitle: EditQuicklinksdata[0].Title,
+      EditLink: EditQuicklinksdata[0].Link.Url,
+      EditUploadIcons: EditQuicklinksdata[0].Icons,
 
-      });
+    });
   }
-  
+
   public async UpdateQuicklinksDetails(CurrentQuickLinkDetailsID) {
     try {
       const updateannouncement: any = {
@@ -476,21 +478,25 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
 
       const updateItem = await sp.web.lists.getByTitle("Quick Links Hub").items.getById(CurrentQuickLinkDetailsID).update(updateannouncement);
 
-      if (this.state.UploadIcons && this.state.UploadIcons.length > 0) {
-        const file = this.state.UploadIcons[0];
+      if (Array.isArray(this.state.EditUploadIcons) && this.state.EditUploadIcons.length > 0) {
+
+        const file = this.state.EditUploadIcons[0];
 
         const itemRef = sp.web.lists
           .getByTitle("Quick Links Hub")
           .items.getById(CurrentQuickLinkDetailsID);
 
+        // delete old attachments
         const attachments = await itemRef.attachmentFiles();
 
         for (let att of attachments) {
           await itemRef.attachmentFiles.getByName(att.FileName).delete();
         }
 
+        // add new file
         await itemRef.attachmentFiles.add(file.name, file);
       }
+
 
       this.setState({ EditQuicklinksDataDialog: true });
       this.getquicklinksData();

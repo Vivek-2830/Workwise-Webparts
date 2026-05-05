@@ -196,7 +196,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={AddAnnouncementDetailsDialogContentProps}
           modalProps={addmodelProps}
-          maxWidth={1500}
+          minWidth={1500}
         >
 
           <div className='AddAnnouncmentData'>
@@ -302,7 +302,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={AddAnnouncementDataDialogContentProps}
           modalProps={addmodelProps2}
-          maxWidth={1500}
+          minWidth={1100}
         >
           <div className="ms-Grid-row">
 
@@ -420,7 +420,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={UpdateAnnouncementDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          maxWidth={800}
+          minWidth={1100}
         >
           <div className='ms-Grid-row'>
 

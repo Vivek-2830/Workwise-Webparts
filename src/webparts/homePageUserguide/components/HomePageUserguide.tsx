@@ -147,7 +147,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={AddUserguideDetailsDialogContentProps}
             modalProps={addmodelProps}
-            maxWidth={1200}
+            minWidth={1500}
           >
 
             <div className='AddUserData'>
@@ -201,7 +201,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                                 iconProps={{ iconName: "Delete" }}
                                 title="Delete"
                                 ariaLabel="Delete"
-                                onClick={() => this.DeleteUserGuideInfo(this.state.DeleteUserguideDetailsID)}
+                                onClick={() => this.DeleteUserGuideInfo(item.ID)}
                               />
 
                             </div>
@@ -231,7 +231,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={AddAnnouncementDataDialogContentProps}
             modalProps={addmodelProps2}
-            maxWidth={1200}
+            minWidth={1100}
           >
             <div className="ms-Grid-row">
 
@@ -323,7 +323,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={UpdateuserguideDataDialogContentProps}
             modalProps={updatemodelProps}
-            maxWidth={800}
+            minWidth={1100}
           >
             <div className='ms-Grid-row'>
 
@@ -365,10 +365,20 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                   />
 
                   {
-                    this.state.EditUploadImages != '' && (
+                    this.state.EditUploadImages && (
                       <div className="Attached-img">
-                        <p>{this.state.EditUploadImages.split('/').pop()}</p>
-                        <Icon iconName="Cancel" onClick={() => { this.setState({ EditUploadImages: '' }) }}></Icon>
+                        <p>
+                          {
+                            typeof this.state.EditUploadImages === "string"
+                              ? this.state.EditUploadImages.split('/').pop()
+                              : this.state.EditUploadImages[0]?.name
+                          }
+                        </p>
+
+                        <Icon
+                          iconName="Cancel"
+                          onClick={() => this.setState({ EditUploadImages: "" })}
+                        />
                       </div>
                     )
                   }
@@ -501,10 +511,10 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
     if (file) {
       this.setState({
         EditUploadImages: [file],
-        previewImage: URL.createObjectURL(file)
+        // previewImage: URL.createObjectURL(file)
       });
     }
-
+  
   }
 
   public async EditUserGuideInfo(ID) {
@@ -526,7 +536,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
     try {
       const updateuserguides: any = {
         Title: this.state.EditTitle,
-        Description: this.state.EditEssentialDescription,
+        EssentialDescription: this.state.EditEssentialDescription,
         link: this.state.Editlink ? {
           Url: this.state.Editlink,
           Description: this.state.Editlink
@@ -535,19 +545,22 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
 
       const updateItem = await sp.web.lists.getByTitle("User guides").items.getById(CurrentUserguideDetailsID).update(updateuserguides);
 
-      if (this.state.UploadImages && this.state.UploadImages.length > 0) {
-        const file = this.state.UploadImages[0];
+      if (Array.isArray(this.state.EditUploadImages) && this.state.EditUploadImages.length > 0) {
 
+        const file = this.state.EditUploadImages[0];
+  
         const itemRef = sp.web.lists
           .getByTitle("User guides")
           .items.getById(CurrentUserguideDetailsID);
-
+  
+        // delete old attachments
         const attachments = await itemRef.attachmentFiles();
-
+  
         for (let att of attachments) {
           await itemRef.attachmentFiles.getByName(att.FileName).delete();
         }
-
+  
+        // add new file
         await itemRef.attachmentFiles.add(file.name, file);
       }
 

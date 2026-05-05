@@ -175,7 +175,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={AddNewsDetailsDialogContentProps}
             modalProps={addmodelProps}
-            maxWidth={1100}
+            minWidth={1500}
           >
 
             <div className='AddnewsInfo'>
@@ -231,7 +231,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                                 iconProps={{ iconName: "Delete" }}
                                 title="Delete"
                                 ariaLabel="Delete"
-                                onClick={() => this.DeleteNewsAnnouncementInfo(item.DeleteNewsAnnouncementID)}
+                                onClick={() => this.DeleteNewsAnnouncementInfo(item.ID)}
                               />
 
                             </div>
@@ -262,7 +262,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={AddNewsDataDialogContentProps}
             modalProps={addmodelProps2}
-            maxWidth={900}
+            minWidth={1100}
           >
             <div className="ms-Grid-row">
 
@@ -368,7 +368,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={UpdateNewsDetailsDialogContentProps}
             modalProps={updatemodelProps}
-            maxWidth={800}
+            minWidth={1100}
           >
             <div className='ms-Grid-row'>
 
@@ -423,10 +423,22 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                   />
 
                   {
-                    this.state.EditUploadNewsPhoto != '' && (
+
+                    this.state.EditUploadNewsPhoto && (
                       <div className="Attached-img">
-                        <p>{this.state.EditUploadNewsPhoto.split('/').pop()}</p>
-                        <Icon iconName="Cancel" onClick={() => { this.setState({ EditUploadNewsPhoto: '' }) }}></Icon>
+
+                        <p>
+                          {
+                            typeof this.state.EditUploadNewsPhoto === "string"
+                              ? this.state.EditUploadNewsPhoto.split('/').pop()
+                              : this.state.EditUploadNewsPhoto[0]?.name
+                          }
+                        </p>
+
+                        <Icon
+                          iconName="Cancel"
+                          onClick={() => this.setState({ EditUploadNewsPhoto: "" })}
+                        />
                       </div>
                     )
                   }
@@ -494,8 +506,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
         "NewsPhoto",
         "NewsCategory",
         "NewsDate",
-        "Link",
-        "AttachmentFiles"
+        "Link"
       )
       .expand("AttachmentFiles")
       .orderBy("NewsDate", false)
@@ -571,8 +582,6 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
 
     let filterdata = this.state.NewsAnnouncementsData;
 
-
-
     switch (item.props.itemKey) {
 
       case "company":
@@ -629,8 +638,6 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
           .attachmentFiles.add(file.name, file);
       }
 
-
-      // this.setState({ AnnouncementsData: announcement });
       this.setState({ AddNewsDataDialog: true });
       this.getNewsAnnouncementsData();
 
@@ -654,7 +661,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
     if (file) {
       this.setState({
         EditUploadNewsPhoto: [file],
-        previewImage: URL.createObjectURL(file)
+        // previewImage: URL.createObjectURL(file)
       });
     }
 
@@ -673,7 +680,6 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
       EditNewsDate: new Date(EditNewsannouncement[0].NewsDate),
       EditLink: EditNewsannouncement[0].Link.Url,
       EditUploadNewsPhoto: EditNewsannouncement[0].NewsPhoto,
-
     });
   }
 
@@ -691,8 +697,8 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
 
       const updateItem = await sp.web.lists.getByTitle("News Announcements").items.getById(CurrentNewsAnnouncementID).update(updateannouncement);
 
-      if (this.state.UploadNewsPhoto && this.state.UploadNewsPhoto.length > 0) {
-        const file = this.state.UploadNewsPhoto[0];
+      if (Array.isArray(this.state.EditNewsPhoto) && this.state.EditNewsPhoto.length > 0) {
+        const file = this.state.EditNewsPhoto[0];
 
         const itemRef = sp.web.lists
           .getByTitle("News Announcements")
