@@ -3,9 +3,12 @@ import styles from './HomePagePoliciesAndDoc.module.scss';
 import { IHomePagePoliciesAndDocProps } from './IHomePagePoliciesAndDocProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePagePoliciesAndDocState {
   PolicesData : any;
+  AddPoliciesDialog: boolean;
+  AddPoliciesDataDialog: boolean;
 }
 
 require('../assets/style.css');
@@ -17,7 +20,9 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
     super(props);
 
     this.state = {
-      PolicesData : ""
+      PolicesData : "",
+      AddPoliciesDialog: true,
+      AddPoliciesDataDialog: true,
     };
 
   }
@@ -42,6 +47,10 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
               Policies &amp; Documents
               <div className="policy-underline"></div>
             </h2>
+
+            <div>
+              <PrimaryButton className='Adddoc' text="Add Document" onClick={() => this.setState({ AddPoliciesDialog : false})} />
+            </div>
 
             {/* <button className="view-all">View all</button> */}
           </div>

@@ -17,7 +17,7 @@ export interface IHomePagePollRequestState {
   SurveyResponseData: any;
   AdduserwidgetDialog: boolean;
   AdduserwidgetDataDialog: boolean;
-
+  UserWidgetData: any;
 }
 
 require('../assets/style.css');
@@ -37,7 +37,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       SurveyData: "",
       SurveyResponseData: "",
       AdduserwidgetDialog: true,
-      AdduserwidgetDataDialog: true
+      AdduserwidgetDataDialog: true,
+      UserWidgetData: ""
     };
 
 
@@ -119,16 +120,31 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddAnnouncementDialog: false })} /> 
           </div> */}
 
+          {
+            this.state.UserWidgetData.length > 0 &&
+              this.state.UserWidgetData.map((item) => {
+                return (
+                  <a href={item.Link} style={{ textDecoration: "none", color: "black" }}>
+                    <div className="stat-card">
+                      <div className='context'>
+                        <img src={item.Icon} /><span> {item.Title}</span>
+                      </div>
+                      {/* <strong>3</strong> */}
+                    </div>
+                  </a>
+                );
+              })
+          }
 
-          <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
+
+          {/* <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
             <div className="stat-card">
               <div className='context'>
                 <img src={require("../assets/checkcirclebroken.png")} /><span> My Training</span>
               </div>
-              {/* <strong>3</strong> */}
+              <strong>3</strong>
             </div>
-          </a>
-
+          </a> */}
 
           {/* <div className="stat-card">
                 <div className='context'>
@@ -137,14 +153,14 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 <strong>4</strong>
               </div> */}
 
-          <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
+          {/* <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
             <div className="stat-card">
               <div className='context'>
                 <img src={require("../assets/ticket01.png")} /><span> My IT Tickets</span>
               </div>
-              {/* <strong>5</strong> */}
+              <strong>5</strong>
             </div>
-          </a>
+          </a> */}
 
 
           {/* <h4>My Favorite Articles</h4>
@@ -181,7 +197,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
   }
 
   public async componentDidMount() {
-
+    this.getUserFullAppsData();
+    this.getUserwidgetInfo();
     await this.loadSurvey();
     await this.checkUserVote();
     await this.loadResults();
@@ -425,6 +442,36 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
         this.setState({ SurveyResponseData: AllData });
       }
     });
+  }
+
+  public async getUserwidgetInfo () {
+    const widgetdata = await sp.web.lists.getByTitle("User widget").items.select(
+      "ID",
+      "Title",
+      "Icon",
+      "Link"
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      console.log(widgetdata);
+      console.log(data);
+      if(data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Title: item.Title ? item.Title : "",
+            Icon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.Icon ? JSON.parse(item.Icon).serverRelativeUrl : require(`../assets/ticket01.png`),
+            Link: item.Link ? item.Link : ""
+          });
+        });
+        this.setState({ UserWidgetData: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error Fetching details ", error);
+    });
+  }
+
+  public async getUserFullAppsData() {
+
   }
 
 }

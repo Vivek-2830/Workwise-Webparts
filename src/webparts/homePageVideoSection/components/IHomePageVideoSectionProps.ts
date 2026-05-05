@@ -4,4 +4,5 @@ export interface IHomePageVideoSectionProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }
