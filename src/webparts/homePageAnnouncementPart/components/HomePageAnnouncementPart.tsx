@@ -164,7 +164,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
                   </div>
 
-                  <div className="welcome-right">
+                  {/* <div className="welcome-right">
                     {
                       item.Images ? (
                         <img src={item.Images} alt="announcement" />
@@ -173,6 +173,53 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                           <source src={item.Videos} type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>
+                      ) : (
+                        <img src={require("../assets/Rectangle1.png")} alt="default" />
+                      )
+                    }
+                  </div> */}
+
+                  <div className="welcome-right">
+                    {
+                      item.Images ? (
+                        <img src={item.Images} alt="announcement" />
+                      ) : item.Videos ? (
+
+                        this.getYouTubeEmbedUrl(item.Videos) ? (
+                          // ✅ YouTube iframe
+                          <iframe
+                            style={{
+                              width: "400px",
+                              borderRadius: "18px",
+                              objectFit: "cover",
+                              height: "203px"
+                            }}
+                            src={this.getYouTubeEmbedUrl(item.Videos)!}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="autoplay; encrypted-media"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        ) : (
+                          // ✅ Normal video file (mp4 etc.)
+                          <video
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            controls
+                            style={{
+                              width: "400px",
+                              borderRadius: "18px",
+                              objectFit: "cover",
+                              height: "203px"
+                            }}
+                          >
+                            <source src={item.Videos} type="video/mp4" />
+                          </video>
+                        )
+
                       ) : (
                         <img src={require("../assets/Rectangle1.png")} alt="default" />
                       )
@@ -238,9 +285,10 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                         <td>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
-                        <td>
+                        {/* <td>
                           {
                             item.Videos ? (
+                              
                               <a
                                 href={item.Videos.Url || item.Videos}
                                 target="_blank"
@@ -252,10 +300,30 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                               "No Video"
                             )
                           }
-                        </td>
+                        </td> */}
+
+                        
 
                         <td>
-                          <div style={{ display: "flex", gap: "8px" }}>
+                          <div style={{ display: "flex", gap: "8px" }}><td>
+                            {
+                              item.Videos ? (
+                                this.getYouTubeEmbedUrl(item.Videos) ? (
+                                  <span></span>
+                                ) : (
+                                  <a
+                                    href={item.Videos}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    Watch Video
+                                  </a>
+                                )
+                              ) : (
+                                "No Video"
+                              )
+                            }
+                          </td>
 
                             <IconButton
                               iconProps={{ iconName: "Edit" }}
@@ -371,12 +439,33 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
             <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
               <div className='Add-Form'>
                 <TextField
-                  label='Video'
-                  type='text'
-                  onChange={(value) =>
-                    this.setState({ Videos: value.target["value"] })
-                  }
+                  label="Video"
+                  type="text"
+                  value={this.state.Videos}
+                  onChange={this.handleVideoChange}
+                  placeholder="Enter YouTube URL or text"
                 />
+
+                {/* 🔹 Inline Preview */}
+                {this.state.Videos && (
+                  this.getYouTubeEmbedUrl(this.state.Videos) ? (
+                    <iframe
+                      width="100%"
+                      height="200"
+                      src={this.getYouTubeEmbedUrl(this.state.Videos)!}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                      loading="lazy"
+                      style={{ marginTop: "10px" }}
+                    />
+                  ) : (
+                    <p style={{ marginTop: "10px" }}>
+                      {this.state.Videos}
+                    </p>
+                  )
+                )}
               </div>
             </div>
 
@@ -798,5 +887,24 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     this.setState({ AnnouncementsData: deleteinfo });
     this.getannouncement();
   }
+
+  private getYouTubeEmbedUrl = (url: string): string | null => {
+    if (!url) return null;
+  
+    const regExp =
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
+  
+    const match = url.match(regExp);
+  
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
+    }
+  
+    return null;
+  };
+
+  private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
+    this.setState({ Videos: value || "" });
+  };
 
 }

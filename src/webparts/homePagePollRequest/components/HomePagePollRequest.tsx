@@ -4,7 +4,7 @@ import { IHomePagePollRequestProps } from './IHomePagePollRequestProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
 import { Chart } from 'chart.js';
-import { PrimaryButton } from 'office-ui-fabric-react';
+import { Dialog, IconButton, PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePagePollRequestState {
   options: any;
@@ -15,12 +15,60 @@ export interface IHomePagePollRequestState {
   counts: any;
   SurveyData: any;
   SurveyResponseData: any;
-  AdduserwidgetDialog: boolean;
-  AdduserwidgetDataDialog: boolean;
   UserWidgetData: any;
+  UseFullAppsData: any
+  Title: any;
+  Icon: any;
+  Link: any;
+  UploadIcon: any;
+  EditTitle: any;
+  EditIcon: any;
+  EditLink: any;
+  EditUploadIcon: any;
+  AddUserwidgetDialog: boolean;
+  AdduserwidgetDataDialog: boolean;
+  EdituserwidgetDataDialog: boolean;
+  AppName: any;
+  AppIcon: any;
+  Applink: any;
+  UploadAppIcon: any;
+  EditAppName: any;
+  EditAppIcon: any;
+  EditApplink: any;
+  EditUploadAppIcon: any;
+  AddUsefullDialog: any;
+  AddUsefullDataDialog: any;
+  EditUserfullDataDialog: boolean;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
+
+const AddUserwidgetDataDialogContentProps = {
+  title: "Add Announcement Details",
+};
+
+const AddAnnouncementDataDialogContentProps = {
+  title: "Add Announcements"
+}
+
+const UpdateAnnouncementDetailsDialogContentProps = {
+  title: "Update Announcement Details"
+}
+
+const updatemodelProps = {
+  className: "Update-Dialog"
+};
+
+const addmodelProps = {
+  className: "Add-Dialog"
+};
+
+const addmodelProps2 = {
+  className: "Add-Data-Dialog"
+}
+
 
 export default class HomePagePollRequest extends React.Component<IHomePagePollRequestProps, IHomePagePollRequestState> {
 
@@ -36,11 +84,33 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       counts: "",
       SurveyData: "",
       SurveyResponseData: "",
-      AdduserwidgetDialog: true,
+      UserWidgetData: "",
+      UseFullAppsData: "",
+      Title: "",
+      Icon: [],
+      Link: "",
+      UploadIcon: [],
+      EditTitle: "",
+      EditIcon: [],
+      EditLink: "",
+      EditUploadIcon: [],
+      AddUserwidgetDialog: true,
       AdduserwidgetDataDialog: true,
-      UserWidgetData: ""
+      EdituserwidgetDataDialog: true,
+      AppName: "",
+      AppIcon: [],
+      Applink: "",
+      UploadAppIcon: [],
+      EditAppName: "",
+      EditAppIcon: [],
+      EditApplink: "",
+      EditUploadAppIcon: [],
+      AddUsefullDialog: true,
+      AddUsefullDataDialog: true,
+      EditUserfullDataDialog: true,
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
-
 
   }
 
@@ -116,25 +186,182 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
           <h3 className="hello">Hello {userDisplayName}</h3>
           <div className="hello-underline"></div>
 
-          {/* <div>
-            <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddAnnouncementDialog: false })} /> 
-          </div> */}
+          {
+            this.state.IsAdmin ?
+            <>
+                <div>
+                  <PrimaryButton text='Add' onClick={() => this.setState({ AddUserwidgetDialog: false })} />
+                </div>
+            </>
+            :
+            <>
+            </>
+          }
 
           {
             this.state.UserWidgetData.length > 0 &&
-              this.state.UserWidgetData.map((item) => {
-                return (
-                  <a href={item.Link} style={{ textDecoration: "none", color: "black" }}>
-                    <div className="stat-card">
-                      <div className='context'>
-                        <img src={item.Icon} /><span> {item.Title}</span>
-                      </div>
-                      {/* <strong>3</strong> */}
+            this.state.UserWidgetData.map((item) => {
+              return (
+                <a href={item.Link.Url} style={{ textDecoration: "none", color: "black" }}>
+                  <div className="stat-card">
+                    <div className='context'>
+                      <img src={item.Icon} /><span> {item.Title}</span>
                     </div>
-                  </a>
-                );
-              })
+                    {/* <strong>3</strong> */}
+                  </div>
+                </a>
+              );
+            })
           }
+
+          <Dialog
+            hidden={this.state.AddUserwidgetDialog}
+            onDismiss={() =>
+              this.setState({
+                AddUserwidgetDialog: true,
+              })
+            }
+            dialogContentProps={AddUserwidgetDataDialogContentProps}
+            modalProps={addmodelProps}
+            minWidth={1500}
+          >
+
+            <div className='AddAnnouncmentData'>
+              <PrimaryButton className='AddAnnounInfo' text='Add User Widget' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
+            </div>
+
+            <div className="news-container">
+              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: '20%' }}>Title</th>
+                    <th style={{ width: '30%' }}>Icon</th>
+                    <th style={{ width: '30%' }}>Link</th>
+                    <th style={{ width: '15%' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {
+                    this.state.UserWidgetData.length > 0 &&
+                    this.state.UserWidgetData.map((item) => {
+                      return (
+                        <tr key={item.ID}>
+                          <td className="title">{item.Title}</td>
+                          <td>
+                            {
+                              item.Icon ? (
+                                <img src={item.Icon} alt="announcement" style={{ width: "30px", height: "30px", objectFit: "cover" }} />
+                              ) : (
+                                "No Icon"
+                              )
+                            }
+                          </td>
+                          <td>
+                            <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
+                          </td>
+
+                          <td>
+                            <div style={{ display: "flex", gap: "8px" }}>
+
+                              <IconButton
+                                iconProps={{ iconName: "Edit" }}
+                                title="Edit"
+                                ariaLabel="Edit"
+                                // onClick={() => this.setState({ EditAnnouncementDataDialog: false, CurrentAnnouncementDetailsID: item.ID }, () => this.EditAnnouncementInfo(item.ID))}
+                              />
+
+                              <IconButton
+                                iconProps={{ iconName: "Delete" }}
+                                title="Delete"
+                                ariaLabel="Delete"
+                                // onClick={() => this.DeleteAnnouncementInfo(item.ID)}
+                              />
+
+                            </div>
+                          </td>
+
+                        </tr>
+                      );
+                    })
+                  }
+
+                </tbody>
+              </table>
+            </div>
+
+            {/* -----------------------------Useful Apps-------------------------------- */}
+              
+            <div className='AddAnnouncmentData'>
+                
+              <h2>Useful Apps</h2>
+
+              <PrimaryButton className='AddAnnounInfo' text='Add Apps' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
+            </div>
+
+            <div className="news-container">
+              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: '20%' }}>AppName</th>
+                    <th style={{ width: '30%' }}>AppIcon</th>
+                    <th style={{ width: '30%' }}>Applink</th>
+                    <th style={{ width: '15%' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {
+                    this.state.UseFullAppsData.length > 0 &&
+                    this.state.UseFullAppsData.map((item) => {
+                      return (
+                        <tr key={item.ID}>
+                          <td className="title">{item.AppName}</td>
+                          <td>
+                            {
+                              item.AppIcon ? (
+                                <img src={item.AppIcon} alt="announcement" style={{ width: "30px", height: "30px", objectFit: "cover" }} />
+                              ) : (
+                                "No AppIcon"
+                              )
+                            }
+                          </td>
+                          <td>
+                            <a href={item.Applink.Url} target="_blank" rel="noopener noreferrer">{item.Applink.Description}</a>
+                          </td>
+
+                          <td>
+                            <div style={{ display: "flex", gap: "8px" }}>
+
+                              <IconButton
+                                iconProps={{ iconName: "Edit" }}
+                                title="Edit"
+                                ariaLabel="Edit"
+                                // onClick={() => this.setState({ EditAnnouncementDataDialog: false, CurrentAnnouncementDetailsID: item.ID }, () => this.EditAnnouncementInfo(item.ID))}
+                              />
+
+                              <IconButton
+                                iconProps={{ iconName: "Delete" }}
+                                title="Delete"
+                                ariaLabel="Delete"
+                                // onClick={() => this.DeleteAnnouncementInfo(item.ID)}
+                              />
+
+                            </div>
+                          </td>
+
+                        </tr>
+                      );
+                    })
+                  }
+
+                </tbody>
+              </table>
+            </div>
+
+          </Dialog>
+
+          
 
 
           {/* <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
@@ -144,26 +371,25 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
               </div>
               <strong>3</strong>
             </div>
-          </a> */}
+              </a> 
 
-          {/* <div className="stat-card">
+              <div className="stat-card">
                 <div className='context'>
                   <img src={require("../assets/icon2.png")} /><span> My Approvels</span>
                 </div>
                 <strong>4</strong>
-              </div> */}
-
-          {/* <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
-            <div className="stat-card">
-              <div className='context'>
-                <img src={require("../assets/ticket01.png")} /><span> My IT Tickets</span>
               </div>
-              <strong>5</strong>
-            </div>
-          </a> */}
 
+              <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
+              <div className="stat-card">
+                <div className='context'>
+                  <img src={require("../assets/ticket01.png")} /><span> My IT Tickets</span>
+                </div>
+                <strong>5</strong>
+              </div>
+              </a> 
 
-          {/* <h4>My Favorite Articles</h4>
+              <h4>My Favorite Articles</h4>
 
               <ul className="fav-list">
                 <li>Better Understanding your patients needs</li>
@@ -172,21 +398,31 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 <li>HR Polices and Procedures Guidelines</li>
               </ul>
 
-              <a className="views-all" href="#">View all</a> */}
-
-
+              <a className="views-all" href="#">View all</a> 
+          */}
 
           <h4>Useful Apps</h4>
 
           <div className="apps-grid">
 
-            {/* <a href='https://axiseurope.crm4.dynamics.com/main.aspx?appid=9fa6e94b-63a5-4a31-89d6-6298402f0d3e&pagetype=dashboard&type=system&_canOverride=true' style={{ textDecoration: "none" }}><div className="app-card">Dynamics CE <img className='next-i' src={require("../assets/icon.png")} /></div></a> */}
+            {
+              this.state.UseFullAppsData.length > 0 &&
+              this.state.UseFullAppsData.map((item) => {
+                return (
+                  <a href={item.Applink.Url} style={{ textDecoration: "none" }}>
+                    <div className="app-card">{item.AppName} <img className='next-i' src={item.AppIcon} /></div>
+                  </a>
+                );
+              })
+            }
+
+            {/* <a href='https://axiseurope.crm4.dynamics.com/main.aspx?appid=9fa6e94b-63a5-4a31-89d6-6298402f0d3e&pagetype=dashboard&type=system&_canOverride=true' style={{ textDecoration: "none" }}><div className="app-card">Dynamics CE <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://uk.sheassure.net/clc' style={{ textDecoration: "none" }}><div className="app-card">Evotix <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://bit.ly/4l6gNQc' style={{ textDecoration: "none" }}><div className="app-card" >Outlook <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://go.accessacloud.com/o/repbp/workspaces/98d34671c16d4d2e9e1429a2fd965ec2/Access.PeopleXDEmpMain/2f1f1cba97924b2b891fc2f51a13677a?location=https%3A%2F%2Fmy.xd.accessacloud.com%2Fpls%2Fcoreportal_repbp%2Fi%23EmpMain%2Fmytime' style={{ textDecoration: "none" }}><div className="app-card">PeopleXD <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://teams.cloud.microsoft/' style={{ textDecoration: "none" }}><div className="app-card">Teams <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://servicedesk.axisclc.com/' style={{ textDecoration: "none" }}><div className="app-card">Halo <img className='next-i' src={require("../assets/icon.png")} /></div></a>
-            <a href='https://go.accessacloud.com/o/repbp/workspaces/28609fedc58441bdbf7a8a4cbe52b1c7/Access.Product.Learning/f899dafaf580404cb513eeab0849d751?location=https%3A%2F%2Faxisclcgroup.lms.accessacloud.com%2Fw%2Fhome' style={{ textDecoration: "none" }}><div className="app-card">Training (LMS) <img className='next-i' src={require("../assets/icon.png")} /></div></a>
+            <a href='https://go.accessacloud.com/o/repbp/workspaces/28609fedc58441bdbf7a8a4cbe52b1c7/Access.Product.Learning/f899dafaf580404cb513eeab0849d751?location=https%3A%2F%2Faxisclcgroup.lms.accessacloud.com%2Fw%2Fhome' style={{ textDecoration: "none" }}><div className="app-card">Training (LMS) <img className='next-i' src={require("../assets/icon.png")} /></div></a> */}
           </div>
 
         </div>
@@ -199,10 +435,12 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
   public async componentDidMount() {
     this.getUserFullAppsData();
     this.getUserwidgetInfo();
+    this.GetCurrentUser();
+
     await this.loadSurvey();
     await this.checkUserVote();
     await this.loadResults();
-     this.getSurveyInfo();
+    this.getSurveyInfo();
 
 
     Chart.pluginService.register({
@@ -226,6 +464,23 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       }
     });
 
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   private async loadSurvey() {
@@ -444,7 +699,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
     });
   }
 
-  public async getUserwidgetInfo () {
+  public async getUserwidgetInfo() {
     const widgetdata = await sp.web.lists.getByTitle("User widget").items.select(
       "ID",
       "Title",
@@ -454,7 +709,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       let AllData = [];
       console.log(widgetdata);
       console.log(data);
-      if(data.length > 0) {
+      if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
             ID: item.ID ? item.ID : "",
@@ -471,7 +726,29 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
   }
 
   public async getUserFullAppsData() {
-
+    const apps = await sp.web.lists.getByTitle("Useful Apps").items.select(
+      "ID",
+      "AppName",
+      "AppIcon",
+      "Applink"
+    ).expand("AttachmentFiles").get().then((data) => {
+      let AllData = [];
+      console.log(apps);
+      console.log(data);
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            AppName: item.AppName ? item.AppName : "",
+            AppIcon: item.AttachmentFiles.length > 0 ? item.AttachmentFiles[0].ServerRelativeUrl : item.AppIcon ? JSON.parse(item.AppIcon).serverRelativeUrl : require(`../assets/Icon.png`),
+            Applink: item.Applink ? item.Applink : ""
+          });
+        });
+        this.setState({ UseFullAppsData: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error Fetching details ", error);
+    });
   }
 
 }

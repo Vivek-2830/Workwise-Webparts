@@ -606,7 +606,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
 
       case "all":
       default:
-        filterdata = this.state.NewsFilterdData;
+        filterdata = this.state.NewsAnnouncementsData;
     }
 
     this.setState({ NewsFilterdData: filterdata });

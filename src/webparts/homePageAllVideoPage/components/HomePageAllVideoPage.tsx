@@ -2,8 +2,29 @@ import * as React from 'react';
 import styles from './HomePageAllVideoPage.module.scss';
 import { IHomePageAllVideoPageProps } from './IHomePageAllVideoPageProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { sp } from '@pnp/sp/presets/all';
 
-export default class HomePageAllVideoPage extends React.Component<IHomePageAllVideoPageProps, {}> {
+export interface IHomePageAllVideoPageState {
+  videos: any;
+}
+
+require('../assets/style.css');
+
+export default class HomePageAllVideoPage extends React.Component<IHomePageAllVideoPageProps, IHomePageAllVideoPageState> {
+
+  constructor(props: IHomePageAllVideoPageProps, state: IHomePageAllVideoPageState) {
+
+    super(props);
+
+    this.state = {
+      videos: []
+    };
+
+
+  }
+
+
+
   public render(): React.ReactElement<IHomePageAllVideoPageProps> {
     const {
       description,
@@ -14,30 +35,70 @@ export default class HomePageAllVideoPage extends React.Component<IHomePageAllVi
     } = this.props;
 
     return (
-      <section className={`${styles.homePageAllVideoPage} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+      <section className="homePageAllVideoPage">
+
+        <section id="homePageAllVideoPage">
+          <div>
+            <div className="news-header">
+              <h2 className="section-title">Videos</h2>
+            </div>
+            <br />
+
+            <div className="VideosHeader">
+
+              {this.state.videos.map((item: any, index: number) => (
+
+                <div className="video-container" key={index} style={{ marginBottom: "20px" }}>
+
+                  {/* <h3>{item.Name}</h3> */}
+
+                  <video className="video-bg" autoPlay width="400" muted controls>
+                    <source src={item.ServerRelativeUrl} type="video/mp4" />
+                  </video>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </div>
+        </section>
+
+
+
       </section>
     );
   }
+  public async componentDidMount() {
+    this.getVideos();
+  }
+
+  public getVideos = async () => {
+    try {
+
+      const files = await sp.web.lists
+        .getByTitle("Videos")
+        .rootFolder
+        .files
+        .select("Name", "ServerRelativeUrl")
+        .get();
+
+      const videoFiles = files.filter((item: any) =>
+        item.Name.endsWith(".mp4") ||
+        item.Name.endsWith(".mov") ||
+        item.Name.endsWith(".webm") ||
+        item.Name.endsWith(".avi")
+      );
+
+      this.setState({
+        videos: videoFiles
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 }

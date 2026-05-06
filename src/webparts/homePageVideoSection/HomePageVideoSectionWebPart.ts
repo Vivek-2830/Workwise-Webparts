@@ -11,7 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'HomePageVideoSectionWebPartStrings';
 import HomePageVideoSection from './components/HomePageVideoSection';
 import { IHomePageVideoSectionProps } from './components/IHomePageVideoSectionProps';
-import { sp } from '@pnp/sp';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IHomePageVideoSectionWebPartProps {
   description: string;

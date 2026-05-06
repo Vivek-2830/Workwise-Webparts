@@ -1,0 +1,11 @@
+.news-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.GalleryVideos{
+    width: 90%;
+    margin: 0 auto;
+    object-fit: cover;
+    height: 190px;
+}

@@ -5,7 +5,7 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { sp } from '@pnp/sp';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IHomePageVideoSectionState {
   videos: any;
@@ -50,7 +50,7 @@ export default class HomePageVideoSection extends React.Component<IHomePageVideo
         <div>
           <div className="news-header">
             <h2 className="section-title">Videos</h2>
-            <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/User-Guides1.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
+            <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/Company%20videos.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
               <button className="view-news">View all</button>
             </a>
           </div>
@@ -88,7 +88,7 @@ export default class HomePageVideoSection extends React.Component<IHomePageVideo
         .rootFolder
         .files
         .select("Name", "ServerRelativeUrl")
-        ();
+        .get();
 
       const videoFiles = files.filter((item: any) =>
         item.Name.endsWith(".mp4") ||
