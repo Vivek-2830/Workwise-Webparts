@@ -4,7 +4,7 @@ import { IHomePagePollRequestProps } from './IHomePagePollRequestProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
 import { Chart } from 'chart.js';
-import { Dialog, IconButton, PrimaryButton } from 'office-ui-fabric-react';
+import { DefaultButton, Dialog, Icon, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 export interface IHomePagePollRequestState {
   options: any;
@@ -41,25 +41,43 @@ export interface IHomePagePollRequestState {
   EditUserfullDataDialog: boolean;
   IsAdmin: boolean;
   CurrentUserEmail: any;
+  previewIcon: any;
+  previewAppIcon: any;
+  CurrentUserWidgetDataID: any;
+  DeleteuserWidgetDataID: any;
+  CurrentUsefullappDataID: any;
+  DeleteUsefullappDataID: any;
 }
 
 require('../assets/style.css');
 
 const AddUserwidgetDataDialogContentProps = {
-  title: "Add Announcement Details",
+  title: "Add Details",
 };
 
-const AddAnnouncementDataDialogContentProps = {
-  title: "Add Announcements"
+const AddUserWidgetDetailsContentProps = {
+  title: "Add User Widget Details"
 }
 
-const UpdateAnnouncementDetailsDialogContentProps = {
-  title: "Update Announcement Details"
+const AddUseFullDataDialogContentProps = {
+  title: "Add UseFullApp Details"
+}
+
+const UpdateUserWidgetDetailsDialogContentProps = {
+  title: "Update User Widget Details"
+}
+
+const UpdateUsefullappDetailsDialogContentProps = {
+  title: "Update UseFullApp Details"
 }
 
 const updatemodelProps = {
   className: "Update-Dialog"
 };
+
+const updatemodelProps2 = {
+  className: "Update-Data-Dialog"
+}
 
 const addmodelProps = {
   className: "Add-Dialog"
@@ -67,6 +85,10 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
+}
+
+const addmodelProps3 =  {
+  className: "Add-UseFull-Dialog"
 }
 
 
@@ -109,7 +131,13 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       AddUsefullDataDialog: true,
       EditUserfullDataDialog: true,
       IsAdmin: false,
-      CurrentUserEmail: ""
+      CurrentUserEmail: "",
+      previewAppIcon: "",
+      previewIcon: "",
+      CurrentUserWidgetDataID: "",
+      DeleteuserWidgetDataID: "",
+      CurrentUsefullappDataID: "",
+      DeleteUsefullappDataID: ""
     };
 
   }
@@ -226,6 +254,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             minWidth={1500}
           >
 
+            {/* -----------------------------Useful Widget-------------------------------- */}
+
             <div className='AddAnnouncmentData'>
               <PrimaryButton className='AddAnnounInfo' text='Add User Widget' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
             </div>
@@ -268,14 +298,14 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                                 iconProps={{ iconName: "Edit" }}
                                 title="Edit"
                                 ariaLabel="Edit"
-                                // onClick={() => this.setState({ EditAnnouncementDataDialog: false, CurrentAnnouncementDetailsID: item.ID }, () => this.EditAnnouncementInfo(item.ID))}
+                                onClick={() => this.setState({ EdituserwidgetDataDialog: false, CurrentUserWidgetDataID: item.ID }, () => this.EditUserWidgetsInfo(item.ID))}
                               />
 
                               <IconButton
                                 iconProps={{ iconName: "Delete" }}
                                 title="Delete"
                                 ariaLabel="Delete"
-                                // onClick={() => this.DeleteAnnouncementInfo(item.ID)}
+                                onClick={() => this.DeleteUserWidgetsDetail(item.ID)}
                               />
 
                             </div>
@@ -296,7 +326,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 
               <h2>Useful Apps</h2>
 
-              <PrimaryButton className='AddAnnounInfo' text='Add Apps' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
+              <PrimaryButton className='AddAnnounInfo' text='Add Apps' onClick={() => this.setState({ AddUsefullDataDialog: false })} />
             </div>
 
             <div className="news-container">
@@ -337,14 +367,14 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                                 iconProps={{ iconName: "Edit" }}
                                 title="Edit"
                                 ariaLabel="Edit"
-                                // onClick={() => this.setState({ EditAnnouncementDataDialog: false, CurrentAnnouncementDetailsID: item.ID }, () => this.EditAnnouncementInfo(item.ID))}
+                                onClick={() => this.setState({ EditUserfullDataDialog: false, CurrentUsefullappDataID: item.ID }, () => this.EditUsefullappInfo(item.ID))}
                               />
 
                               <IconButton
                                 iconProps={{ iconName: "Delete" }}
                                 title="Delete"
                                 ariaLabel="Delete"
-                                // onClick={() => this.DeleteAnnouncementInfo(item.ID)}
+                                onClick={() => this.DeleteusefullappDetail(item.ID)}
                               />
 
                             </div>
@@ -361,45 +391,186 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
 
           </Dialog>
 
-          
+          {/* -----------------------------Useful Widget-------------------------------- */}
+          <Dialog
+            hidden={this.state.AdduserwidgetDataDialog}
+            onDismiss={() =>
+              this.setState({
+                AdduserwidgetDataDialog: true,
+                Title: "",
+                Icon: "",
+                Link: ""
+              })
+            }
+            dialogContentProps={AddUserWidgetDetailsContentProps}
+            modalProps={addmodelProps2}
+            minWidth={1100}
+          >
+            <div className="ms-Grid-row">
 
-
-          {/* <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
-            <div className="stat-card">
-              <div className='context'>
-                <img src={require("../assets/checkcirclebroken.png")} /><span> My Training</span>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='Announcement Title'
+                    type='text'
+                    onChange={(value) =>
+                      this.setState({ Title: value.target["value"] })
+                    }
+                  />
+                </div>
               </div>
-              <strong>3</strong>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <label><b>Upload Image</b></label><br />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUserWidgetIcomChange(e)}
+                  />
+
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    onChange={(value) =>
+                      this.setState({ Link: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+                <div className='Announcement-Submit'>
+                  <div className='Submit-Button'>
+                    <PrimaryButton
+                      text='Submit'
+                      onClick={() => this.AddUserwidgetInfo()}
+                    />
+                  </div>
+
+                  <div className='Cancel-Button'>
+                    <DefaultButton
+                      text='Cancel'
+                      onClick={() =>
+                        this.setState({ AdduserwidgetDataDialog: true })
+                      }
+                    />
+                  </div>
+
+                </div>
+              </div>
+
             </div>
-              </a> 
+          </Dialog>
 
-              <div className="stat-card">
-                <div className='context'>
-                  <img src={require("../assets/icon2.png")} /><span> My Approvels</span>
+          {/* -----------------------------Useful Widget-------------------------------- */}
+          <Dialog
+            hidden={this.state.EdituserwidgetDataDialog}
+            onDismiss={() =>
+              this.setState({
+                EdituserwidgetDataDialog: true,
+                EditTitle: "",
+                EditLink: "",
+                EditIcon: "",
+                EditUploadIcon: [],
+              })
+            }
+            dialogContentProps={UpdateUserWidgetDetailsDialogContentProps}
+            modalProps={updatemodelProps}
+            minWidth={1100}
+          >
+            <div className='ms-Grid-row'>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='Title'
+                    type='text'
+                    value={this.state.EditTitle}
+                    onChange={(value) =>
+                      this.setState({ EditTitle: value.target["value"] })
+                    }
+                  />
                 </div>
-                <strong>4</strong>
               </div>
 
-              <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
-              <div className="stat-card">
-                <div className='context'>
-                  <img src={require("../assets/ticket01.png")} /><span> My IT Tickets</span>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <label><b>Upload Image</b></label><br />
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUpdateUserWidgetIconChange(e)}
+                  />
+
+                  {
+                    this.state.EditUploadIcon && (
+                      <div className="Attached-img">
+
+                        {/* ✅ Handle BOTH string + file */}
+                        <p>
+                          {
+                            typeof this.state.EditUploadIcon === "string"
+                              ? this.state.EditUploadIcon.split('/').pop()
+                              : this.state.EditUploadIcon[0]?.name
+                          }
+                        </p>
+
+                        <Icon
+                          iconName="Cancel"
+                          onClick={() => this.setState({ EditUploadIcon: "" })}
+                        />
+                      </div>
+                    )
+                  }
+
                 </div>
-                <strong>5</strong>
               </div>
-              </a> 
 
-              <h4>My Favorite Articles</h4>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    value={this.state.EditLink}
+                    onChange={(value) =>
+                      this.setState({ EditLink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
 
-              <ul className="fav-list">
-                <li>Better Understanding your patients needs</li>
-                <li>401k Updates fpr 2020</li>
-                <li className="active">Covid Frequently Asked Questions</li>
-                <li>HR Polices and Procedures Guidelines</li>
-              </ul>
+              <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+                <div className='Announcement-Submit'>
+                  <div className='Submit-Button'>
+                    <PrimaryButton
+                      text='Update'
+                      onClick={() => this.UpdateUserWidgetstDetails(this.state.CurrentUserWidgetDataID)}
+                    />
+                  </div>
 
-              <a className="views-all" href="#">View all</a> 
-          */}
+                  <div className='Cancel-Button'>
+                    <DefaultButton
+                      text='Cancel'
+                      onClick={() =>
+                        this.setState({ EdituserwidgetDataDialog: true })
+                      }
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+          </Dialog>
 
           <h4>Useful Apps</h4>
 
@@ -424,6 +595,185 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             <a href='https://servicedesk.axisclc.com/' style={{ textDecoration: "none" }}><div className="app-card">Halo <img className='next-i' src={require("../assets/icon.png")} /></div></a>
             <a href='https://go.accessacloud.com/o/repbp/workspaces/28609fedc58441bdbf7a8a4cbe52b1c7/Access.Product.Learning/f899dafaf580404cb513eeab0849d751?location=https%3A%2F%2Faxisclcgroup.lms.accessacloud.com%2Fw%2Fhome' style={{ textDecoration: "none" }}><div className="app-card">Training (LMS) <img className='next-i' src={require("../assets/icon.png")} /></div></a> */}
           </div>
+
+          <Dialog
+            hidden={this.state.AddUsefullDataDialog}
+            onDismiss={() =>
+              this.setState({
+                AddUsefullDataDialog: true,
+                Title: "",
+                Icon: "",
+                Link: ""
+              })
+            }
+            dialogContentProps={AddUseFullDataDialogContentProps}
+            modalProps={addmodelProps3}
+            minWidth={1100}
+          >
+            <div className="ms-Grid-row">
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='AppName'
+                    type='text'
+                    onChange={(value) =>
+                      this.setState({ AppName: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <label><b>Upload AppIcon</b></label><br />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUseFullappIconChange(e)}
+                  />
+
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='App Link'
+                    type='text'
+                    onChange={(value) =>
+                      this.setState({ Applink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+                <div className='Announcement-Submit'>
+                  <div className='Submit-Button'>
+                    <PrimaryButton
+                      text='Submit'
+                      onClick={() => this.AddUseFullAppInfo()}
+                    />
+                  </div>
+
+                  <div className='Cancel-Button'>
+                    <DefaultButton
+                      text='Cancel'
+                      onClick={() =>
+                        this.setState({ AddUsefullDataDialog: true })
+                      }
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </Dialog>
+
+          <Dialog
+            hidden={this.state.EditUserfullDataDialog}
+            onDismiss={() =>
+              this.setState({
+                EditUserfullDataDialog: true,
+                EditAppName: "",
+                EditApplink: "",
+                EditAppIcon: "",
+                EditUploadAppIcon: [],
+              })
+            }
+            dialogContentProps={UpdateUsefullappDetailsDialogContentProps}
+            modalProps={updatemodelProps2}
+            minWidth={1100}
+          >
+            <div className='ms-Grid-row'>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <TextField
+                    label='Title'
+                    type='text'
+                    value={this.state.EditAppName}
+                    onChange={(value) =>
+                      this.setState({ EditAppName: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div className='Add-Form'>
+                  <label><b>Upload AppIcon</b></label><br />
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUpdateUserWidgetIconChange(e)}
+                  />
+
+                  {
+                    this.state.EditUploadAppIcon && (
+                      <div className="Attached-img">
+
+                        {/* ✅ Handle BOTH string + file */}
+                        <p>
+                          {
+                            typeof this.state.EditUploadAppIcon === "string"
+                              ? this.state.EditUploadAppIcon.split('/').pop()
+                              : this.state.EditUploadAppIcon[0]?.name
+                          }
+                        </p>
+
+                        <Icon
+                          iconName="Cancel"
+                          onClick={() => this.setState({ EditUploadAppIcon: "" })}
+                        />
+                      </div>
+                    )
+                  }
+
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+                <div>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    value={this.state.EditApplink}
+                    onChange={(value) =>
+                      this.setState({ EditApplink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+                <div className='Announcement-Submit'>
+                  <div className='Submit-Button'>
+                    <PrimaryButton
+                      text='Update'
+                      onClick={() => this.UpdateusefullappDetails(this.state.CurrentUsefullappDataID)}
+                    />
+                  </div>
+
+                  <div className='Cancel-Button'>
+                    <DefaultButton
+                      text='Cancel'
+                      onClick={() =>
+                        this.setState({ EditUserfullDataDialog: true })
+                      }
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+          </Dialog>
 
         </div>
 
@@ -751,4 +1101,269 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
     });
   }
 
+  public async AddUserwidgetInfo() {
+    if (this.state.Title.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const userwidget = await sp.web.lists.getByTitle("User widget").items.add({
+        Title: this.state.Title,
+        Link: this.state.Link
+          ? {
+            Url: this.state.Link,
+            Description: this.state.Link
+          }
+          : null
+      });
+
+      if (this.state.UploadIcon && this.state.UploadIcon.length > 0) {
+
+        const file = this.state.UploadIcon[0];
+
+        await sp.web.lists
+          .getByTitle("User widget")
+          .items.getById(userwidget.data.Id)
+          .attachmentFiles.add(file.name, file);
+      }
+
+      this.setState({ AdduserwidgetDataDialog: true });
+      this.getUserwidgetInfo();
+
+    }
+  }
+  
+  handleUserWidgetIcomChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        UploadIcon: [file],
+        previewIcon: URL.createObjectURL(file)
+      });
+    }
+  };
+
+  handleUpdateUserWidgetIconChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        EditUploadIcon: [file],
+      });
+    }
+  
+  }
+
+  public async EditUserWidgetsInfo(ID) {
+    let Edituserwidgets = this.state.UserWidgetData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(Edituserwidgets);
+    this.setState({
+      EditTitle: Edituserwidgets[0].Title,
+      EditLink: Edituserwidgets[0].Link.Url,
+      EditUploadIcon: Edituserwidgets[0].Icon
+    });
+  }
+
+  public async UpdateUserWidgetstDetails(CurrentUserWidgetDataID) {
+    try {
+      const updateuserWidgets: any = {
+        Title: this.state.EditTitle,
+        Link: this.state.EditLink ? {
+          Url: this.state.EditLink,
+          Description: this.state.EditLink
+        } : null
+      };
+
+      const updateItem = await sp.web.lists.getByTitle("User widget").items.getById(CurrentUserWidgetDataID).update(updateuserWidgets);
+
+      if (Array.isArray(this.state.EditUploadIcon) && this.state.EditUploadIcon.length > 0) {
+
+        const file = this.state.EditUploadIcon[0];
+  
+        const itemRef = sp.web.lists
+          .getByTitle("User widget")
+          .items.getById(CurrentUserWidgetDataID);
+  
+        // delete old attachments
+        const attachments = await itemRef.attachmentFiles();
+  
+        for (let att of attachments) {
+          await itemRef.attachmentFiles.getByName(att.FileName).delete();
+        }
+  
+        // add new file
+        await itemRef.attachmentFiles.add(file.name, file);
+      }
+  
+
+      this.setState({ EdituserwidgetDataDialog: true });
+      this.getUserwidgetInfo();
+
+    } catch (error) {
+      console.log("Error Updating details :", error);
+    }
+  }
+
+  public async DeleteUserWidgetsDetail(DeleteuserWidgetDataID) {
+    const deleteinfo = await sp.web.lists.getByTitle("User widget").items.getById(DeleteuserWidgetDataID).delete();
+    this.setState({ UserWidgetData: deleteinfo });
+    this.getUserwidgetInfo()
+  }
+
+  public async AddUseFullAppInfo() {
+    if (this.state.Title.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const useapp = await sp.web.lists.getByTitle("Useful Apps").items.add({
+        AppName: this.state.AppName,
+        Applink: this.state.Applink
+          ? {
+            Url: this.state.Applink,
+            Description: this.state.Applink
+          }
+          : null
+      });
+
+      if (this.state.UploadAppIcon && this.state.UploadAppIcon.length > 0) {
+
+        const file = this.state.UploadAppIcon[0];
+
+        await sp.web.lists
+          .getByTitle("Useful Apps")
+          .items.getById(useapp.data.Id)
+          .attachmentFiles.add(file.name, file);
+      }
+
+      this.setState({ AddUsefullDataDialog: true });
+      this.getUserFullAppsData();
+
+    }
+  }
+  
+  handleUseFullappIconChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        UploadAppIcon: [file],
+        previewAppIcon: URL.createObjectURL(file)
+      });
+    }
+  };
+
+  handleUpdateUseFullappIconChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        EditUploadAppIcon: [file],
+      });
+    }
+  
+  }
+
+  public async EditUsefullappInfo(ID) {
+    let Editusefullapps = this.state.UseFullAppsData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(Editusefullapps);
+    this.setState({
+      EditAppName: Editusefullapps[0].AppName,
+      EditApplink: Editusefullapps[0].Applink.Url,
+      EditUploadAppIcon: Editusefullapps[0].AppIcon
+    });
+  }
+
+  public async UpdateusefullappDetails(CurrentUsefullappDataID) {
+    try {
+      const updateuseFullapps: any = {
+        AppName: this.state.EditAppName,
+        Applink: this.state.EditApplink ? {
+          Url: this.state.EditApplink,
+          Description: this.state.EditApplink
+        } : null
+      };
+
+      const updateItem = await sp.web.lists.getByTitle("Useful Apps").items.getById(CurrentUsefullappDataID).update(updateuseFullapps);
+
+      if (Array.isArray(this.state.EditUploadAppIcon) && this.state.EditUploadAppIcon.length > 0) {
+
+        const file = this.state.EditUploadAppIcon[0];
+  
+        const itemRef = sp.web.lists
+          .getByTitle("Useful Apps")
+          .items.getById(CurrentUsefullappDataID);
+  
+        // delete old attachments
+        const attachments = await itemRef.attachmentFiles();
+  
+        for (let att of attachments) {
+          await itemRef.attachmentFiles.getByName(att.FileName).delete();
+        }
+  
+        // add new file
+        await itemRef.attachmentFiles.add(file.name, file);
+      }
+  
+
+      this.setState({ EditUserfullDataDialog: true });
+      this.getUserFullAppsData();
+
+    } catch (error) {
+      console.log("Error Updating details :", error);
+    }
+  }
+
+  public async DeleteusefullappDetail(DeleteUsefullappDataID) {
+    const deletapps = await sp.web.lists.getByTitle("Useful Apps").items.getById(DeleteUsefullappDataID).delete();
+    this.setState({ UserWidgetData: deletapps });
+    this.getUserFullAppsData()
+  }
+
 }
+
+
+
+
+
+{/* <a href="https://axiseuropeplc.sharepoint.com/sites/AxisLMS/SitePages/My-Training-Dashboard.aspx?isSPOFile=1" style={{ textDecoration: "none", color: "black" }}>
+            <div className="stat-card">
+              <div className='context'>
+                <img src={require("../assets/checkcirclebroken.png")} /><span> My Training</span>
+              </div>
+              <strong>3</strong>
+            </div>
+              </a> 
+
+              <div className="stat-card">
+                <div className='context'>
+                  <img src={require("../assets/icon2.png")} /><span> My Approvels</span>
+                </div>
+                <strong>4</strong>
+              </div>
+
+              <a href='https://servicedesk.axisclc.com/portal/tickets?btn=60&viewid=1' style={{ textDecoration: "none", color: "black" }}>
+              <div className="stat-card">
+                <div className='context'>
+                  <img src={require("../assets/ticket01.png")} /><span> My IT Tickets</span>
+                </div>
+                <strong>5</strong>
+              </div>
+              </a> 
+
+              <h4>My Favorite Articles</h4>
+
+              <ul className="fav-list">
+                <li>Better Understanding your patients needs</li>
+                <li>401k Updates fpr 2020</li>
+                <li className="active">Covid Frequently Asked Questions</li>
+                <li>HR Polices and Procedures Guidelines</li>
+              </ul>
+
+              <a className="views-all" href="#">View all</a> 
+          */}

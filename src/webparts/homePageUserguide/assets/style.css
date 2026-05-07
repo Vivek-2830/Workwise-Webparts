@@ -81,6 +81,10 @@
     color: #4D5D6A;
     line-height: 1.6;
     margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 .read-more {

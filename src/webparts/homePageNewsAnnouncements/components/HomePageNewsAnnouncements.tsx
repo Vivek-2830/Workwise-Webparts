@@ -128,6 +128,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
               <PivotItem headerText="Charity" itemKey="charity" />
               <PivotItem headerText="Colleagues" itemKey="colleagues" />
               <PivotItem headerText="Contracts" itemKey="contracts" />
+              <PivotItem headerText="Case Studies" itemKey="case studies" />
             </Pivot>
           </div>
 
@@ -570,8 +571,8 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
       // }
 
       this.setState({
-        NewsAnnouncementsData: topFourPerCategory,
-        NewsFilterdData: topFourPerCategory
+        NewsAnnouncementsData: formattedData,
+        NewsFilterdData: formattedData
       });
 
     }
@@ -602,6 +603,10 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
 
       case "contracts":
         filterdata = filterdata.filter(t => t.NewsCategory === "Contracts");
+        break;
+
+      case "case studies":
+        filterdata = filterdata.filter(t => t.NewsCategory === "Case Studies");
         break;
 
       case "all":

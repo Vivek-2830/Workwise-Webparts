@@ -161,6 +161,14 @@
           "manifest": "./src/webparts/homePageAllVideoPage/HomePageAllVideoPageWebPart.manifest.json"
         }
       ]
+    },
+    "home-page-all-news-announcement-page-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/homePageAllNewsAnnouncementPage/HomePageAllNewsAnnouncementPageWebPart.js",
+          "manifest": "./src/webparts/homePageAllNewsAnnouncementPage/HomePageAllNewsAnnouncementPageWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -185,6 +193,7 @@
     "EmployeehubHrQuicklinksWebPartStrings": "lib/webparts/employeehubHrQuicklinks/loc/{locale}.js",
     "EmployeehubHrfaQsWebPartStrings": "lib/webparts/employeehubHrfaQs/loc/{locale}.js",
     "HomePageVideoSectionWebPartStrings": "lib/webparts/homePageVideoSection/loc/{locale}.js",
-    "HomePageAllVideoPageWebPartStrings": "lib/webparts/homePageAllVideoPage/loc/{locale}.js"
+    "HomePageAllVideoPageWebPartStrings": "lib/webparts/homePageAllVideoPage/loc/{locale}.js",
+    "HomePageAllNewsAnnouncementPageWebPartStrings": "lib/webparts/homePageAllNewsAnnouncementPage/loc/{locale}.js"
   }
 }
