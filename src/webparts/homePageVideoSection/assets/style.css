@@ -9,3 +9,19 @@
     object-fit: cover;
     height: 190px;
 }
+
+.section-video {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.section-video::after {
+    content: "";
+    width: 55px;
+    height: 3px;
+    background: #0b7c7a;
+    position: absolute;
+    bottom: -6px;
+    left: 0; 
+}

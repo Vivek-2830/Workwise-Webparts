@@ -49,7 +49,9 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
             </h2>
 
             <div>
-              <PrimaryButton className='Adddoc' text="Add Document" onClick={() => this.setState({ AddPoliciesDialog : false})} />
+              <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Policies%20Documents/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                <PrimaryButton className='Adddoc' text="Add Document" onClick={() => this.setState({ AddPoliciesDialog : false})} />
+              </a>
             </div>
 
             {/* <button className="view-all">View all</button> */}

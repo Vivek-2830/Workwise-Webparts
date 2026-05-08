@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { sp } from '@pnp/sp/presets/all';
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePageVideoSectionState {
   videos: any;
@@ -49,7 +50,12 @@ export default class HomePageVideoSection extends React.Component<IHomePageVideo
 
         <div>
           <div className="news-header">
-            <h2 className="section-title">Videos</h2>
+            <h2 className="section-video">Videos</h2>
+
+            <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Videos/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+              <PrimaryButton className='Adddoc' text="Add Video" />
+            </a>
+
             <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/Company%20videos.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
               <button className="view-news">View all</button>
             </a>

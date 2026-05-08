@@ -260,7 +260,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                   <th style={{ width: '15%' }}>Images</th>
                   <th style={{ width: '15%' }}>Link</th>
                   <th style={{ width: '15%' }}>Videos</th>
-                  <th style={{ width: '15%' }}>Actions</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -304,8 +304,8 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
                         
 
-                        <td>
-                          <div style={{ display: "flex", gap: "8px" }}><td>
+                       
+                          <td>
                             {
                               item.Videos ? (
                                 this.getYouTubeEmbedUrl(item.Videos) ? (
@@ -324,7 +324,8 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                               )
                             }
                           </td>
-
+                          <td>
+                          <div style={{ display: "flex", gap: "8px" }}>
                             <IconButton
                               iconProps={{ iconName: "Edit" }}
                               title="Edit"

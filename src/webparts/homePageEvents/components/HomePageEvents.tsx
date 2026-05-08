@@ -4,6 +4,7 @@ import { IHomePageEventsProps } from './IHomePageEventsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import * as moment from 'moment';
 import { sp } from '@pnp/sp/presets/all';
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePageEventsState {
   EventsAllDate: any;
@@ -37,6 +38,12 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
 
           <h2 className="section-title">Events</h2>
           <div className="title-underline"></div>
+
+          <div>
+            <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Events/calendar.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+              <PrimaryButton className='Adddoc' text="Add Event"/>
+            </a>
+          </div>
 
           <div className='events-scroll'>
 

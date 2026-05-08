@@ -141,6 +141,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                   <th style={{ width: '20%' }}>Title</th>
                   <th style={{ width: '30%' }}>Icons</th>
                   <th style={{ width: '30%' }}>Links</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
