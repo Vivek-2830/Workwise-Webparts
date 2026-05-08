@@ -157,7 +157,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                         <img src={item.Images} alt="announcement" />
                       ) : item.Videos ? (
 
-                        this.getYouTubeEmbedUrl(item.Videos) ? (
+                       item.Videos ? (
                           // ✅ YouTube iframe
                           <iframe
                             style={{
