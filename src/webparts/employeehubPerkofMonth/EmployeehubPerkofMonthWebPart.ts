@@ -11,9 +11,14 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EmployeehubPerkofMonthWebPartStrings';
 import EmployeehubPerkofMonth from './components/EmployeehubPerkofMonth';
 import { IEmployeehubPerkofMonthProps } from './components/IEmployeehubPerkofMonthProps';
+import { sp } from '@pnp/sp/presets/all';
+import { IFilePickerResult, PropertyFieldFilePicker } from '@pnp/spfx-property-controls/lib/propertyFields/filePicker';
 
 export interface IEmployeehubPerkofMonthWebPartProps {
   description: string;
+  PerkMonthImage: IFilePickerResult;
+  PerkMonthDescription: string;
+  LinkButton: string;
 }
 
 export default class EmployeehubPerkofMonthWebPart extends BaseClientSideWebPart<IEmployeehubPerkofMonthWebPartProps> {
@@ -23,6 +28,10 @@ export default class EmployeehubPerkofMonthWebPart extends BaseClientSideWebPart
 
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
+
+    sp.setup({
+      spfxContext: this.context
+    });
 
     return super.onInit();
   }
@@ -35,7 +44,11 @@ export default class EmployeehubPerkofMonthWebPart extends BaseClientSideWebPart
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        PerkMonthImage: this.properties.PerkMonthImage,
+        PerkMonthDescription: this.properties.PerkMonthDescription,
+        LinkButton: this.properties.LinkButton
       }
     );
 
@@ -77,15 +90,32 @@ export default class EmployeehubPerkofMonthWebPart extends BaseClientSideWebPart
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('LinkButton', {
+                  label: 'Add PerkMonth Link',
+                }),
+                PropertyFieldFilePicker("PerkMonth Image", {
+                  context: this.context,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  onSave: (e: IFilePickerResult) => {
+                    console.log(e);
+                    this.properties.PerkMonthImage = e;
+                  },
+                  onChanged: (e: IFilePickerResult) => {
+                    console.log(e);
+                    this.properties.PerkMonthImage = e;
+                  },
+                  buttonLabel: "Upload PerkMonth Image",
+                  label: "Our PerkMonth  Image",
+                  key: "FilePickerID",
+                  filePickerResult: this.properties.PerkMonthImage,
+                  hideLocalUploadTab: true,
+                }),
+                PropertyPaneTextField('PerkMonthDescription', {
+                  label: "PerkMonth Description"
                 })
               ]
             }

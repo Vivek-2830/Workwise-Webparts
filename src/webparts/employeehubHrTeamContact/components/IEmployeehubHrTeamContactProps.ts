@@ -4,4 +4,5 @@ export interface IEmployeehubHrTeamContactProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

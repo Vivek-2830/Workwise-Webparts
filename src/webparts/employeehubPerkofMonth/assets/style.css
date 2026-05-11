@@ -1,0 +1,47 @@
+.perk-card {
+    width: 315px;
+    /* background: #005a5f; */
+    color: black;
+    /* border-radius: 16px; */
+    /* padding: 18px 18px 22px; */
+}
+
+.perk-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+.perk-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 36px;
+}
+
+.arrow {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.image-container {
+    margin-left: 41px;
+    text-align: center;
+}
+
+.perkdes {
+    color: #040404;
+    line-height: 1.2;
+    margin-bottom: 26px;
+    font-size: 15px;
+}
+
+.ImageCon {
+    height: 254px;
+    /* width: 278px; */
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+    max-width: 100%;
+}

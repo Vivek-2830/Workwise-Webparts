@@ -1,0 +1,102 @@
+.hr-wrapper {
+    /* padding: 30px 20px; */
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* TITLE */
+
+.hr-title h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.underline {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: #0f6cbd;
+    margin-top: 6px;
+}
+
+.main-card {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* GRID */
+
+.hr-grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+/* CARD */
+
+.hr-card {
+    background: #fff;
+    border: 1px solid #dbe5ee;
+    border-radius: 12px;
+    padding: 14px;
+    align-items: flex-start;
+    transition: 0.3s ease;
+}
+
+.hr-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.hr-info h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.role {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin: 2px 0 6px;
+}
+
+.contact p {
+    margin: 2px 0;
+    font-size: 12px;
+    color: #333;
+    margin-top: 1px;
+}
+
+.contact {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 3px;
+}
+
+.contact-email {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 5px;
+}
+
+.contact-email p {
+    margin: 2px 0;
+    font-size: 12px;
+    color: #333;
+    margin-top: 1px;
+}
+
+@media (max-width: 700px) {
+    .hr-grid {
+        grid-template-columns: 1fr;
+    }
+}

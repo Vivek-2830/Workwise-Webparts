@@ -146,7 +146,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                     </p>
 
                     <div className='announcement-read'>
-                      <a href={item.link} className='anno-read'>Read more...</a>
+                      <a href={item.link.Url} className='anno-read'>Read more...</a>
                     </div>
 
                   </div>
@@ -255,7 +255,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                           }
                         </td>
                         <td>
-                          <a href={item.link} target="_blank" rel="noopener noreferrer">{item.link.Description}</a>
+                          <a href={item.link.Url} target="_blank" rel="noopener noreferrer">{item.link.Description}</a>
                         </td>
 
                         <td>
@@ -665,7 +665,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
             Source: item.Source || "",
             Images: imageUrl,
             Videos: videoUrl || videoColumnUrl,
-            link: item.link ? item.link.Url : ""
+            link: item.link ? item.link : ""
           });
 
         });
@@ -828,20 +828,47 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
     this.getEmpannouncement();
   }
 
-  private getYouTubeEmbedUrl = (url: string): string | null => {
+  private getYouTubeEmbedUrl = (url: any): string | null => {
     if (!url) return null;
-
+  
+    // Handle SharePoint Hyperlink field object:
+    // { Url: "...", Description: "..." }
+    if (typeof url === "object" && url.Url) {
+      url = url.Url;
+    }
+  
+    // Ensure url is a string
+    if (typeof url !== "string") {
+      return null;
+    }
+  
     const regExp =
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
-
+  
     const match = url.match(regExp);
-
+  
     if (match && match[1]) {
-      return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=${match[1]}`;
     }
-
+  
     return null;
   };
+
+
+  // private getYouTubeEmbedUrl = (url: string): string | null => {
+  //   if (!url) return null;
+
+  //   const regExp =
+  //     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
+
+  //   const match = url.match(regExp);
+
+  //   if (match && match[1]) {
+  //     return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
+  //   }
+
+  //   return null;
+  // };
 
   private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
     this.setState({ EmpVideos: value || "" });

@@ -4,4 +4,5 @@ export interface IEmployeehubBenefitsSectionProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

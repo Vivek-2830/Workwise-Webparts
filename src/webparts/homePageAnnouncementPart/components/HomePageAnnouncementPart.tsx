@@ -889,8 +889,35 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     this.getannouncement();
   }
 
-  private getYouTubeEmbedUrl = (url: string): string | null => {
+  // private getYouTubeEmbedUrl = (url: string): string | null => {
+
+  //   if (!url) return null;
+  
+  //   const regExp =
+  //     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
+  
+  //   const match = url.match(regExp);
+  
+  //   if (match && match[1]) {
+  //     return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
+  //   }
+  
+  //   return null;
+  // };
+
+  private getYouTubeEmbedUrl = (url: any): string | null => {
     if (!url) return null;
+  
+    // Handle SharePoint Hyperlink field object:
+    // { Url: "...", Description: "..." }
+    if (typeof url === "object" && url.Url) {
+      url = url.Url;
+    }
+  
+    // Ensure url is a string
+    if (typeof url !== "string") {
+      return null;
+    }
   
     const regExp =
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
@@ -898,7 +925,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     const match = url.match(regExp);
   
     if (match && match[1]) {
-      return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=${match[1]}`;
     }
   
     return null;

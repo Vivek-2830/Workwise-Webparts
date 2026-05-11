@@ -1,0 +1,87 @@
+.benefits-wrapper {
+    /* padding: 30px 20px; */
+    font-family: "Segoe UI", sans-serif;
+}
+
+.benefits-title {
+    margin-bottom: 20px;
+}
+
+.benefits-title h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.underline {
+    display: inline-block;
+    width: 59px;
+    height: 3px;
+    background: #1aa3a3;
+    margin-top: 6px;
+}
+
+/* GRID */
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+/* CARD */
+
+.benefit-card {
+    background: #fff;
+    border: 1px solid #dbe5ee;
+    border-radius: 12px;
+    padding: 29px 10px;
+    text-align: center;
+    transition: 0.3s ease;
+    /* height: 119px;
+    width: 259px; */
+}
+
+.benefit-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+/* ICON */
+
+.benefit-card .icons {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
+/* TEXT */
+
+.benefit-card h4 {
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.benefit-card p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.4;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}
