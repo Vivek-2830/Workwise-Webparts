@@ -8,17 +8,15 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'HomePageIntranetFaQsWebPartStrings';
-import HomePageIntranetFaQs from './components/HomePageIntranetFaQs';
-import { IHomePageIntranetFaQsProps } from './components/IHomePageIntranetFaQsProps';
-import { sp } from '@pnp/sp/presets/all';
+import * as strings from 'RelatedNewsWebPartStrings';
+import RelatedNews from './components/RelatedNews';
+import { IRelatedNewsProps } from './components/IRelatedNewsProps';
 
-export interface IHomePageIntranetFaQsWebPartProps {
+export interface IRelatedNewsWebPartProps {
   description: string;
-  ListName: any;
 }
 
-export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<IHomePageIntranetFaQsWebPartProps> {
+export default class RelatedNewsWebPart extends BaseClientSideWebPart<IRelatedNewsWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
@@ -26,24 +24,18 @@ export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<I
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
-    sp.setup({
-      spfxContext: this.context
-    });
-
     return super.onInit();
   }
 
   public render(): void {
-    const element: React.ReactElement<IHomePageIntranetFaQsProps> = React.createElement(
-      HomePageIntranetFaQs,
+    const element: React.ReactElement<IRelatedNewsProps> = React.createElement(
+      RelatedNews,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context,
-        ListName: this.properties.ListName ? this.properties.ListName : "Intranet FAQ"
+        userDisplayName: this.context.pageContext.user.displayName
       }
     );
 
@@ -92,8 +84,8 @@ export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<I
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('ListName', {
-                  label: "List Name"
+                PropertyPaneTextField('description', {
+                  label: strings.DescriptionFieldLabel
                 })
               ]
             }

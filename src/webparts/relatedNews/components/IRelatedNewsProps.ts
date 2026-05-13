@@ -1,9 +1,7 @@
-export interface IHomePageIntranetFaQsProps {
+export interface IRelatedNewsProps {
   description: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  context: any;
-  ListName: any;
 }

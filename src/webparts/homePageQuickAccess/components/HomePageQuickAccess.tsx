@@ -128,7 +128,7 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
                   {
                     this.state.QuickAccessData.map((item) => {
 
-                      // if (item.QuickAccessCategories !== "Tools") return null;
+                      if (item.QuickAccessCategories !== "Tools") return null;
 
                       // let imagePath = "";
                       // let ImageInfo = JSON.parse(item.Icon);
@@ -175,7 +175,7 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
                   {
                     this.state.QuickAccessData.map((item) => {
 
-                      // if (item.QuickAccessCategories !== "Support") return null;
+                      if (item.QuickAccessCategories !== "Support") return null;
 
                       // let imagePath = "";
                       // let ImageInfo = JSON.parse(item.Icon);

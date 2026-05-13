@@ -312,7 +312,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
   }
 
   public async getFAQs() {
-    const faqs = await sp.web.lists.getByTitle("Intranet FAQ").items.select(
+    const faqs = await sp.web.lists.getByTitle(this.props.ListName).items.select(
       "ID",
       "Questions",
       "Answers"
@@ -339,7 +339,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
     if (this.state.Questions.length == 0) {
       alert("Please Enter Details");
     } else {
-      const announcement = await sp.web.lists.getByTitle("Intranet FAQ").items.add({
+      const announcement = await sp.web.lists.getByTitle(this.props.ListName).items.add({
         Questions: this.state.Questions,
         Answers: this.state.Answers
       });
@@ -370,7 +370,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
         Answers: this.state.EditAnswers,
       };
 
-      const updateItem = await sp.web.lists.getByTitle("Intranet FAQ").items.getById(CurrentIntranetFaqID).update(updatefaq);
+      const updateItem = await sp.web.lists.getByTitle(this.props.ListName).items.getById(CurrentIntranetFaqID).update(updatefaq);
 
       this.setState({ EditIntranetFaqDataDiaolg: true });
       this.getFAQs();
@@ -381,7 +381,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
   }
 
   public async DeleteIntranetFaqItems(DeleteIntranetFaqID) {
-    const deleteinfo = await sp.web.lists.getByTitle("Intranet FAQ").items.getById(DeleteIntranetFaqID).delete();
+    const deleteinfo = await sp.web.lists.getByTitle(this.props.ListName).items.getById(DeleteIntranetFaqID).delete();
     this.setState({ FaqsAnswersData: deleteinfo });
     this.getFAQs();
   }
