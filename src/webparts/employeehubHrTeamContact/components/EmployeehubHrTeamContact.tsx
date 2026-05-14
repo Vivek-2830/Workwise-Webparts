@@ -3,6 +3,7 @@ import styles from './EmployeehubHrTeamContact.module.scss';
 import { IEmployeehubHrTeamContactProps } from './IEmployeehubHrTeamContactProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
+import { DefaultButton, Dialog, Icon, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 export interface IEmployeehubHrTeamContactState {
   HRDetailsData: any;
@@ -28,33 +29,58 @@ export interface IEmployeehubHrTeamContactState {
 
 require('../assets/style.css');
 
+const AddHRTeamContactDetailsDialogContentProps = {
+  title: "Add HRTeamContact Details",
+};
+
+const AddHRTeamContactDataDialogContentProps = {
+  title: "Add HRTeamContact"
+}
+
+const UpdateHRTeamContactDetailsDialogContentProps = {
+  title: "Update HRTeamContact Details"
+}
+
+const updatemodelProps = {
+  className: "Update-Dialog"
+};
+
+const addmodelProps = {
+  className: "Add-Dialog"
+};
+
+const addmodelProps2 = {
+  className: "Add-Data-Dialog"
+}
+
+
 export default class EmployeehubHrTeamContact extends React.Component<IEmployeehubHrTeamContactProps, IEmployeehubHrTeamContactState> {
 
-  constructor(props: IEmployeehubHrTeamContactProps, state:IEmployeehubHrTeamContactState) {
-    
-      super(props);
+  constructor(props: IEmployeehubHrTeamContactProps, state: IEmployeehubHrTeamContactState) {
 
-      this.state = {
-        HRDetailsData: "",
-        Name: "",
-        JobTitle: "",
-        Phone: "",
-        Email: "",
-        Photo: [],
-        UploadPhoto: [],
-        AddHRTemaDialog: true,
-        AddHRTeamDataDialog: true,
-        EditName: "",
-        EditJobTitle: "",
-        EditPhone: "",
-        EditEmail: "",
-        EditPhoto: [],
-        EditUploadPhoto: [],
-        EditHRTeamDataDialog: true,
-        CurrentHrTeamDetailsID: "",
-        DeleteHrTeamDetailsID: "",
-        previewImage: "",
-      };
+    super(props);
+
+    this.state = {
+      HRDetailsData: "",
+      Name: "",
+      JobTitle: "",
+      Phone: "",
+      Email: "",
+      Photo: [],
+      UploadPhoto: [],
+      AddHRTemaDialog: true,
+      AddHRTeamDataDialog: true,
+      EditName: "",
+      EditJobTitle: "",
+      EditPhone: "",
+      EditEmail: "",
+      EditPhoto: [],
+      EditUploadPhoto: [],
+      EditHRTeamDataDialog: true,
+      CurrentHrTeamDetailsID: "",
+      DeleteHrTeamDetailsID: "",
+      previewImage: "",
+    };
 
   }
 
@@ -76,6 +102,11 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
           <div className="hr-title">
             <h3>HR Team Contact Details</h3>
             <span className="underline"></span>
+
+            <div className='AddAnnouncemt'>
+              <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddHRTemaDialog: false })} />
+            </div>
+
           </div>
 
           <div className="hr-grid">
@@ -116,11 +147,327 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
           </div>
         </div>
 
+        <Dialog
+          hidden={this.state.AddHRTemaDialog}
+          onDismiss={() =>
+            this.setState({
+              AddHRTemaDialog: true,
+            })
+          }
+          dialogContentProps={AddHRTeamContactDetailsDialogContentProps}
+          modalProps={addmodelProps}
+          minWidth={1500}
+        >
+
+          <div className='AddAnnouncmentData'>
+            <PrimaryButton className='AddHRInfo' text='Add Data' onClick={() => this.setState({ AddHRTeamDataDialog: false })} />
+          </div>
+
+          <div className="news-container">
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '20%' }}>Name</th>
+                  <th style={{ width: '30%' }}>JobTitle</th>
+                  <th style={{ width: '30%' }}>Phone</th>
+                  <th style={{ width: '15%' }}>Email</th>
+                  <th style={{ width: '15%' }}>Photo</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {
+                  this.state.HRDetailsData.length > 0 &&
+                  this.state.HRDetailsData.map((item) => {
+                    return (
+                      <tr key={item.ID}>
+                        <td className="title">{item.Name}</td>
+                        <td>{item.JobTitle}</td>
+                        <td>{item.Phone}</td>
+                        <td>{item.Email}</td>
+                        <td>
+                          {
+                            item.Photo ? (
+                              <img src={item.Photo} alt="Photo" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
+                            ) : (
+                              "No Photo"
+                            )
+                          }
+                        </td>
+
+                        <td>
+                          <div style={{ display: "flex", gap: "8px" }}>
+                            <IconButton
+                              iconProps={{ iconName: "Edit" }}
+                              title="Edit"
+                              ariaLabel="Edit"
+                              onClick={() => this.setState({ EditHRTeamDataDialog: false, CurrentHrTeamDetailsID: item.ID }, () => this.EditHRContact(item.ID))}
+                            />
+
+                            <IconButton
+                              iconProps={{ iconName: "Delete" }}
+                              title="Delete"
+                              ariaLabel="Delete"
+                              onClick={() => this.DeleteHRTeamInfo(item.ID)}
+                            />
+
+                          </div>
+                        </td>
+
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.AddHRTeamDataDialog}
+          onDismiss={() =>
+            this.setState({
+              AddHRTeamDataDialog: true,
+              Name: "",
+              JobTitle: "",
+              Phone: "",
+              Email: "",
+              Photo: [],
+              UploadPhoto: []
+            })
+          }
+          dialogContentProps={AddHRTeamContactDataDialogContentProps}
+          modalProps={addmodelProps2}
+          minWidth={1100}
+        >
+          <div className="ms-Grid-row">
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label="Name"
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Name: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Job Title'
+                  type='text'
+                  multiline rows={3}
+                  onChange={(value) =>
+                    this.setState({ JobTitle: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Phone'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Phone: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Email'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Email: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <label><b>Upload Photo</b></label><br />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => this.handleImageChange(e)}
+                />
+
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Submit'
+                    onClick={() => this.AddHRContactInfo()}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ AddHRTeamDataDialog: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.EditHRTeamDataDialog}
+          onDismiss={() =>
+            this.setState({
+              EditHRTeamDataDialog: true,
+              EditName: "",
+              EditJobTitle: "",
+              EditPhone: "",
+              EditEmail: "",
+              EditPhoto: [],
+              EditUploadPhoto: []
+            })
+          }
+          dialogContentProps={UpdateHRTeamContactDetailsDialogContentProps}
+          modalProps={updatemodelProps}
+          minWidth={1100}
+        >
+          <div className='ms-Grid-row'>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Name'
+                  type='text'
+                  value={this.state.EditName}
+                  onChange={(value) =>
+                    this.setState({ EditName: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Job Title'
+                  type='text'
+                  multiline rows={3}
+                  value={this.state.EditJobTitle}
+                  onChange={(value) =>
+                    this.setState({ EditJobTitle: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Phone'
+                  type='text'
+                  value={this.state.EditPhone}
+                  onChange={(value) =>
+                    this.setState({ EditPhone: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div>
+                <TextField
+                  label='Email'
+                  type='text'
+                  value={this.state.EditEmail}
+                  onChange={(value) =>
+                    this.setState({ EditEmail: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <label><b>Upload Photo</b></label><br />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => this.handleUpdateImageChange(e)}
+                />
+
+                {
+                  this.state.EditUploadPhoto && (
+                    <div className="Attached-img">
+
+                      {/* ✅ Handle BOTH string + file */}
+                      <p>
+                        {
+                          typeof this.state.EditUploadPhoto === "string"
+                            ? this.state.EditUploadPhoto.split('/').pop()
+                            : this.state.EditUploadPhoto[0]?.name
+                        }
+                      </p>
+
+                      <Icon
+                        iconName="Cancel"
+                        onClick={() => this.setState({ EditUploadPhoto: "" })}
+                      />
+                    </div>
+                  )
+                }
+
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Update'
+                    onClick={() => this.UpdateHRContactDetails(this.state.CurrentHrTeamDetailsID)}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ EditHRTeamDataDialog: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </Dialog>
+
       </section>
     );
   }
 
-  public async componentDidMount() { 
+  public async componentDidMount() {
     this.getHRTeamDetails();
   }
 
@@ -152,6 +499,117 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
     }).catch((error) => {
       console.log("Error Fetching Detail in HR Team Contact Details:", error);
     });
+  }
+
+  public async AddHRContactInfo() {
+    if (this.state.Name.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const hrcontact = await sp.web.lists.getByTitle("HR Team Contact Details").items.add({
+        Name: this.state.Name,
+        JobTitle: this.state.JobTitle,
+        Phone: this.state.Phone,
+        Email: this.state.Email
+      });
+
+      if (this.state.UploadPhoto && this.state.UploadPhoto.length > 0) {
+
+        const file = this.state.UploadPhoto[0];
+
+        await sp.web.lists
+          .getByTitle("HR Team Contact Details")
+          .items.getById(hrcontact.data.Id)
+          .attachmentFiles.add(file.name, file);
+      }
+
+      this.setState({ AddHRTeamDataDialog: true });
+      this.getHRTeamDetails();
+
+    }
+  }
+
+  handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        UploadPhoto: [file],
+        previewImage: URL.createObjectURL(file)
+      });
+    }
+  };
+
+  handleUpdateImageChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      this.setState({
+        EditUploadPhoto: [file],
+        // previewImage: URL.createObjectURL(file)
+      });
+    }
+
+  }
+
+  public async EditHRContact(ID) {
+    let EditHRInfo = this.state.HRDetailsData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(EditHRInfo);
+    this.setState({
+      EditName: EditHRInfo[0].Name,
+      EditJobTitle: EditHRInfo[0].JobTitle,
+      EditPhone: EditHRInfo[0].Phone,
+      EditEmail: EditHRInfo[0].Email,
+      EditUploadPhoto: EditHRInfo[0].Photo,
+    });
+  }
+
+  public async UpdateHRContactDetails(CurrentHrTeamDetailsID) {
+    try {
+      const updateempannouncement: any = {
+        Name: this.state.EditName,
+        JobTitle: this.state.EditJobTitle,
+        Phone: this.state.EditPhone,
+        Email: this.state.EditEmail
+      };
+
+      const updateItem = await sp.web.lists.getByTitle("HR Team Contact Details").items.getById(CurrentHrTeamDetailsID).update(updateempannouncement);
+
+      if (Array.isArray(this.state.EditUploadPhoto) && this.state.EditUploadPhoto.length > 0) {
+
+        const file = this.state.EditUploadPhoto[0];
+
+        const itemRef = sp.web.lists
+          .getByTitle("HR Team Contact Details")
+          .items.getById(CurrentHrTeamDetailsID);
+
+        // delete old attachments
+        const attachments = await itemRef.attachmentFiles();
+
+        for (let att of attachments) {
+          await itemRef.attachmentFiles.getByName(att.FileName).delete();
+        }
+
+        // add new file
+        await itemRef.attachmentFiles.add(file.name, file);
+      }
+
+
+      this.setState({ EditHRTeamDataDialog: true });
+      this.getHRTeamDetails();
+
+    } catch (error) {
+      console.log("Error Updating details :", error);
+    }
+  }
+
+  public async DeleteHRTeamInfo(DeleteHrTeamDetailsID) {
+    const deleteinfo = await sp.web.lists.getByTitle("HR Team Contact Details").items.getById(DeleteHrTeamDetailsID).delete();
+    this.setState({ HRDetailsData: deleteinfo });
+    this.getHRTeamDetails();
   }
 
 }
