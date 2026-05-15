@@ -1,0 +1,137 @@
+.jobs-wrapper {
+    /* padding: 30px 20px; */
+    font-family: "Segoe UI", sans-serif;
+}
+
+.jobs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jobs-header h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.underline {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: #1aa3a3;
+    margin-top: 6px;
+}
+
+.view-all {
+    background: #007b7f;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.jobs-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 42px;
+}
+
+.job-card {
+    background: #fff;
+    border: 1px solid #dbe5ee;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.job-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.dept {
+    margin: 4px 0 12px;
+    color: #888;
+    font-size: 13px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.job-info {
+    margin-bottom: 12px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 9px;
+}
+
+.info-row img {
+    width: 19px;
+    height: 19px;
+}
+
+.job-card h5 {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.req-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 6px;
+    height: 510px;
+    overflow: hidden;
+}
+
+.req-row img {
+    width: 14px;
+    height: 14px;
+    margin-top: 13px;
+}
+
+.info-p {
+    color: #040404;
+}
+
+.deadline {
+    margin-top: 10px;
+    font-size: 14px;
+    color: red;
+}
+
+.apply-btn {
+    margin-top: auto;
+    background: #007b7f;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+    .jobs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+}

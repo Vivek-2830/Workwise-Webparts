@@ -1,8 +1,7 @@
-export interface IEmployeehubHrfaQsProps {
+export interface IEmployeeHubAxisClcGalleryProps {
   description: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  context: any;
 }

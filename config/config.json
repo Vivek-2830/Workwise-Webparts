@@ -177,6 +177,46 @@
           "manifest": "./src/webparts/relatedNews/RelatedNewsWebPart.manifest.json"
         }
       ]
+    },
+    "employee-hub-feed-back-section-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeHubFeedBackSection/EmployeeHubFeedBackSectionWebPart.js",
+          "manifest": "./src/webparts/employeeHubFeedBackSection/EmployeeHubFeedBackSectionWebPart.manifest.json"
+        }
+      ]
+    },
+    "employee-hub-people-stories-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeHubPeopleStories/EmployeeHubPeopleStoriesWebPart.js",
+          "manifest": "./src/webparts/employeeHubPeopleStories/EmployeeHubPeopleStoriesWebPart.manifest.json"
+        }
+      ]
+    },
+    "employee-hub-axis-clc-gallery-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeHubAxisClcGallery/EmployeeHubAxisClcGalleryWebPart.js",
+          "manifest": "./src/webparts/employeeHubAxisClcGallery/EmployeeHubAxisClcGalleryWebPart.manifest.json"
+        }
+      ]
+    },
+    "employee-hub-shout-out-acknowledge-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeHubShoutOutAcknowledge/EmployeeHubShoutOutAcknowledgeWebPart.js",
+          "manifest": "./src/webparts/employeeHubShoutOutAcknowledge/EmployeeHubShoutOutAcknowledgeWebPart.manifest.json"
+        }
+      ]
+    },
+    "employee-hub-shout-out-announcement-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeHubShoutOutAnnouncement/EmployeeHubShoutOutAnnouncementWebPart.js",
+          "manifest": "./src/webparts/employeeHubShoutOutAnnouncement/EmployeeHubShoutOutAnnouncementWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -203,6 +243,11 @@
     "HomePageVideoSectionWebPartStrings": "lib/webparts/homePageVideoSection/loc/{locale}.js",
     "HomePageAllVideoPageWebPartStrings": "lib/webparts/homePageAllVideoPage/loc/{locale}.js",
     "HomePageAllNewsAnnouncementPageWebPartStrings": "lib/webparts/homePageAllNewsAnnouncementPage/loc/{locale}.js",
-    "RelatedNewsWebPartStrings": "lib/webparts/relatedNews/loc/{locale}.js"
+    "RelatedNewsWebPartStrings": "lib/webparts/relatedNews/loc/{locale}.js",
+    "EmployeeHubFeedBackSectionWebPartStrings": "lib/webparts/employeeHubFeedBackSection/loc/{locale}.js",
+    "EmployeeHubPeopleStoriesWebPartStrings": "lib/webparts/employeeHubPeopleStories/loc/{locale}.js",
+    "EmployeeHubAxisClcGalleryWebPartStrings": "lib/webparts/employeeHubAxisClcGallery/loc/{locale}.js",
+    "EmployeeHubShoutOutAcknowledgeWebPartStrings": "lib/webparts/employeeHubShoutOutAcknowledge/loc/{locale}.js",
+    "EmployeeHubShoutOutAnnouncementWebPartStrings": "lib/webparts/employeeHubShoutOutAnnouncement/loc/{locale}.js"
   }
 }

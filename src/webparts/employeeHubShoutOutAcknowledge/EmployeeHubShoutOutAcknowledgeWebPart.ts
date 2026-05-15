@@ -8,16 +8,15 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'EmployeehubHrQuicklinksWebPartStrings';
-import EmployeehubHrQuicklinks from './components/EmployeehubHrQuicklinks';
-import { IEmployeehubHrQuicklinksProps } from './components/IEmployeehubHrQuicklinksProps';
-import { sp } from '@pnp/sp/presets/all';
+import * as strings from 'EmployeeHubShoutOutAcknowledgeWebPartStrings';
+import EmployeeHubShoutOutAcknowledge from './components/EmployeeHubShoutOutAcknowledge';
+import { IEmployeeHubShoutOutAcknowledgeProps } from './components/IEmployeeHubShoutOutAcknowledgeProps';
 
-export interface IEmployeehubHrQuicklinksWebPartProps {
+export interface IEmployeeHubShoutOutAcknowledgeWebPartProps {
   description: string;
 }
 
-export default class EmployeehubHrQuicklinksWebPart extends BaseClientSideWebPart<IEmployeehubHrQuicklinksWebPartProps> {
+export default class EmployeeHubShoutOutAcknowledgeWebPart extends BaseClientSideWebPart<IEmployeeHubShoutOutAcknowledgeWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
@@ -25,23 +24,18 @@ export default class EmployeehubHrQuicklinksWebPart extends BaseClientSideWebPar
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
-    sp.setup({
-      spfxContext: this.context
-    });
-
     return super.onInit();
   }
 
   public render(): void {
-    const element: React.ReactElement<IEmployeehubHrQuicklinksProps> = React.createElement(
-      EmployeehubHrQuicklinks,
+    const element: React.ReactElement<IEmployeeHubShoutOutAcknowledgeProps> = React.createElement(
+      EmployeeHubShoutOutAcknowledge,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+        userDisplayName: this.context.pageContext.user.displayName
       }
     );
 

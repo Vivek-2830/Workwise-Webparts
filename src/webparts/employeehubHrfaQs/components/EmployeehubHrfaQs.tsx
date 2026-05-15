@@ -2,8 +2,77 @@ import * as React from 'react';
 import styles from './EmployeehubHrfaQs.module.scss';
 import { IEmployeehubHrfaQsProps } from './IEmployeehubHrfaQsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { sp } from '@pnp/sp/presets/all';
+import { DatePicker, DefaultButton, Dialog, Dropdown, Icon, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
-export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQsProps, {}> {
+export interface IEmployeehubHrfaQsState {
+  EmployeeFaQData: any;
+  Question: any;
+  Answers: any;
+  EmployeeHRFAQsDialog: boolean;
+  AddEmployeeHRFAQsDialog: boolean;
+  EditQuestion: any;
+  EditAnswers: any;
+  EditEmployeeHRFAQsDialog: boolean;
+  CurrentEmployeeFAQsItemID: any;
+  DeleteEmployeeFAQsItemID: any;
+}
+
+require('../assets/style.css');
+
+const EmployeeHubFAQsDetailsDialogContentProps = {
+  title: "Add EmployeeHubFAQs Details",
+};
+
+const AddEmployeeHubFAQsDataDialogContentProps = {
+  title: "Add EmployeeHubFAQs"
+}
+
+const UpdateEmployeeHubFAQsDetailsDialogContentProps = {
+  title: "Update EmployeeHubFAQs Details"
+}
+
+const updatemodelProps = {
+  className: "Update-Dialog"
+};
+
+const addmodelProps = {
+  className: "Add-Dialog"
+};
+
+const addmodelProps2 = {
+  className: "Add-Data-Dialog"
+}
+
+export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQsProps, IEmployeehubHrfaQsState> {
+
+  constructor(props: IEmployeehubHrfaQsProps, state: IEmployeehubHrfaQsState) {
+
+    super(props);
+
+    this.state = {
+      EmployeeFaQData: "",
+      Question: "",
+      Answers: "",
+      EmployeeHRFAQsDialog: true,
+      AddEmployeeHRFAQsDialog: true,
+      EditQuestion: "",
+      EditAnswers: "",
+      EditEmployeeHRFAQsDialog: true,
+      CurrentEmployeeFAQsItemID: "",
+      DeleteEmployeeFAQsItemID: "",
+    };
+
+  }
+
   public render(): React.ReactElement<IEmployeehubHrfaQsProps> {
     const {
       description,
@@ -14,30 +83,322 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
     } = this.props;
 
     return (
-      <section className={`${styles.employeehubHrfaQs} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <section className="employeehubHrfaQs">
+
+        <div className="faq-wrapper">
+
+          <h2 className="faq-title">
+            HR FAQs
+            <span className="underline"></span>
+          </h2>
+
+          <div className='AddHRInfo'>
+            <PrimaryButton text='Add HRFAQs' onClick={() => this.setState({ EmployeeHRFAQsDialog: false })} />
+          </div>
+
+          {
+            this.state.EmployeeFaQData.length > 0 &&
+            this.state.EmployeeFaQData.map((item) => {
+              return (
+                <div className="faq-card">
+                  <div className="faq-item">
+                    <Accordion allowZeroExpanded>
+                      <AccordionItem>
+                        <AccordionItemHeading>
+                          <AccordionItemButton>
+                            {item.Question}
+                          </AccordionItemButton>
+                        </AccordionItemHeading>
+                        <AccordionItemPanel>
+                          <p className="faq-answer" dangerouslySetInnerHTML={{ __html: item.Answers }}>
+                          </p>
+                        </AccordionItemPanel>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
+                </div>
+              );
+            })
+          }
+
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+
+        <Dialog
+          hidden={this.state.EmployeeHRFAQsDialog}
+          onDismiss={() =>
+            this.setState({
+              EmployeeHRFAQsDialog: true,
+            })
+          }
+          dialogContentProps={EmployeeHubFAQsDetailsDialogContentProps}
+          modalProps={addmodelProps}
+          minWidth={1500}
+        >
+
+          <div className='AddfaqsData'>
+            <PrimaryButton className='Addhrfaqs' text='Add Data' onClick={() => this.setState({ AddEmployeeHRFAQsDialog: false })} />
+          </div>
+
+          <div className="news-container">
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '20%' }}>Question</th>
+                  <th style={{ width: '30%' }}>Answers</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {
+                  this.state.EmployeeFaQData.length > 0 &&
+                  this.state.EmployeeFaQData.map((item) => {
+                    return (
+                      <tr key={item.ID}>
+                        <td className="title">{item.Question}</td>
+                        <td dangerouslySetInnerHTML={{ __html: item.Answers }}></td>
+                        <td>
+                          <div style={{ display: "flex", gap: "8px" }}>
+                            <IconButton
+                              iconProps={{ iconName: "Edit" }}
+                              title="Edit"
+                              ariaLabel="Edit"
+                              onClick={() => this.setState({ EditEmployeeHRFAQsDialog: false, CurrentEmployeeFAQsItemID: item.ID }, () => this.EditEmpFAQsInfo(item.ID))}
+                            />
+
+                            <IconButton
+                              iconProps={{ iconName: "Delete" }}
+                              title="Delete"
+                              ariaLabel="Delete"
+                              onClick={() => this.DeleteEmpHRFaqsInfo(item.ID)}
+                            />
+
+                          </div>
+                        </td>
+
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.AddEmployeeHRFAQsDialog}
+          onDismiss={() =>
+            this.setState({
+              AddEmployeeHRFAQsDialog: true,
+              Question: "",
+              Answers: ""
+            })
+          }
+          dialogContentProps={AddEmployeeHubFAQsDataDialogContentProps}
+          modalProps={addmodelProps2}
+          minWidth={1100}
+        >
+          <div className="ms-Grid-row">
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Question'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Question: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Answers'
+                  type='text'
+                  multiline rows={3}
+                  onChange={(value) =>
+                    this.setState({ Answers: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Submit'
+                    onClick={() => this.AddEmpFAQsInfo()}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ AddEmployeeHRFAQsDialog: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </Dialog>
+
+        <Dialog
+          hidden={this.state.EditEmployeeHRFAQsDialog}
+          onDismiss={() =>
+            this.setState({
+              EditEmployeeHRFAQsDialog: true,
+              EditQuestion: "",
+              EditAnswers: ""
+            })
+          }
+          dialogContentProps={UpdateEmployeeHubFAQsDetailsDialogContentProps}
+          modalProps={updatemodelProps}
+          minWidth={1100}
+        >
+          <div className='ms-Grid-row'>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Question'
+                  type='text'
+                  value={this.state.EditQuestion}
+                  onChange={(value) =>
+                    this.setState({ EditQuestion: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Answers'
+                  type='text'
+                  multiline rows={3}
+                  value={this.state.EditAnswers}
+                  onChange={(value) =>
+                    this.setState({ EditAnswers: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+              <div className='Announcement-Submit'>
+                <div className='Submit-Button'>
+                  <PrimaryButton
+                    text='Update'
+                    onClick={() => this.UpdateEmpFAQsDetails(this.state.CurrentEmployeeFAQsItemID)}
+                  />
+                </div>
+
+                <div className='Cancel-Button'>
+                  <DefaultButton
+                    text='Cancel'
+                    onClick={() =>
+                      this.setState({ EditEmployeeHRFAQsDialog: true })
+                    }
+                  />
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </Dialog>
+
       </section>
     );
   }
+
+  public async componentDidMount() {
+    this.getEmployeeFaQs();
+  }
+
+  public async getEmployeeFaQs() {
+    const faq = await sp.web.lists.getByTitle("Employee FaQs").items.select(
+      "ID",
+      "Question",
+      "Answers"
+    ).get().then((data) => {
+      let AllData = [];
+      console.log(faq);
+      console.log(data);
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Question: item.Question ? item.Question : "",
+            Answers: item.Answers ? item.Answers : ""
+          });
+        });
+        this.setState({ EmployeeFaQData: AllData });
+      }
+    }).catch((error) => {
+      console.log("Error Fetching Details in Employee FaQs:", error);
+    });
+  }
+
+  public async AddEmpFAQsInfo() {
+    if (this.state.Question.length == 0) {
+      alert("Please Enter Details");
+    } else {
+      const empannouncement = await sp.web.lists.getByTitle("Employee FaQs").items.add({
+        Question: this.state.Question,
+        Answers: this.state.Answers
+      });
+
+      this.setState({ AddEmployeeHRFAQsDialog: true });
+      this.getEmployeeFaQs();
+
+    }
+  }
+
+  public async EditEmpFAQsInfo(ID) {
+    let EditFaqs = this.state.EmployeeFaQData.filter((item) => {
+      if (item.ID == ID) {
+        return item;
+      }
+    });
+    console.log(EditFaqs);
+    this.setState({
+      EditQuestion: EditFaqs[0].Question,
+      EditAnswers: EditFaqs[0].Answers
+    });
+  }
+
+  public async UpdateEmpFAQsDetails(CurrentEmployeeFAQsItemID) {
+    try {
+      const updateHRFaqs: any = {
+        Question: this.state.EditQuestion,
+        Answers: this.state.EditAnswers
+      };
+
+      const updateItem = await sp.web.lists.getByTitle("Employee FaQs").items.getById(CurrentEmployeeFAQsItemID).update(updateHRFaqs);
+
+      this.setState({ EditEmployeeHRFAQsDialog: true });
+      this.getEmployeeFaQs();
+
+    } catch (error) {
+      console.log("Error Updating details :", error);
+    }
+  }
+
+  public async DeleteEmpHRFaqsInfo(DeleteEmployeeFAQsItemID) {
+    const deleteinfo = await sp.web.lists.getByTitle("Employee FaQs").items.getById(DeleteEmployeeFAQsItemID).delete();
+    this.setState({ EmployeeFaQData: deleteinfo });
+    this.getEmployeeFaQs();
+  }
+
 }
