@@ -5,6 +5,12 @@
     margin-top: 66px;
 }
 
+
+.essential-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .essential-title {
     font-size: 22px;
     font-weight: 600;

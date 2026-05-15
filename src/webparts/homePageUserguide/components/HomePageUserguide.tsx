@@ -26,6 +26,8 @@ export interface IHomePageUserguideState {
   CurrentUserguideDetailsID: any;
   DeleteUserguideDetailsID: any;
   previewImage: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -78,7 +80,9 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
       EditUploadImages: [],
       CurrentUserguideDetailsID: "",
       DeleteUserguideDetailsID: "",
-      previewImage: ""
+      previewImage: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -108,11 +112,24 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
       <section className="homePageUserguide">
 
         <div className="essential-section">
-          <h2 className="essential-title">User guides</h2>
-
-          <div className='AddAnnouncemt'>
-            <PrimaryButton text='Add UserGuides' onClick={() => this.setState({ AddUserGuideDialog: false })} />
+          <div className="essential-header">
+            <h2 className="section-title">User guide</h2>
+            <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/User-Guides1.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
+              <button className="view-news">View all</button>
+            </a>
           </div>
+
+          {
+            this.state.IsAdmin ?
+            <>
+              <div className='AddAnnouncemt'>
+                <PrimaryButton text='Add UserGuides' onClick={() => this.setState({ AddUserGuideDialog: false })} />
+              </div>
+            </> 
+            :
+            <>
+            </>
+          }
 
           <Slider {...userguide}>
 
@@ -433,7 +450,25 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
 
   public async componentDidMount() {
     this.getEssentiallearnings();
+    this.GetCurrentUser();
   }
+
+  public async GetCurrentUser() {
+      try {
+        const currentUser = await sp.web.currentUser.get();
+        const userEmail = currentUser.Email.toLowerCase().trim();
+        const ownerGroup = await sp.web.associatedOwnerGroup();
+        const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+  
+        const isAdmin = groupUsers.some(user =>
+          user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+        );
+        this.setState({ IsAdmin: true });
+        this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+    }
 
   public async getEssentiallearnings() {
     const roadmap = await sp.web.lists.getByTitle("User guides").items.select(

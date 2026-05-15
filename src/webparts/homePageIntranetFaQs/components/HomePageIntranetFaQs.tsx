@@ -24,6 +24,8 @@ export interface IHomePageIntranetFaQsState {
   EditIntranetFaqDataDiaolg: boolean;
   CurrentIntranetFaqID: any;
   DeleteIntranetFaqID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -69,6 +71,8 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
       EditIntranetFaqDataDiaolg: true,
       CurrentIntranetFaqID: "",
       DeleteIntranetFaqID: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -89,9 +93,17 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
           <h2>Intranet FAQs</h2>
 
-          <div className='AddAnnouncemt'>
-            <PrimaryButton text='Add FAQs' onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
-          </div>
+          {
+            this.state.IsAdmin ?
+              <>
+                <div className='AddAnnouncemt'>
+                  <PrimaryButton text='Add FAQs' onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+          }
 
           {
             this.state.FaqsAnswersData.length > 0 &&
@@ -309,6 +321,24 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
   public async componentDidMount() {
     this.getFAQs();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getFAQs() {
