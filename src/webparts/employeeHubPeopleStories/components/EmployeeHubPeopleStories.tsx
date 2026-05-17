@@ -3,7 +3,24 @@ import styles from './EmployeeHubPeopleStories.module.scss';
 import { IEmployeeHubPeopleStoriesProps } from './IEmployeeHubPeopleStoriesProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class EmployeeHubPeopleStories extends React.Component<IEmployeeHubPeopleStoriesProps, {}> {
+export interface IEmployeeHubPeopleStoriesState {
+
+}
+
+
+export default class EmployeeHubPeopleStories extends React.Component<IEmployeeHubPeopleStoriesProps, IEmployeeHubPeopleStoriesState> {
+
+  constructor(props: IEmployeeHubPeopleStoriesProps, state: IEmployeeHubPeopleStoriesState) {
+
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+
+
   public render(): React.ReactElement<IEmployeeHubPeopleStoriesProps> {
     const {
       description,
@@ -14,29 +31,78 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
     } = this.props;
 
     return (
-      <section className={`${styles.employeeHubPeopleStories} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+      <section className="employeeHubPeopleStories">
+
+        <section className="stories-section">
+          <h2 className="stories-title">Investing in People: Stories of Growth</h2>
+
+          <div className="stories-grid">
+
+            <div className="story-card">
+              <div className="story-thumbnail">
+                <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
+                  <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="story-content">
+                <div className="story-title">
+                  Sarah’s Development - New Learning Program Participation
+                </div>
+              </div>
+            </div>
+
+
+            <div className="story-card">
+              <div className="story-thumbnail">
+                <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
+                  <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="story-content">
+                <div className="story-title">
+                  Joanne’s Promotion - Mentorship &amp; Career Path
+                </div>
+              </div>
+            </div>
+
+
+            <div className="story-card">
+              <div className="story-thumbnail">
+                <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
+                  <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+              </div>
+              <div className="story-content">
+                <div className="story-title">
+                  David’s Retirement - What did Axis CLC do for his career?
+                </div>
+              </div>
+            </div>
+
+
+            <div className="story-card">
+              <div className="story-thumbnail">
+                <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
+                  <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+              </div>
+              <div className="story-content">
+                <div className="story-title">
+                  Maxine’s Promotion - Mentorship &amp; Career Path
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="accent-line"></div>
+        </section>
+
       </section>
     );
   }

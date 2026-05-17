@@ -1,0 +1,79 @@
+.section-feed {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-feed::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 110px;
+  height: 3px;
+  background: #0ea5b6;
+  border-radius: 3px;
+}
+
+.section-subtitle {
+  margin-top: 21px;
+  font-size: 20px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 36px;
+}
+
+
+/* =========================
+   FEEDBACK PANEL
+========================= */
+.feedback-panel {
+  background: #dff0f1;
+  border-radius: 18px;
+  padding: 5px 28px 23px 26px;
+  width: 810px;
+}
+
+.feedback-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.column-title {
+  font-size: 21px;
+  font-weight: 600;
+  color: #222;
+  position: relative;
+  display: inline-block;
+}
+
+.column-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #0ea5b6;
+  border-radius: 3px;
+  margin-top: 6px;
+}
+
+.column-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feedback-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 17px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}

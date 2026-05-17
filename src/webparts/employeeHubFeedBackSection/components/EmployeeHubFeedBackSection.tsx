@@ -3,7 +3,26 @@ import styles from './EmployeeHubFeedBackSection.module.scss';
 import { IEmployeeHubFeedBackSectionProps } from './IEmployeeHubFeedBackSectionProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class EmployeeHubFeedBackSection extends React.Component<IEmployeeHubFeedBackSectionProps, {}> {
+
+export interface IEmployeeHubFeedBackSectionState {
+
+}
+
+require('../assets/style.css');
+
+export default class EmployeeHubFeedBackSection extends React.Component<IEmployeeHubFeedBackSectionProps, IEmployeeHubFeedBackSectionState> {
+
+  constructor(props: IEmployeeHubFeedBackSectionProps, state: IEmployeeHubFeedBackSectionState) {
+
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+
+
   public render(): React.ReactElement<IEmployeeHubFeedBackSectionProps> {
     const {
       description,
@@ -14,29 +33,39 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
     } = this.props;
 
     return (
-      <section className={`${styles.employeeHubFeedBackSection} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <section className="employeeHubFeedBackSection">
+
+        <h1 className="section-feed">Hearts & Minds - Our Culture, Our People</h1>
+        <p className="section-subtitle">
+          Join us in shaping a more engaged, connected, and vibrant workplace ready for our Investors in People survey!
+        </p>
+
+        <div className="feedback-panel">
+          <div className="feedback-grid">
+
+            <div>
+              <h3 className="column-title">Your Feedback (You Said)</h3>
+              <div className="column-items">
+                <div className="feedback-item">Need clearer communication on teams roles</div>
+                <div className="feedback-item">More structured mentorship opportunities</div>
+                <div className="feedback-item">More structured team interest in the employees</div>
+                <div className="feedback-item">More clear and communicative mentorship opportunities</div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="column-title">Our Response (We Did)</h3>
+              <div className="column-items">
+                <div className="feedback-item">Implementing a weekly department-wide email digest</div>
+                <div className="feedback-item">Launched a new peer mentoring program for all staff</div>
+                <div className="feedback-item">Launched a new peer mentorship for career opportunities</div>
+                <div className="feedback-item">Launched a new peer mentorship program for training and success</div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+
       </section>
     );
   }

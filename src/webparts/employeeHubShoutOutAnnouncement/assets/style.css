@@ -1,0 +1,107 @@
+.shoutouts-section {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Title */
+.shoutouts-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.shoutouts-title::after {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 4px;
+    background: #00a9b7;
+    border-radius: 2px;
+    margin-top: 6px;
+}
+
+/* =========================
+   CARD
+========================= */
+.shout-card {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Right Accent Bar */
+.shout-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: #00b8c8;
+    border-radius: 6px 14px 14px 6px;
+}
+
+/* Icon */
+.shout-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: #f5fcfd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+/* Content */
+.shout-content {
+    flex: 1;
+    padding-right: 12px;
+}
+
+.shout-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 6px;
+}
+
+.shout-message {
+    font-size: 14px;
+    line-height: 1.35;
+    color: #7a7a7a;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .shout-card {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .shout-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+
+    .shout-name {
+        font-size: 15px;
+    }
+
+    .shout-message {
+        font-size: 13px;
+    }
+}

@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EmployeeHubFeedBackSectionWebPartStrings';
 import EmployeeHubFeedBackSection from './components/EmployeeHubFeedBackSection';
 import { IEmployeeHubFeedBackSectionProps } from './components/IEmployeeHubFeedBackSectionProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeeHubFeedBackSectionWebPartProps {
   description: string;
@@ -24,6 +25,10 @@ export default class EmployeeHubFeedBackSectionWebPart extends BaseClientSideWeb
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
+    sp.setup({
+      spfxContext: this.context
+    });
+
     return super.onInit();
   }
 
@@ -35,7 +40,8 @@ export default class EmployeeHubFeedBackSectionWebPart extends BaseClientSideWeb
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context
       }
     );
 

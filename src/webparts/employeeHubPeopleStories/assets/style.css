@@ -1,0 +1,90 @@
+.stories-section {
+    margin-bottom: 42px;
+    width: 830px;
+}
+
+/* Section Title */
+.stories-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.stories-title::after {
+    content: "";
+    display: block;
+    width: 55px;
+    height: 4px;
+    background: #00a8b5;
+    border-radius: 2px;
+    margin-top: 8px;
+}
+
+/* Cards Container */
+.stories-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 41px;
+}
+
+.story-card {
+    width: 116%;
+    background: #f5f5f5;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, .08);
+    border: 1px solid #f0f0f0;
+    transition: transform .3s ease, box-shadow .3s ease
+}
+
+.story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.story-thumbnail {
+    width: 85%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    margin: 16px 0 0 15px;
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+/* Card Content */
+.story-content {
+    padding: 24px 16px 20px;
+}
+
+.story-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #222;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .story-title {
+        font-size: 15px;
+    }
+
+    .accent-line {
+        width: 180px;
+    }
+}

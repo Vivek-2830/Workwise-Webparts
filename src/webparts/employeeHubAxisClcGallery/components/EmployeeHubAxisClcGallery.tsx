@@ -3,7 +3,24 @@ import styles from './EmployeeHubAxisClcGallery.module.scss';
 import { IEmployeeHubAxisClcGalleryProps } from './IEmployeeHubAxisClcGalleryProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class EmployeeHubAxisClcGallery extends React.Component<IEmployeeHubAxisClcGalleryProps, {}> {
+export interface IEmployeeHubAxisClcGalleryState {
+
+}
+
+require('../assets/style.css');
+
+export default class EmployeeHubAxisClcGallery extends React.Component<IEmployeeHubAxisClcGalleryProps, IEmployeeHubAxisClcGalleryState> {
+
+  constructor(props: IEmployeeHubAxisClcGalleryProps, state: IEmployeeHubAxisClcGalleryState) {
+
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+
   public render(): React.ReactElement<IEmployeeHubAxisClcGalleryProps> {
     const {
       description,
@@ -14,29 +31,36 @@ export default class EmployeeHubAxisClcGallery extends React.Component<IEmployee
     } = this.props;
 
     return (
-      <section className={`${styles.employeeHubAxisClcGallery} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <section className="employeeHubAxisClcGallery">
+
+        <div className="gallery-section">
+
+
+          <div className="gallery-header">
+            Life at Axis CLC (Photo Gallery)
+          </div>
+
+
+          <div className="gallery-grid">
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 1" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 2" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 3" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 4" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 5" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 6" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 7" /></div>
+            <div className="gallery-item"><img src={require('../assets/Frame14.png')} alt="Gallery Image 8" /></div>
+          </div>
+
+          <button className="submit-btn">
+            Submit an Image
+            <svg viewBox="0 0 24 24">
+              <path d="M5 20h14v-2H5v2zm7-18l-5.5 5.5 1.42 1.42L11 6.84V16h2V6.84l3.08 3.08 1.42-1.42L12 2z" />
+            </svg>
+          </button>
+
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+
       </section>
     );
   }

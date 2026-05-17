@@ -3,7 +3,24 @@ import styles from './EmployeeHubShoutOutAnnouncement.module.scss';
 import { IEmployeeHubShoutOutAnnouncementProps } from './IEmployeeHubShoutOutAnnouncementProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEmployeeHubShoutOutAnnouncementProps, {}> {
+export interface IEmployeeHubShoutOutAnnouncementState {
+
+}
+
+require('../assets/style.css');
+
+export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEmployeeHubShoutOutAnnouncementProps, IEmployeeHubShoutOutAnnouncementState> {
+
+  constructor(props: IEmployeeHubShoutOutAnnouncementProps, state: IEmployeeHubShoutOutAnnouncementState) {
+
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+
   public render(): React.ReactElement<IEmployeeHubShoutOutAnnouncementProps> {
     const {
       description,
@@ -14,29 +31,72 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
     } = this.props;
 
     return (
-      <section className={`${styles.employeeHubShoutOutAnnouncement} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <section className="employeeHubShoutOutAnnouncement">
+
+        <div className="shoutouts-section">
+          <h2 className="shoutouts-title">Shout Out's</h2>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">John Smith</div>
+              <div className="shout-message">
+                John has been an amazing help finalising the end of year accounts
+              </div>
+            </div>
+          </div>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">Ella Ferguson</div>
+              <div className="shout-message">
+                Ella really stepped up and has taken on extra workload since a team member left
+              </div>
+            </div>
+          </div>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">Mark Bronson</div>
+              <div className="shout-message">
+                Mark has been a great addition to our team and has picked things up really quickly
+              </div>
+            </div>
+          </div>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">Andrew Grange</div>
+              <div className="shout-message">
+                Andy recently started helping with the training of new staff and is doing great
+              </div>
+            </div>
+          </div>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">Amanda Brogue</div>
+              <div className="shout-message">
+                Amanda is really holding together the administration of the Exeter office until we get a new hire in to assist
+              </div>
+            </div>
+          </div>
+
+          <div className="shout-card">
+            <div className="shout-icon">📣</div>
+            <div className="shout-content">
+              <div className="shout-name">Oliver Ridgeley</div>
+              <div className="shout-message">
+                Ollie has been a hard working member of the team since he joined in June
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+
       </section>
     );
   }

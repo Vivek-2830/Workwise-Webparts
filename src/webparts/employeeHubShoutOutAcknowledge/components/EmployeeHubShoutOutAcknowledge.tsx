@@ -3,7 +3,26 @@ import styles from './EmployeeHubShoutOutAcknowledge.module.scss';
 import { IEmployeeHubShoutOutAcknowledgeProps } from './IEmployeeHubShoutOutAcknowledgeProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmployeeHubShoutOutAcknowledgeProps, {}> {
+
+export interface IEmployeeHubShoutOutAcknowledgeState {
+
+}
+
+require('../assets/style.css');
+
+export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmployeeHubShoutOutAcknowledgeProps, IEmployeeHubShoutOutAcknowledgeState> {
+
+  constructor(props: IEmployeeHubShoutOutAcknowledgeProps, state: IEmployeeHubShoutOutAcknowledgeState) {
+
+    super(props);
+
+    this.state = {
+
+    };
+
+  }
+
+
   public render(): React.ReactElement<IEmployeeHubShoutOutAcknowledgeProps> {
     const {
       description,
@@ -14,29 +33,24 @@ export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmp
     } = this.props;
 
     return (
-      <section className={`${styles.employeeHubShoutOutAcknowledge} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <section className="employeeHubShoutOutAcknowledge">
+
+        <div className="shoutout-card">
+          <div className="card-top">
+            📣
+          </div>
+          <div className="card-body">
+            <h3 className="card-title">
+              Shout Out: Acknowledge a Colleague!
+            </h3>
+            <p className="card-text">
+              Recognise a fellow team member for their hard work, support,
+              or great attitude. Leave your message here!
+            </p>
+            <a href="#" className="submitbtn">Submit a Shout Out</a>
+          </div>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It's the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+
       </section>
     );
   }
