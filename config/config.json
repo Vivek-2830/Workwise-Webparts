@@ -217,6 +217,38 @@
           "manifest": "./src/webparts/employeeHubShoutOutAnnouncement/EmployeeHubShoutOutAnnouncementWebPart.manifest.json"
         }
       ]
+    },
+    "business-resources-banner-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/businessResourcesBanner/BusinessResourcesBannerWebPart.js",
+          "manifest": "./src/webparts/businessResourcesBanner/BusinessResourcesBannerWebPart.manifest.json"
+        }
+      ]
+    },
+    "business-resources-all-document-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/businessResourcesAllDocument/BusinessResourcesAllDocumentWebPart.js",
+          "manifest": "./src/webparts/businessResourcesAllDocument/BusinessResourcesAllDocumentWebPart.manifest.json"
+        }
+      ]
+    },
+    "business-resources-fa-qs-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/businessResourcesFaQs/BusinessResourcesFaQsWebPart.js",
+          "manifest": "./src/webparts/businessResourcesFaQs/BusinessResourcesFaQsWebPart.manifest.json"
+        }
+      ]
+    },
+    "business-resources-image-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/businessResourcesImage/BusinessResourcesImageWebPart.js",
+          "manifest": "./src/webparts/businessResourcesImage/BusinessResourcesImageWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -248,6 +280,10 @@
     "EmployeeHubPeopleStoriesWebPartStrings": "lib/webparts/employeeHubPeopleStories/loc/{locale}.js",
     "EmployeeHubAxisClcGalleryWebPartStrings": "lib/webparts/employeeHubAxisClcGallery/loc/{locale}.js",
     "EmployeeHubShoutOutAcknowledgeWebPartStrings": "lib/webparts/employeeHubShoutOutAcknowledge/loc/{locale}.js",
-    "EmployeeHubShoutOutAnnouncementWebPartStrings": "lib/webparts/employeeHubShoutOutAnnouncement/loc/{locale}.js"
+    "EmployeeHubShoutOutAnnouncementWebPartStrings": "lib/webparts/employeeHubShoutOutAnnouncement/loc/{locale}.js",
+    "BusinessResourcesBannerWebPartStrings": "lib/webparts/businessResourcesBanner/loc/{locale}.js",
+    "BusinessResourcesAllDocumentWebPartStrings": "lib/webparts/businessResourcesAllDocument/loc/{locale}.js",
+    "BusinessResourcesFaQsWebPartStrings": "lib/webparts/businessResourcesFaQs/loc/{locale}.js",
+    "BusinessResourcesImageWebPartStrings": "lib/webparts/businessResourcesImage/loc/{locale}.js"
   }
 }

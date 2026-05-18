@@ -1,0 +1,13 @@
+.business-image {
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.Responsive-Img {
+    width: 100%;
+    height: 286px;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}

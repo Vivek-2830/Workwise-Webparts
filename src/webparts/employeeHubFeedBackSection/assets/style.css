@@ -20,7 +20,7 @@
 
 .section-subtitle {
   margin-top: 21px;
-  font-size: 20px;
+  font-size: 16px;
   color: #666;
   line-height: 1.5;
   margin-bottom: 36px;
@@ -34,7 +34,7 @@
   background: #dff0f1;
   border-radius: 18px;
   padding: 5px 28px 23px 26px;
-  width: 810px;
+  /* width: 810px; */
 }
 
 .feedback-grid {
@@ -68,6 +68,9 @@
 }
 
 .feedback-item {
+  display: flex;
+  align-items: center;
+  height: 35px;
   background: #ffffff;
   border-radius: 8px;
   padding: 17px 18px;

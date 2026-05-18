@@ -7,6 +7,7 @@ export interface IEmployeeHubPeopleStoriesState {
 
 }
 
+require('../assets/style.css');
 
 export default class EmployeeHubPeopleStories extends React.Component<IEmployeeHubPeopleStoriesProps, IEmployeeHubPeopleStoriesState> {
 

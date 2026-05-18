@@ -1,10 +1,11 @@
 .shoutout-card {
-    width: 365px;
+    /* width: 365px; */
     background: #fff;
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     border: 1px solid #eee;
+    margin-top: 130px;
 }
 
 .card-top {

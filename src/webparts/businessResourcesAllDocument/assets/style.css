@@ -1,0 +1,562 @@
+.latest-card {
+    /* width: 360px; */
+    background: #f2f9f9;
+    border-radius: 14px;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.latest-header {
+    background-color: #007680;
+    color: #ffffff;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.latest-list {
+    list-style: none;
+    margin: 0;
+    padding: 10px 16px;
+}
+
+.latest-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #d6e7e7;
+}
+
+.latest-list.scroll {
+    max-height: 212px;
+    overflow-y: auto;
+}
+
+.latest-list.scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.latest-list.scroll::-webkit-scrollbar-thumb {
+    background: #007c82;
+    border-radius: 10px;
+}
+
+.latest-list.scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.list-card {
+    padding: 10px 0;
+}
+
+/* .latest-item:last-child {
+    border-bottom: none;
+} */
+
+.file-info {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.file-icon {
+    font-size: 18px;
+    color: #ff6a00;
+    margin-top: 2px;
+}
+
+.file-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+}
+
+.file-meta {
+    font-size: 12px;
+    color: #8a8a8a;
+    margin-top: 2px;
+}
+
+.download-icon {
+    color: #007a7c;
+    text-decoration: none;
+}
+
+.download-icon:hover {
+    color: #005f61;
+}
+
+/* ------------------------------------------------------------------------------------- */
+
+.quick-accesswrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.search-box {
+    margin-bottom: 40px;
+    width: 87%;
+    margin-left: 52px;
+}
+
+.new-search,
+.new-search:hover {
+    border: 1px solid #007680;
+    border-radius: 34px;
+    height: auto;
+    padding: 7px 8px;
+    margin: 10px 0 10px 0;
+}
+
+.new-search::after {
+    border: 1px solid #007680;
+    border-radius: 34px;
+    height: auto;
+    padding: 7px 8px;
+}
+
+.new-search .ms-SearchBox-icon {
+    color: black;
+}
+
+.new-search .ms-SearchBox-field {
+    text-align: center;
+    color: black;
+}
+
+.quick-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 31px;
+    flex-wrap: wrap;
+}
+
+.quick-item {
+    text-align: center;
+    flex: 1;
+    min-width: 160px;
+}
+
+.icon-circle {
+    width: 90px;
+    height: 90px;
+    background-color: #007a7c;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    margin: 0 auto 14px;
+}
+
+.icon-circle img {
+    width: 37px;
+    height: 37px;
+}
+
+.quick-item p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1.3;
+}
+
+.icon-circle {
+    background-color: #005f61;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------- */
+
+.docs-wrapper {
+    /* background: #eef6f6; */
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: #0f2f2f;
+    margin-bottom: 25px;
+}
+
+.frequent-files {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.file-card {
+    flex: 1;
+    height: 100px;
+    background: linear-gradient(rgba(0, 122, 124, 0.6), rgba(0, 122, 124, 0.6)), url('../assets/Rectangle2.png') center/cover no-repeat;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.category-tabs .ms-Pivot {
+    background: transparent;
+    margin-left: 340px;
+    display: flex;
+    gap: 10px 0;
+    flex-wrap: wrap;
+}
+
+.category-tabs .ms-Pivot-link {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    font-size: 14px;
+    height: 36px;
+}
+
+.category-tabs .ms-Pivot-link.is-selected {
+    background: #ff6a00;
+    color: #fff;
+}
+
+.category-tabs .ms-Pivot-link.is-selected::before {
+    background-color: none;
+    content: none;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+}
+
+.doc-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.doc-header {
+    background: #007c82;
+    color: #fff;
+    padding: 12px 18px;
+    font-weight: 600;
+}
+
+.doc-icon {
+    font-size: 18px;
+    color: #ff6a00;
+    margin-top: 2px;
+}
+
+.docsPolice-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+}
+
+.line-doc {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.docsPolice-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.docsPolice-icon {
+    font-size: 18px;
+    color: #ff6a00;
+    margin-top: 2px;
+}
+
+.documents-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px 0;
+}
+
+.doclist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-list.scroll {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.docs-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.docfile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doc-name {
+    font-size: 14px;
+    color: #1a1a1a;
+}
+
+.download img {
+    width: 8px;
+    cursor: pointer;
+}
+
+.doc-list.scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.doc-list.scroll::-webkit-scrollbar-thumb {
+    background: #007c82;
+    border-radius: 10px;
+}
+
+.doc-list.scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+/* ------------------------------------------------------- */
+
+.temps-wrapper {
+    background: white;
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ----------------------------------------------------------- */
+
+.Insurance-wrapper {
+    /* background: #eef6f6; */
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------------------------------------------------------------------- */
+
+.How-wrapper {
+    background: white;
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.Business-wrapper {
+    margin-top: 20px;
+    /* background: #eef6f6; */
+    padding: 30px 40px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+
+.category-card {
+    background: #eef6f6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.categorys-card {
+    background: #eef6f6;
+    border-radius: 12px;
+    padding: 10px 0;
+}
+
+.TemplatesandBranding video,
+.TemplatesandBranding iframe,
+.TemplatesandBranding .fileimage {
+    height: 100px !important;
+    width: 100px !important;
+    object-fit: contain;
+}
+
+.TemplatesandBranding {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.TemplatesandBranding .docsPolice-info {
+    flex-direction: column;
+}
+
+.searchitems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.searchitems .docs-items {
+    flex-basis: 28%;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+
+/* MAIN LAYOUT */
+.brochures-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+}
+
+/* LEFT PANEL */
+.brochures-latest-card {
+    background: #f4f7f8;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.brochures-header {
+    background: #0f7c7c;
+    color: #fff;
+    padding: 12px 16px;
+    font-weight: 600;
+}
+
+/* LEFT LIST */
+.brochures-latest-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.brochures-latest-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.brochures-latest-item:hover {
+    background: #eef6f6;
+}
+
+/* FILE INFO */
+.brochures-file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brochures-file-icon {
+    font-size: 18px;
+    color: #ff6a00;
+    margin-top: 2px;
+}
+
+.brochures-file-name {
+    font-size: 14px;
+    color: #333;
+}
+
+/* RIGHT PANEL */
+.brochures-preview-card {
+    background: #f4f7f8;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* GRID */
+.brochures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+/* ITEM */
+.brochures-grid-item {
+    position: relative;
+    text-align: center;
+}
+
+/* IMAGE CARD */
+.brochures-image-card {
+    padding: 10px;
+}
+
+.brochures-image-card img {
+    width: 85%;
+    height: 80px;
+    object-fit: cover;
+}
+
+.brochures-image-card p {
+    font-size: 13px;
+    margin-top: 8px;
+    color: #444;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+/* DOWNLOAD ICON */
+.brochures-download-icon {
+    position: absolute;
+    top: 61px;
+    right: 8px;
+}
+
+.brochures-grid.scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.brochures-grid.scroll::-webkit-scrollbar-thumb {
+    background: #007c82;
+    border-radius: 10px;
+}
+
+.brochures-grid.scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .brochures-container {
+        grid-template-columns: 1fr;
+    }
+
+    .brochures-preview-card {
+        height: auto;
+    }
+}

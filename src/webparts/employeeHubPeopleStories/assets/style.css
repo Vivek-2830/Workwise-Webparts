@@ -1,6 +1,6 @@
 .stories-section {
     margin-bottom: 42px;
-    width: 830px;
+    /* width: 830px; */
 }
 
 /* Section Title */
@@ -28,11 +28,11 @@
     margin-top: 22px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 41px;
+    gap: 7px;
 }
 
 .story-card {
-    width: 116%;
+    /* width: 116%; */
     background: #f5f5f5;
     border-radius: 14px;
     overflow: hidden;
@@ -63,7 +63,7 @@
 }
 
 .story-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1.4;
     color: #222;
