@@ -114,8 +114,8 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
         <div className="essential-section">
           <div className="essential-header">
             <h2 className="section-title">User guide</h2>
-            <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/User-Guides1.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
-              <button className="view-news">View all</button>
+            <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/User-Guides1.aspx' style={{ textDecoration: "none", color: "inherit" }} target="_blank" rel="noopener noreferrer">
+              <button className="view-userguide">View all</button>
             </a>
           </div>
 
