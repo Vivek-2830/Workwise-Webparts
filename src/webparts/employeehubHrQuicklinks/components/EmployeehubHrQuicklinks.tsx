@@ -21,6 +21,8 @@ export interface IEmployeehubHrQuicklinksState {
   previewImage: any;
   CurrentEmployeeHRQuickItemID: any;
   DeleteEmployeeHRQuickItemID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -71,6 +73,8 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
       previewImage: "",
       CurrentEmployeeHRQuickItemID: "",
       DeleteEmployeeHRQuickItemID: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -93,9 +97,17 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
             HR Quick Links
             <span className="underline"></span>
 
-            <div className='Addquicklink'>
-              <PrimaryButton text='Add HRQuicklink' onClick={() => this.setState({ EmployeeHRQuickDialog: false })} />
-            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='Addquicklink'>
+                  <PrimaryButton text='Add HRQuicklink' onClick={() => this.setState({ EmployeeHRQuickDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+            }
 
           </h2>
 
@@ -384,6 +396,24 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
 
   public async componentDidMount() {
     this.getRecruitmentData();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getRecruitmentData() {

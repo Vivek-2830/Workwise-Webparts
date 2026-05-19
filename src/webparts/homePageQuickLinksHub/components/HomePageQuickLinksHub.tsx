@@ -21,6 +21,8 @@ export interface IHomePageQuickLinksHubState {
   EditQuicklinksDataDialog: boolean;
   CurrentQuickLinkDetailsID: any;
   DeleteQuickLinkDataID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -70,7 +72,9 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
       EditUploadIcons: [],
       EditQuicklinksDataDialog: true,
       CurrentQuickLinkDetailsID: "",
-      DeleteQuickLinkDataID: ""
+      DeleteQuickLinkDataID: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -87,9 +91,16 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
     return (
       <section className="homePageQuickLinksHub">
 
-        <div className='AddAnnouncemt'>
-          <PrimaryButton text='Add Quicklinks' onClick={() => this.setState({ AddQuicklinkDialog: false })} />
-        </div>
+        {
+          this.state.IsAdmin ?
+            <>
+              <div className='AddAnnouncemt'>
+                <PrimaryButton text='Add Quicklinks' onClick={() => this.setState({ AddQuicklinkDialog: false })} />
+              </div>
+            </>
+            :
+            <></>
+        }
 
         <div className="quick-links">
 
@@ -372,6 +383,24 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
 
   public async componentDidMount() {
     this.getquicklinksData();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getquicklinksData() {

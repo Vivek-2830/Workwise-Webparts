@@ -8,6 +8,8 @@ import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePageEventsState {
   EventsAllDate: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -18,7 +20,9 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
     super(props);
     
     this.state = {
-      EventsAllDate: ""
+      EventsAllDate: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
   }
 
@@ -39,11 +43,18 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
           <h2 className="section-title">Events</h2>
           <div className="title-underline"></div>
 
-          <div>
-            <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Events/calendar.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
-              <PrimaryButton className='Adddoc' text="Add Event"/>
-            </a>
-          </div>
+          {
+            this.state.IsAdmin ?
+            <>
+                <div>
+                  <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Events/calendar.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                    <PrimaryButton className='Adddoc' text="Add Event" />
+                  </a>
+                </div>
+            </>
+            :
+            <></>
+          }
 
           <div className='events-scroll'>
 
@@ -225,7 +236,25 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
 
   public async componentDidMount() {
     // this.getEvents();
-      this.getEventsDetails();
+    this.getEventsDetails();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   // public async getEvents() {

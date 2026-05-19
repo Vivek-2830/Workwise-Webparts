@@ -5,4 +5,5 @@ export interface IEmployeehubHrfaQsProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: any;
+  ListName: any;
 }

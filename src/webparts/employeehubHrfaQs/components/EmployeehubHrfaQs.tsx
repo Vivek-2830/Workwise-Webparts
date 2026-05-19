@@ -357,7 +357,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
   }
 
   public async getEmployeeFaQs() {
-    const faq = await sp.web.lists.getByTitle("Employee FaQs").items.select(
+    const faq = await sp.web.lists.getByTitle(this.props.ListName).items.select(
       "ID",
       "Question",
       "Answers"
@@ -384,7 +384,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
     if (this.state.Question.length == 0) {
       alert("Please Enter Details");
     } else {
-      const empannouncement = await sp.web.lists.getByTitle("Employee FaQs").items.add({
+      const empannouncement = await sp.web.lists.getByTitle(this.props.ListName).items.add({
         Question: this.state.Question,
         Answers: this.state.Answers
       });
@@ -415,7 +415,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
         Answers: this.state.EditAnswers
       };
 
-      const updateItem = await sp.web.lists.getByTitle("Employee FaQs").items.getById(CurrentEmployeeFAQsItemID).update(updateHRFaqs);
+      const updateItem = await sp.web.lists.getByTitle(this.props.ListName).items.getById(CurrentEmployeeFAQsItemID).update(updateHRFaqs);
 
       this.setState({ EditEmployeeHRFAQsDialog: true });
       this.getEmployeeFaQs();
@@ -426,7 +426,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
   }
 
   public async DeleteEmpHRFaqsInfo(DeleteEmployeeFAQsItemID) {
-    const deleteinfo = await sp.web.lists.getByTitle("Employee FaQs").items.getById(DeleteEmployeeFAQsItemID).delete();
+    const deleteinfo = await sp.web.lists.getByTitle(this.props.ListName).items.getById(DeleteEmployeeFAQsItemID).delete();
     this.setState({ EmployeeFaQData: deleteinfo });
     this.getEmployeeFaQs();
   }

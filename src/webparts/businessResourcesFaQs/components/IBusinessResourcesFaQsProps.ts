@@ -5,4 +5,5 @@ export interface IBusinessResourcesFaQsProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: any;
+  ListName: any;
 }

@@ -15,6 +15,7 @@ import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeehubHrfaQsWebPartProps {
   description: string;
+  ListName: any;
 }
 
 export default class EmployeehubHrfaQsWebPart extends BaseClientSideWebPart<IEmployeehubHrfaQsWebPartProps> {
@@ -42,7 +43,8 @@ export default class EmployeehubHrfaQsWebPart extends BaseClientSideWebPart<IEmp
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+        context: this.context,
+        ListName: this.properties.ListName ? this.properties.ListName : "Employee FaQs"
       }
     );
 

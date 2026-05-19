@@ -30,6 +30,8 @@ export interface IHomePageNewsAnnouncementsState {
   EditNewsAnnouncementDataDialog: boolean;
   CurrentNewsAnnouncementID: any;
   DeleteNewsAnnouncementID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -86,7 +88,9 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
       EditUploadNewsPhoto: [],
       EditNewsAnnouncementDataDialog: true,
       CurrentNewsAnnouncementID: "",
-      DeleteNewsAnnouncementID: ""
+      DeleteNewsAnnouncementID: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -109,9 +113,17 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
           <div className="news-header">
             <h2 className="section-title">News &amp; Announcements</h2>
 
-            <div className='AddNews'>
-              <PrimaryButton text='Add News' onClick={() => this.setState({ AddNewsDialog: false })} />
-            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='AddNews'>
+                  <PrimaryButton text='Add News' onClick={() => this.setState({ AddNewsDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+            }
 
             <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/News%20&%20Announcements%20Page.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
               <button className="view-news">View all</button>
@@ -495,6 +507,24 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
   public async componentDidMount() {
     this.getNewsAnnouncementsData();
     this.GetTicketsChoicesItems();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getNewsAnnouncementsData() {

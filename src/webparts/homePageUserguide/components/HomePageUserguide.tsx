@@ -468,7 +468,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
       } catch (error) {
         console.error("Error checking admin status:", error);
       }
-    }
+  }
 
   public async getEssentiallearnings() {
     const roadmap = await sp.web.lists.getByTitle("User guides").items.select(

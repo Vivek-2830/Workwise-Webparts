@@ -353,7 +353,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
   }
 
   public async getBusinessFaQsData() {
-    const faqs = await sp.web.lists.getByTitle("Business FaQ").items.select(
+    const faqs = await sp.web.lists.getByTitle(this.props.ListName).items.select(
       "ID",
       "Question",
       "Answer"
@@ -380,7 +380,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
     if (this.state.Question.length == 0) {
       alert("Please Enter Details");
     } else {
-      const empannouncement = await sp.web.lists.getByTitle("Business FaQ").items.add({
+      const empannouncement = await sp.web.lists.getByTitle(this.props.ListName).items.add({
         Question: this.state.Question,
         Answer: this.state.Answer
       });
@@ -411,7 +411,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
         Answers: this.state.EditAnswer
       };
 
-      const updateItem = await sp.web.lists.getByTitle("Business FaQ").items.getById(CurrenFaQItemID).update(updateFaqs);
+      const updateItem = await sp.web.lists.getByTitle(this.props.ListName).items.getById(CurrenFaQItemID).update(updateFaqs);
 
       this.setState({ EditBusinessResourceFaQDialog: true });
       this.getBusinessFaQsData();
@@ -422,7 +422,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
   }
 
   public async DeleteResourceFAQsItemInfo(DeleteFaQItemID) {
-    const deleteinfo = await sp.web.lists.getByTitle("Business FaQ").items.getById(DeleteFaQItemID).delete();
+    const deleteinfo = await sp.web.lists.getByTitle(this.props.ListName).items.getById(DeleteFaQItemID).delete();
     this.setState({ BusinessFaQsData: deleteinfo });
     this.getBusinessFaQsData();
   }

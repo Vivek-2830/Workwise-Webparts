@@ -15,6 +15,7 @@ import { sp } from '@pnp/sp/presets/all';
 
 export interface IBusinessResourcesFaQsWebPartProps {
   description: string;
+  ListName: any;
 }
 
 export default class BusinessResourcesFaQsWebPart extends BaseClientSideWebPart<IBusinessResourcesFaQsWebPartProps> {
@@ -41,7 +42,8 @@ export default class BusinessResourcesFaQsWebPart extends BaseClientSideWebPart<
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context : this.context
+        context : this.context,
+        ListName: this.properties.ListName ? this.properties.ListName : "Business FaQ"
       }
     );
 

@@ -25,6 +25,8 @@ export interface IEmployeehubHrTeamContactState {
   CurrentHrTeamDetailsID: any;
   DeleteHrTeamDetailsID: any;
   previewImage: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -80,6 +82,8 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
       CurrentHrTeamDetailsID: "",
       DeleteHrTeamDetailsID: "",
       previewImage: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -103,9 +107,16 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
             <h3>HR Team Contact Details</h3>
             <span className="underline"></span>
 
-            <div className='AddAnnouncemt'>
-              <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddHRTemaDialog: false })} />
-            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='AddAnnouncemt'>
+                  <PrimaryButton text='Add TeamContact' onClick={() => this.setState({ AddHRTemaDialog: false })} />
+                </div>
+              </>
+              :
+              <></>
+            }
 
           </div>
 
@@ -469,6 +480,24 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
 
   public async componentDidMount() {
     this.getHRTeamDetails();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getHRTeamDetails() {

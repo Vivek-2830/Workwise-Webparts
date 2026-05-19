@@ -24,6 +24,8 @@ export interface IEmployeehubOurValuesState {
   CurrentOurValueItemID: any;
   DeleteOurvalueItemID: any;
   previewImage: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -76,6 +78,8 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
       CurrentOurValueItemID: "",
       DeleteOurvalueItemID: "",
       previewImage: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -97,9 +101,17 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
 
           <h2 className='Value-Title'>Our Values</h2>
 
-          <div className='Addvalue'>
-            <PrimaryButton text='Add OurValue' onClick={() => this.setState({ AddOurvalueDialog: false })} />
-          </div>
+          {
+            this.state.IsAdmin ?
+            <>
+              <div className='Addvalue'>
+                <PrimaryButton text='Add OurValue' onClick={() => this.setState({ AddOurvalueDialog: false })} />
+              </div>
+            </>
+            :
+            <>
+            </>
+          }
 
           <div className="trust-wrapper">
 
@@ -420,6 +432,24 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
 
   public async componentDidMount() {
     this.getOurvalues();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getOurvalues() {
