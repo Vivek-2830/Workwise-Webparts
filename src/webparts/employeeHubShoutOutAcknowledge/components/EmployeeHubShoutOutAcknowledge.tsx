@@ -29,7 +29,10 @@ export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmp
       isDarkTheme,
       environmentMessage,
       hasTeamsContext,
-      userDisplayName
+      userDisplayName,
+      ShoutOutTitle,
+      ShoutOutDescription,
+      Link
     } = this.props;
 
     return (
@@ -41,13 +44,15 @@ export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmp
           </div>
           <div className="card-body">
             <h3 className="card-title">
-              Shout Out: Acknowledge a Colleague!
+              {ShoutOutTitle}
+              {/* Shout Out: Acknowledge a Colleague! */}
             </h3>
             <p className="card-text">
-              Recognise a fellow team member for their hard work, support,
-              or great attitude. Leave your message here!
+              {ShoutOutDescription}
+              {/* Recognise a fellow team member for their hard work, support,
+              or great attitude. Leave your message here! */}
             </p>
-            <a href="#" className="submitbtn">Submit a Shout Out</a>
+            <a href={Link} className="submitbtn">Submit a Shout Out</a>
           </div>
         </div>
 

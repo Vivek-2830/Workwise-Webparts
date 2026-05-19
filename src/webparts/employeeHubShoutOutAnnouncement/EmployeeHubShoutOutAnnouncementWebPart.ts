@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EmployeeHubShoutOutAnnouncementWebPartStrings';
 import EmployeeHubShoutOutAnnouncement from './components/EmployeeHubShoutOutAnnouncement';
 import { IEmployeeHubShoutOutAnnouncementProps } from './components/IEmployeeHubShoutOutAnnouncementProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeeHubShoutOutAnnouncementWebPartProps {
   description: string;
@@ -24,6 +25,11 @@ export default class EmployeeHubShoutOutAnnouncementWebPart extends BaseClientSi
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
+    sp.setup({
+      spfxContext: this.context
+    });
+    
+
     return super.onInit();
   }
 
@@ -35,7 +41,8 @@ export default class EmployeeHubShoutOutAnnouncementWebPart extends BaseClientSi
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context
       }
     );
 

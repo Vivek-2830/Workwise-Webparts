@@ -11,9 +11,13 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EmployeeHubShoutOutAcknowledgeWebPartStrings';
 import EmployeeHubShoutOutAcknowledge from './components/EmployeeHubShoutOutAcknowledge';
 import { IEmployeeHubShoutOutAcknowledgeProps } from './components/IEmployeeHubShoutOutAcknowledgeProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeeHubShoutOutAcknowledgeWebPartProps {
   description: string;
+  ShoutOutTitle: any;
+  ShoutOutDescription: any;
+  Link: any;
 }
 
 export default class EmployeeHubShoutOutAcknowledgeWebPart extends BaseClientSideWebPart<IEmployeeHubShoutOutAcknowledgeWebPartProps> {
@@ -23,6 +27,10 @@ export default class EmployeeHubShoutOutAcknowledgeWebPart extends BaseClientSid
 
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
+
+    sp.setup({
+      spfxContext: this.context
+    });
 
     return super.onInit();
   }
@@ -35,7 +43,11 @@ export default class EmployeeHubShoutOutAcknowledgeWebPart extends BaseClientSid
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        ShoutOutTitle: this.properties.ShoutOutTitle,
+        ShoutOutDescription: this.properties.ShoutOutDescription,
+        Link: this.properties.Link
       }
     );
 
@@ -84,8 +96,14 @@ export default class EmployeeHubShoutOutAcknowledgeWebPart extends BaseClientSid
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('ShoutOutTitle', {
+                  label: "ShoutOut Title"
+                }),
+                PropertyPaneTextField('ShoutOutDescription', {
+                  label: "ShoutOut Description"
+                }),
+                PropertyPaneTextField('Link', {
+                  label: "Link"
                 })
               ]
             }
