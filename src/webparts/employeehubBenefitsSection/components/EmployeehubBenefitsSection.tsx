@@ -534,7 +534,7 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
 
     if (file) {
       this.setState({
-        UploadBenefitsIcon: [file],
+        EditUploadBenefitsIcon: [file],
         // previewImage: URL.createObjectURL(file)
       });
     }

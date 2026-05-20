@@ -3,7 +3,7 @@ import styles from './EmployeeHubFeedBackSection.module.scss';
 import { IEmployeeHubFeedBackSectionProps } from './IEmployeeHubFeedBackSectionProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { sp } from '@pnp/sp/presets/all';
-import { Dialog } from 'office-ui-fabric-react';
+import { DefaultButton, Dialog, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
 
 
 export interface IEmployeeHubFeedBackSectionState {
@@ -23,16 +23,16 @@ export interface IEmployeeHubFeedBackSectionState {
 
 require('../assets/style.css');
 
-const AddUserguideDetailsDialogContentProps = {
-  title: "Add Userguide Details",
+const FeedbackDetailsDialogContentProps = {
+  title: "Add Feedback Details",
 };
 
-const AddAnnouncementDataDialogContentProps = {
-  title: "Add Userguide"
+const AddAFeedbackDataDialogContentProps = {
+  title: "Add Feedback"
 }
 
-const UpdateuserguideDataDialogContentProps = {
-  title: "Update Userguide Details"
+const UpdateFeedbackDataDialogContentProps = {
+  title: "Update Feedback Details"
 }
 
 const updatemodelProps = {
@@ -89,6 +89,18 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
           Join us in shaping a more engaged, connected, and vibrant workplace ready for our Investors in People survey!
         </p>
 
+        {
+          this.state.IsAdmin ?
+            <>
+              <div className='Addfeed'>
+                <PrimaryButton text='Add Feedback' onClick={() => this.setState({ FeedbackResponseDialog: false })} />
+              </div>
+            </>
+            :
+            <>
+            </>
+        }
+
         <div className="feedback-panel">
           <div className="feedback-grid">
 
@@ -131,47 +143,33 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
               FeedbackResponseDialog: true,
             })
           }
-          dialogContentProps={AddUserguideDetailsDialogContentProps}
+          dialogContentProps={FeedbackDetailsDialogContentProps}
           modalProps={addmodelProps}
           minWidth={1500}
         >
 
           <div className='AddUserData'>
-            <PrimaryButton className='Add Userguide' text='Add UserInfo' onClick={() => this.setState({ AddUserGuideDataDialog: false })} />
+            <PrimaryButton className='Add Userguide' text='Add Feedbacks' onClick={() => this.setState({ AddFeedbackResponseDialog: false })} />
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Essential Description</th>
-                  <th style={{ width: '15%' }}>Images</th>
-                  <th style={{ width: '15%' }}>link</th>
+                  <th style={{ width: '20%' }}>YourFeedback</th>
+                  <th style={{ width: '30%' }}>OurResponse</th>
                   <th style={{ width: '15%' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
 
                 {
-                  this.state.EssentialLearningsData.length > 0 &&
-                  this.state.EssentialLearningsData.map((item) => {
+                  this.state.FeedBackResponseData.length > 0 &&
+                  this.state.FeedBackResponseData.map((item) => {
                     return (
                       <tr key={item.ID}>
-                        <td className="title">{item.Title}</td>
-                        <td>{item.EssentialDescription}</td>
-                        <td>
-                          {
-                            item.Images ? (
-                              <img src={item.Images} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
-                            ) : (
-                              "No Image"
-                            )
-                          }
-                        </td>
-                        <td>
-                          <a href={item.link.Url} target="_blank" rel="noopener noreferrer">{item.link.Description}</a>
-                        </td>
+                        <td className="title">{item.YourFeedback}</td>
+                        <td>{item.OurResponse}</td>
 
                         <td>
                           <div style={{ display: "flex", gap: "8px" }}>
@@ -180,14 +178,14 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                               iconProps={{ iconName: "Edit" }}
                               title="Edit"
                               ariaLabel="Edit"
-                              onClick={() => this.setState({ EditUserGuideDataDialog: false, CurrentUserguideDetailsID: item.ID }, () => this.EditUserGuideInfo(item.ID))}
+                              onClick={() => this.setState({ EditFeedbackResponseDialog: false, CurrentFeedbackItemID: item.ID }, () => this.EditFeedbackInfo(item.ID))}
                             />
 
                             <IconButton
                               iconProps={{ iconName: "Delete" }}
                               title="Delete"
                               ariaLabel="Delete"
-                              onClick={() => this.DeleteUserGuideInfo(item.ID)}
+                              onClick={() => this.DeleteFeedbackInfo(item.ID)}
                             />
 
                           </div>
@@ -205,17 +203,15 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
         </Dialog>
 
         <Dialog
-          hidden={this.state.AddUserGuideDataDialog}
+          hidden={this.state.AddFeedbackResponseDialog}
           onDismiss={() =>
             this.setState({
-              AddUserGuideDataDialog: true,
-              Title: "",
-              EssentialDescription: "",
-              link: "",
-
+              AddFeedbackResponseDialog: true,
+              YourFeedback: "",
+              OurResponse: ""
             })
           }
-          dialogContentProps={AddAnnouncementDataDialogContentProps}
+          dialogContentProps={AddAFeedbackDataDialogContentProps}
           modalProps={addmodelProps2}
           minWidth={1100}
         >
@@ -227,7 +223,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   label='Title'
                   type='text'
                   onChange={(value) =>
-                    this.setState({ Title: value.target["value"] })
+                    this.setState({ YourFeedback: value.target["value"] })
                   }
                 />
               </div>
@@ -240,32 +236,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   type='text'
                   multiline rows={3}
                   onChange={(value) =>
-                    this.setState({ EssentialDescription: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e: any) => this.handleImageChange(e)}
-                />
-
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Link'
-                  type='text'
-                  onChange={(value) =>
-                    this.setState({ link: value.target["value"] })
+                    this.setState({ OurResponse: value.target["value"] })
                   }
                 />
               </div>
@@ -276,7 +247,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                 <div className='Submit-Button'>
                   <PrimaryButton
                     text='Submit'
-                    onClick={() => this.AddAnnouncementInfo()}
+                    onClick={() => this.AddFeedbackInfo()}
                   />
                 </div>
 
@@ -284,7 +255,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   <DefaultButton
                     text='Cancel'
                     onClick={() =>
-                      this.setState({ AddUserGuideDataDialog: true })
+                      this.setState({ AddFeedbackResponseDialog: true })
                     }
                   />
                 </div>
@@ -296,18 +267,15 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
         </Dialog>
 
         <Dialog
-          hidden={this.state.EditUserGuideDataDialog}
+          hidden={this.state.EditFeedbackResponseDialog}
           onDismiss={() =>
             this.setState({
-              EditUserGuideDataDialog: true,
-              EditTitle: "",
-              EditEssentialDescription: "",
-              Editlink: "",
-              EditImages: [],
-              EditUploadImages: []
+              EditFeedbackResponseDialog: true,
+              EditYourFeedback: "",
+              EditOurResponse: "",
             })
           }
-          dialogContentProps={UpdateuserguideDataDialogContentProps}
+          dialogContentProps={UpdateFeedbackDataDialogContentProps}
           modalProps={updatemodelProps}
           minWidth={1100}
         >
@@ -318,9 +286,9 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                 <TextField
                   label='Title'
                   type='text'
-                  value={this.state.EditTitle}
+                  value={this.state.EditYourFeedback}
                   onChange={(value) =>
-                    this.setState({ EditTitle: value.target["value"] })
+                    this.setState({ EditYourFeedback: value.target["value"] })
                   }
                 />
               </div>
@@ -332,54 +300,9 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   label='Essential Description'
                   type='text'
                   multiline rows={3}
-                  value={this.state.EditEssentialDescription}
+                  value={this.state.EditOurResponse}
                   onChange={(value) =>
-                    this.setState({ EditEssentialDescription: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e: any) => this.handleUpdateImageChange(e)}
-                />
-
-                {
-                  this.state.EditUploadImages && (
-                    <div className="Attached-img">
-                      <p>
-                        {
-                          typeof this.state.EditUploadImages === "string"
-                            ? this.state.EditUploadImages.split('/').pop()
-                            : this.state.EditUploadImages[0]?.name
-                        }
-                      </p>
-
-                      <Icon
-                        iconName="Cancel"
-                        onClick={() => this.setState({ EditUploadImages: "" })}
-                      />
-                    </div>
-                  )
-                }
-
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
-                <TextField
-                  label='Link'
-                  type='text'
-                  value={this.state.Editlink}
-                  onChange={(value) =>
-                    this.setState({ Editlink: value.target["value"] })
+                    this.setState({ EditOurResponse: value.target["value"] })
                   }
                 />
               </div>
@@ -390,7 +313,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                 <div className='Submit-Button'>
                   <PrimaryButton
                     text='Update'
-                    onClick={() => this.UpdateAnnouncementDetails(this.state.CurrentUserguideDetailsID)}
+                    onClick={() => this.UpdatefeedbackDetails(this.state.CurrentFeedbackItemID)}
                   />
                 </div>
 
@@ -398,7 +321,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   <DefaultButton
                     text='Cancel'
                     onClick={() =>
-                      this.setState({ EditUserGuideDataDialog: true })
+                      this.setState({ EditFeedbackResponseDialog: true })
                     }
                   />
                 </div>
