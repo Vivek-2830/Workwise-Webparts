@@ -101,7 +101,7 @@ export default class EmployeeHubAxisClcGallery extends React.Component<IEmployee
       this.setState({ IsAdmin: true });
       this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
     } catch (error) {
-      console.error("Error checking admin status:", error);
+      console.error("Error checking details:", error);
     }
   }
 
@@ -162,7 +162,7 @@ export default class EmployeeHubAxisClcGallery extends React.Component<IEmployee
         AxisGalleryData: formattedImages
       });
     } catch (error) {
-      console.error("Error fetching gallery images:", error);
+      console.error("Error fetching details:", error);
     }
   }
 
