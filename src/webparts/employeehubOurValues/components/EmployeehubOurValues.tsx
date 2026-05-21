@@ -36,11 +36,11 @@ const AddOurvalueDetailsDialogContentProps = {
 
 const AddOurValuesDataDialogContentProps = {
   title: "Add Value"
-}
+};
 
 const UpdateOurValuesDetailsDialogContentProps = {
   title: "Update OurValue Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +52,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class EmployeehubOurValues extends React.Component<IEmployeehubOurValuesProps, IEmployeehubOurValuesState> {
 
@@ -514,7 +514,7 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

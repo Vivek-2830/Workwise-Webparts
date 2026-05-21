@@ -38,11 +38,11 @@ const AddUserguideDetailsDialogContentProps = {
 
 const AddAnnouncementDataDialogContentProps = {
   title: "Add Userguide"
-}
+};
 
 const UpdateuserguideDataDialogContentProps = {
   title: "Update Userguide Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -538,7 +538,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

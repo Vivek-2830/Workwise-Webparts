@@ -36,11 +36,11 @@ const AddIntranetFaqDetailsDialogContentProps = {
 
 const AddAIntranetfaqDataDialogContentProps = {
   title: "Add Intranet"
-}
+};
 
 const UpdateIntranetFaqDetailsDialogContentProps = {
   title: "Update Intranet Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +52,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageIntranetFaQs extends React.Component<IHomePageIntranetFaQsProps, IHomePageIntranetFaQsState> {
 

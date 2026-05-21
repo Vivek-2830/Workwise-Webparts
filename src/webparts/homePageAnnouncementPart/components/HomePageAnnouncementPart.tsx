@@ -46,11 +46,11 @@ const AddAnnouncementDetailsDialogContentProps = {
 
 const AddAnnouncementDataDialogContentProps = {
   title: "Add Announcements"
-}
+};
 
 const UpdateAnnouncementDetailsDialogContentProps = {
   title: "Update Announcement Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -62,7 +62,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageAnnouncementPart extends React.Component<IHomePageAnnouncementPartProps, IHomePageAnnouncementPartState> {
 
@@ -819,7 +819,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -959,10 +959,10 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     }
   
     return null;
-  };
+  }
 
   private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
     this.setState({ Videos: value || "" });
-  };
+  }
 
 }

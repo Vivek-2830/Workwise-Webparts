@@ -42,11 +42,11 @@ const AddNewsDetailsDialogContentProps = {
 
 const AddNewsDataDialogContentProps = {
   title: "Add News "
-}
+};
 
 const UpdateNewsDetailsDialogContentProps = {
   title: "Update News Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -58,7 +58,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageNewsAnnouncements extends React.Component<IHomePageNewsAnnouncementsProps, IHomePageNewsAnnouncementsState> {
 
@@ -688,7 +688,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

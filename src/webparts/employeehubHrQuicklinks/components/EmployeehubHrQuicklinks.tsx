@@ -33,11 +33,11 @@ const HRQuicklinkDialogContentProps = {
 
 const AddHRQuicklinkDataDialogContentProps = {
   title: "Add HRQuicklink"
-}
+};
 
 const UpdateHRQuicklinkDetailsDialogContentProps = {
   title: "Update HRQuicklink Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -49,7 +49,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehubHrQuicklinksProps, IEmployeehubHrQuicklinksState> {
 
@@ -481,7 +481,7 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

@@ -54,7 +54,7 @@ export default class EmployeeHubAxisClcGallery extends React.Component<IEmployee
                     <div className="gallery-item" key={item.Id}>
                       <img src={item.EncodedAbsUrl} alt={item.FileLeafRef} />
                     </div>
-                  )     
+                  );     
                 })
 
             }

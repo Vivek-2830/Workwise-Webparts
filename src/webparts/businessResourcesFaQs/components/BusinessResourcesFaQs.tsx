@@ -36,11 +36,11 @@ const BusinessResourceFAQsDetailsDialogContentProps = {
 
 const AddBusinessResourceFAQsDataDialogContentProps = {
   title: "Add BusinessResourceFAQs"
-}
+};
 
 const UpdateBusinessResourceFAQsDetailsDialogContentProps = {
   title: "Update BusinessResource Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +52,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class BusinessResourcesFaQs extends React.Component<IBusinessResourcesFaQsProps, IBusinessResourcesFaQsState> {
 
@@ -73,7 +73,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
       DeleteFaQItemID: "",
       IsAdmin: false,
       CurrentUserEmail: ""
-    }
+    };
 
   }
 

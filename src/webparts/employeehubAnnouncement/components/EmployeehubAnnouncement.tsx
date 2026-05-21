@@ -43,11 +43,11 @@ const AddEmpAnnouncementDetailsDialogContentProps = {
 
 const AddEmpAnnouncementDataDialogContentProps = {
   title: "Add Announcements"
-}
+};
 
 const UpdateEmpAnnouncementDetailsDialogContentProps = {
   title: "Update Announcement Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -59,7 +59,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 
 export default class EmployeehubAnnouncement extends React.Component<IEmployeehubAnnouncementProps, IEmployeehubAnnouncementState> {
@@ -93,7 +93,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
       EmpVideos: "",
       IsAdmin: false,
       CurrentUserEmail: ""
-    }
+    };
 
   }
 
@@ -757,7 +757,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -881,7 +881,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
     }
   
     return null;
-  };
+  }
 
 
   // private getYouTubeEmbedUrl = (url: string): string | null => {
@@ -901,6 +901,6 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
 
   private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
     this.setState({ EmpVideos: value || "" });
-  };
+  }
 
 }

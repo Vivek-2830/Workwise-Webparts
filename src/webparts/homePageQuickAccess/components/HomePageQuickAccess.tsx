@@ -38,11 +38,11 @@ const AddQuickaccessDetailsDialogContentProps = {
 
 const AddQuickaccessDataDialogContentProps = {
   title: "Add Quickaccess"
-}
+};
 
 const UpdateQuickaccessDetailsDialogContentProps = {
   title: "Update Quickaccess Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -54,7 +54,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageQuickAccess extends React.Component<IHomePageQuickAccessProps, IHomePageQuickAccessState> {
 
@@ -687,7 +687,7 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

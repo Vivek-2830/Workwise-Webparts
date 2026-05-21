@@ -43,11 +43,11 @@ const AddInternalVacanciesDetailsDialogContentProps = {
 
 const AddEInternalVacanciesDataDialogContentProps = {
   title: "Add InternalVacancies"
-}
+};
 
 const UpdateInternalVacanciesDetailsDialogContentProps = {
   title: "Update InternalVacancies Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -59,7 +59,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class EmployeehubInternalVacancies extends React.Component<IEmployeehubInternalVacanciesProps, IEmployeehubInternalVacanciesState> {
 

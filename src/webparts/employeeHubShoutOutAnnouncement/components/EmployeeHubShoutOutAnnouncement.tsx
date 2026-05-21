@@ -33,11 +33,11 @@ const ShoutOutAnnouncementDialogContentProps = {
 
 const AddShoutOutAnnouncementDataDialogContentProps = {
   title: "Add  ShoutOutAnnouncement"
-}
+};
 
 const UpdateShoutOutAnnouncementDataDialogContentProps = {
   title: "Update  ShoutOutAnnouncement Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -469,7 +469,7 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

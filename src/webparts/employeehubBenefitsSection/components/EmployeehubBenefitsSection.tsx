@@ -36,11 +36,11 @@ const AddBenefitsDetailsDialogContentProps = {
 
 const AddBenefitsDataDialogContentProps = {
   title: "Add BenefitsItem"
-}
+};
 
 const UpdateBenefitsDetailsDialogContentProps = {
   title: "Update Benefits Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +52,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class EmployeehubBenefitsSection extends React.Component<IEmployeehubBenefitsSectionProps, IEmployeehubBenefitsSectionState> {
 
@@ -527,7 +527,7 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

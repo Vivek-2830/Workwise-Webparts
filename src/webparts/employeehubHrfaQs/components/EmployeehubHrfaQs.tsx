@@ -36,11 +36,11 @@ const EmployeeHubFAQsDetailsDialogContentProps = {
 
 const AddEmployeeHubFAQsDataDialogContentProps = {
   title: "Add EmployeeHubFAQs"
-}
+};
 
 const UpdateEmployeeHubFAQsDetailsDialogContentProps = {
   title: "Update EmployeeHubFAQs Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +52,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQsProps, IEmployeehubHrfaQsState> {
 

@@ -29,11 +29,11 @@ const FeedbackDetailsDialogContentProps = {
 
 const AddAFeedbackDataDialogContentProps = {
   title: "Add Feedback"
-}
+};
 
 const UpdateFeedbackDataDialogContentProps = {
   title: "Update Feedback Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -112,7 +112,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   this.state.FeedBackResponseData.map((item) => {
                     return (
                       <div className="feedback-item">{item.YourFeedback}</div>
-                    )
+                    );
                   })
                 }
               </div>
@@ -126,7 +126,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
                   this.state.FeedBackResponseData.map((item) => {
                     return (
                       <div className="feedback-item">{item.OurResponse}</div>
-                    )
+                    );
                   })
                 }
               </div>

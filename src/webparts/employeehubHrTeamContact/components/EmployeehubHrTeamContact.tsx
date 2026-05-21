@@ -37,11 +37,11 @@ const AddHRTeamContactDetailsDialogContentProps = {
 
 const AddHRTeamContactDataDialogContentProps = {
   title: "Add HRTeamContact"
-}
+};
 
 const UpdateHRTeamContactDetailsDialogContentProps = {
   title: "Update HRTeamContact Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -53,7 +53,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 
 export default class EmployeehubHrTeamContact extends React.Component<IEmployeehubHrTeamContactProps, IEmployeehubHrTeamContactState> {
@@ -566,7 +566,7 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

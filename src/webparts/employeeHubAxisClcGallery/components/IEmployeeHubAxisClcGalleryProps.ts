@@ -4,4 +4,5 @@ export interface IEmployeeHubAxisClcGalleryProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

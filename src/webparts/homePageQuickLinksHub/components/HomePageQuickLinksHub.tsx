@@ -33,11 +33,11 @@ const AddQuickLinkDetailsDialogContentProps = {
 
 const AddQuickLinksDataDialogContentProps = {
   title: "Add Quick Links"
-}
+};
 
 const UpdateQuickLinkDetailsDialogContentProps = {
   title: "Update Quick Link Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -49,7 +49,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageQuickLinksHub extends React.Component<IHomePageQuickLinksHubProps, IHomePageQuickLinksHubState> {
 
@@ -467,7 +467,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

@@ -4,4 +4,5 @@ export interface IEmployeeHubPeopleStoriesProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

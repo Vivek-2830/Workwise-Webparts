@@ -742,7 +742,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
                         </li>
                       </a>
-                    )
+                    );
                   }
                   )}
               </ul>
@@ -1194,7 +1194,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           SelectBrochurePivot: key,
           BrochuresFilterdData:
             filterByCategory(this.state.BrochuresData)
-        })
+        });
     }
   }
 
