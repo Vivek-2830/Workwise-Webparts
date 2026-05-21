@@ -6,6 +6,7 @@ import { sp } from '@pnp/sp/presets/all';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IEmployeeHubPeopleStoriesState {
   Title: any;
@@ -57,16 +58,14 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
       userDisplayName
     } = this.props;
 
-    var settings = {
+    const settings12 = {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 4,
       slidesToScroll: 1,
       autoplaySpeed: 5000,
       autoplay: true,
-      cssEase: "linear",
-      fade: true,
       // nextArrow: <SampleNextArrow />,
       // prevArrow: <SamplePrevArrow />
     };
@@ -77,13 +76,24 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
         <section className="stories-section">
           <h2 className="stories-title">Investing in People: Stories of Growth</h2>
 
+          {
+            this.state.IsAdmin ?
+              <>
+                <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/People%20Stories/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                  <PrimaryButton className='AdminButton' text="Add PeopleStories" />
+                </a>
+              </>
+              :
+              <>
+              </>
+          }
+          <div className="stories-grid">
 
-          <Slider {...settings}>
-            {
-              this.state.PeopleStoriesData.length > 0 &&
-              this.state.PeopleStoriesData.map((item) => {
-                return (
-                  <div className="stories-grid">
+            <Slider {...settings12}>
+              {
+                this.state.PeopleStoriesData.length > 0 &&
+                this.state.PeopleStoriesData.map((item) => {
+                  return (
 
                     <div className="story-card">
                       <div className="story-thumbnail">
@@ -144,15 +154,17 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
                       </div>
                       <div className="story-content">
                         <div className="story-title">
-                         {item.Title}
+                          {item.Title}
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            }
-          </Slider>
+                  );
+                })
+              }
+            </Slider>
+
+
+          </div>
 
           {/* <div className="stories-grid">
 
@@ -250,7 +262,7 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
 
   public async getPeopleStoriesData(): Promise<void> {
     try {
-  
+
       const items: any[] = await sp.web.lists
         .getByTitle("People Stories")
         .items
@@ -262,40 +274,40 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
         )
         .expand("AttachmentFiles")
         .get();
-  
+
       let AllData: any[] = [];
-  
+
       if (items && items.length > 0) {
-  
+
         items.forEach((item: any) => {
-  
+
           let videoUrl: string = "";
-  
+
           /* ===========================
              CHECK ATTACHMENT VIDEO
           ============================ */
-  
+
           if (
             item.AttachmentFiles &&
             item.AttachmentFiles.length > 0
           ) {
-  
+
             const file = item.AttachmentFiles[0];
             const fileName = file.FileName.toLowerCase();
-  
+
             if (fileName.match(/\.(mp4|webm|ogg|mov|avi|m4v)$/)) {
               videoUrl = file.ServerRelativeUrl;
             }
           }
-  
+
           /* ===========================
              CHECK HYPERLINK VIDEO FIELD
           ============================ */
-  
+
           let videoColumnUrl: string = "";
-  
+
           if (item.Video) {
-  
+
             // Hyperlink field object
             if (
               typeof item.Video === "object" &&
@@ -303,32 +315,32 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
             ) {
               videoColumnUrl = item.Video.Url;
             }
-  
+
             // Direct string
             else if (typeof item.Video === "string") {
               videoColumnUrl = item.Video;
             }
           }
-  
+
           /* ===========================
              PUSH CLEAN DATA
           ============================ */
-  
+
           AllData.push({
             ID: item.ID || "",
             Title: item.Title || "",
             Video: videoUrl || videoColumnUrl
           });
-  
+
         });
-  
+
         this.setState({
           PeopleStoriesData: AllData
         });
-  
+
         console.log(AllData);
       }
-  
+
     } catch (error) {
       console.log("Error Fetching details :", error);
     }
