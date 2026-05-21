@@ -1,0 +1,90 @@
+.Business-contents {
+    width: 550px;
+    /* margin: 0 auto; */
+    padding: 11px 20px;
+    margin-left: 70px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.Business-contents h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    color: #222;
+}
+
+.Faq-underline {
+    width: 122px;
+    height: 3px;
+    background: #1aa3a3;
+    margin: 8px 0 17px;
+}
+
+.accordion {
+    border: none;
+}
+
+.Business-row {
+    /* border-bottom: 1px solid #e5e5e5; */
+}
+
+.accordion__button {
+    background: transparent !important;
+    padding: 14px 0 !important;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    color: #007c89;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+
+.accordion__button:focus {
+    outline: none;
+}
+
+/* Arrow icon */
+.accordion__button::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    font-size: 22px;
+    color: #007c89;
+    transition: transform 0.25s ease;
+}
+
+.accordion__button:hover {
+    background-color: none;
+}
+
+/* Rotate arrow when expanded */
+.accordion__button[aria-expanded="true"]::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* Answer panel */
+.accordion__panel {
+    padding: 0 0 18px 0;
+}
+
+.Business-answer {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .accordion__button {
+        font-size: 15px;
+        padding-right: 36px;
+    }
+}

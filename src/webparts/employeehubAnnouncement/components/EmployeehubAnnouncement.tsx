@@ -31,6 +31,8 @@ export interface IEmployeehubAnnouncementState {
   EditEmpAnnouncementDataDialog: boolean;
   CurrentEmpAnnouncementDataID: any;
   DeleteEmpAnnouncementDataID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -41,11 +43,11 @@ const AddEmpAnnouncementDetailsDialogContentProps = {
 
 const AddEmpAnnouncementDataDialogContentProps = {
   title: "Add Announcements"
-}
+};
 
 const UpdateEmpAnnouncementDetailsDialogContentProps = {
   title: "Update Announcement Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -57,7 +59,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 
 export default class EmployeehubAnnouncement extends React.Component<IEmployeehubAnnouncementProps, IEmployeehubAnnouncementState> {
@@ -88,8 +90,10 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
       EditEmpAnnouncementDataDialog: true,
       CurrentEmpAnnouncementDataID: "",
       DeleteEmpAnnouncementDataID: "",
-      EmpVideos: ""
-    }
+      EmpVideos: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
+    };
 
   }
 
@@ -120,9 +124,16 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
     return (
       <section className="employeehubAnnouncement">
 
-        <div className='AddAnnouncemt'>
-          <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddEmpAnnouncementDialog: false })} />
-        </div>
+        {
+          this.state.IsAdmin ? 
+          <>
+            <div className='AddAnnouncemt'>
+              <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddEmpAnnouncementDialog: false })} />
+            </div>
+          </>
+          :
+          <></>
+        }
 
         <Slider {...settings}>
 
@@ -597,6 +608,24 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
 
   public async componentDidMount() {
     this.getEmpannouncement();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getEmpannouncement(): Promise<void> {
@@ -728,7 +757,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -852,7 +881,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
     }
   
     return null;
-  };
+  }
 
 
   // private getYouTubeEmbedUrl = (url: string): string | null => {
@@ -872,6 +901,6 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
 
   private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
     this.setState({ EmpVideos: value || "" });
-  };
+  }
 
 }

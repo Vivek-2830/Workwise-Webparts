@@ -4,4 +4,5 @@ export interface IEmployeehubHrQuicklinksProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

@@ -16,7 +16,7 @@ export interface IHomePagePollRequestState {
   SurveyData: any;
   SurveyResponseData: any;
   UserWidgetData: any;
-  UseFullAppsData: any
+  UseFullAppsData: any;
   Title: any;
   Icon: any;
   Link: any;
@@ -57,19 +57,19 @@ const AddUserwidgetDataDialogContentProps = {
 
 const AddUserWidgetDetailsContentProps = {
   title: "Add User Widget Details"
-}
+};
 
 const AddUseFullDataDialogContentProps = {
   title: "Add UseFullApp Details"
-}
+};
 
 const UpdateUserWidgetDetailsDialogContentProps = {
   title: "Update User Widget Details"
-}
+};
 
 const UpdateUsefullappDetailsDialogContentProps = {
   title: "Update UseFullApp Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -77,7 +77,7 @@ const updatemodelProps = {
 
 const updatemodelProps2 = {
   className: "Update-Data-Dialog"
-}
+};
 
 const addmodelProps = {
   className: "Add-Dialog"
@@ -85,11 +85,11 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 const addmodelProps3 =  {
   className: "Add-UseFull-Dialog"
-}
+};
 
 
 export default class HomePagePollRequest extends React.Component<IHomePagePollRequestProps, IHomePagePollRequestState> {
@@ -1140,7 +1140,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
         previewIcon: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateUserWidgetIconChange = (e: any) => {
     const file = e.target.files[0];
@@ -1210,7 +1210,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
   public async DeleteUserWidgetsDetail(DeleteuserWidgetDataID) {
     const deleteinfo = await sp.web.lists.getByTitle("User widget").items.getById(DeleteuserWidgetDataID).delete();
     this.setState({ UserWidgetData: deleteinfo });
-    this.getUserwidgetInfo()
+    this.getUserwidgetInfo();
   }
 
   public async AddUseFullAppInfo() {
@@ -1252,7 +1252,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
         previewAppIcon: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateUseFullappIconChange = (e: any) => {
     const file = e.target.files[0];
@@ -1322,7 +1322,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
   public async DeleteusefullappDetail(DeleteUsefullappDataID) {
     const deletapps = await sp.web.lists.getByTitle("Useful Apps").items.getById(DeleteUsefullappDataID).delete();
     this.setState({ UserWidgetData: deletapps });
-    this.getUserFullAppsData()
+    this.getUserFullAppsData();
   }
 
 }

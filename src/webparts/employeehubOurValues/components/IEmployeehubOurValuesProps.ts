@@ -4,4 +4,5 @@ export interface IEmployeehubOurValuesProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
 }

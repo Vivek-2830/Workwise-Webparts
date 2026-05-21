@@ -33,6 +33,8 @@ export interface IHomePageAnnouncementPartState {
   EditAnnouncementDataDialog: boolean;
   CurrentAnnouncementDetailsID: any;
   DeleteAnnouncementID: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -44,11 +46,11 @@ const AddAnnouncementDetailsDialogContentProps = {
 
 const AddAnnouncementDataDialogContentProps = {
   title: "Add Announcements"
-}
+};
 
 const UpdateAnnouncementDetailsDialogContentProps = {
   title: "Update Announcement Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -60,7 +62,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageAnnouncementPart extends React.Component<IHomePageAnnouncementPartProps, IHomePageAnnouncementPartState> {
 
@@ -92,7 +94,9 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
       EditUploadImages: [],
       EditAnnouncementDataDialog: true,
       CurrentAnnouncementDetailsID: "",
-      DeleteAnnouncementID: ""
+      DeleteAnnouncementID: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -122,9 +126,17 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     return (
       <section className="homePageAnnouncementPart">
 
-        <div className='AddAnnouncemt'>
-          <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddAnnouncementDialog: false })} />
-        </div>
+        {
+          this.state.IsAdmin ?
+          <>
+            <div className='AddAnnouncemt'>
+              <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddAnnouncementDialog: false })} />
+            </div>
+          </>
+          :
+          <>
+          </>
+        }
 
         <Slider {...settings}>
 
@@ -646,6 +658,24 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
   public async componentDidMount() {
     this.getannouncement();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getannouncement(): Promise<void> {
@@ -789,7 +819,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -929,10 +959,10 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
     }
   
     return null;
-  };
+  }
 
   private handleVideoChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, value?: string) => {
     this.setState({ Videos: value || "" });
-  };
+  }
 
 }

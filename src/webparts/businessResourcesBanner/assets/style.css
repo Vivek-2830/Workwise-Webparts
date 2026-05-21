@@ -1,0 +1,52 @@
+.Business-section {
+    position: relative;
+    height: 200px;
+    background-image: url('../assets/Rectangle26.png');
+    /* replace with your image */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    font-family: "Segoe UI", sans-serif;
+    margin-bottom: 51px;
+}
+
+/* TEAL OVERLAY */
+.Business-overlay {
+    position: absolute;
+    inset: 0;
+    /* background: linear-gradient(90deg, rgba(0, 43, 48, .95), rgba(0, 79, 88, .85), rgba(0, 118, 128, .75)); */
+    background: linear-gradient(90deg, rgba(0, 79, 88, .85), rgba(0, 118, 128, 0.75));
+}
+
+/* CONTENT */
+.Business-content {
+    position: relative;
+    color: #fff;
+    max-width: 600px;
+}
+
+.Business-content h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.Business-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .Business-section {
+        height: auto;
+        padding: 24px;
+    }
+
+    .Business-content h1 {
+        font-size: 26px;
+    }
+}

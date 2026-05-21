@@ -26,6 +26,8 @@ export interface IHomePageQuickAccessState {
   DeleteQuickAccessDataID: any;
   previewImage: any;
   QuickAccessCategorieslist: any; 
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -36,11 +38,11 @@ const AddQuickaccessDetailsDialogContentProps = {
 
 const AddQuickaccessDataDialogContentProps = {
   title: "Add Quickaccess"
-}
+};
 
 const UpdateQuickaccessDetailsDialogContentProps = {
   title: "Update Quickaccess Details"
-}
+};
 
 const updatemodelProps = {
   className: "Update-Dialog"
@@ -52,7 +54,7 @@ const addmodelProps = {
 
 const addmodelProps2 = {
   className: "Add-Data-Dialog"
-}
+};
 
 export default class HomePageQuickAccess extends React.Component<IHomePageQuickAccessProps, IHomePageQuickAccessState> {
 
@@ -80,7 +82,9 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
       CurrentQuickAccessDataID: "",
       DeleteQuickAccessDataID: "",
       previewImage: "",
-      QuickAccessCategorieslist : []
+      QuickAccessCategorieslist : [],
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -98,9 +102,17 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
     return (
       <section className="homePageQuickAccess">
 
-        <div className='AddAnnouncemt'>
-          <PrimaryButton text='Add Access Details' onClick={() => this.setState({ AddQuickaccessDialog: false })} />
-        </div>
+        {
+          this.state.IsAdmin ?
+            <>
+              <div className='AddAnnouncemt'>
+                <PrimaryButton text='Add Access Details' onClick={() => this.setState({ AddQuickaccessDialog: false })} />
+              </div>
+            </>
+            :
+            <>
+            </>
+        }
 
         <div className="quick-access-wrapper">
 
@@ -582,6 +594,24 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
   public async componentDidMount() {
     this.getQuickAccessData();
     this.GetTicketsChoicesItems();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
   }
 
   public async getQuickAccessData() {
@@ -657,7 +687,7 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
         previewImage: URL.createObjectURL(file)
       });
     }
-  };
+  }
 
   handleUpdateImageChange = (e: any) => {
     const file = e.target.files[0];

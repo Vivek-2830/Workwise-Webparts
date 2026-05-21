@@ -5,6 +5,12 @@
     margin-top: 66px;
 }
 
+
+.essential-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .essential-title {
     font-size: 22px;
     font-weight: 600;
@@ -102,6 +108,15 @@
 .learning-card:hover {
     transform: translateY(-6px);
     box-shadow: 0px 2px 4px 0px #25313C1A;
+}
+
+.view-userguide {
+    background: #0aa3a3;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {

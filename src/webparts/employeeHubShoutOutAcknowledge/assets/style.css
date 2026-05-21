@@ -1,0 +1,91 @@
+.shoutout-card {
+    /* width: 365px; */
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+    margin-top: 130px;
+}
+
+.card-top {
+    background: #f9fbfb;
+    height: 162px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 27px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 18px;
+}
+
+.card-text {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.submitbtn {
+    display: block;
+    width: 89%;
+    background: #007c89;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    transition: background 0.3s ease;
+}
+
+.submitbtn:hover {
+    background: #006873;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .shoutout-card {
+        width: 100%;
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-feed {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    .feedback-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .column-title {
+        font-size: 22px;
+    }
+
+    .feedback-item {
+        font-size: 15px;
+    }
+}

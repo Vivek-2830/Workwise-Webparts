@@ -11,9 +11,11 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EmployeehubHrfaQsWebPartStrings';
 import EmployeehubHrfaQs from './components/EmployeehubHrfaQs';
 import { IEmployeehubHrfaQsProps } from './components/IEmployeehubHrfaQsProps';
+import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeehubHrfaQsWebPartProps {
   description: string;
+  ListName: any;
 }
 
 export default class EmployeehubHrfaQsWebPart extends BaseClientSideWebPart<IEmployeehubHrfaQsWebPartProps> {
@@ -23,6 +25,11 @@ export default class EmployeehubHrfaQsWebPart extends BaseClientSideWebPart<IEmp
 
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
+
+    sp.setup({
+      spfxContext: this.context
+    });
+
 
     return super.onInit();
   }
@@ -35,7 +42,9 @@ export default class EmployeehubHrfaQsWebPart extends BaseClientSideWebPart<IEmp
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        ListName: this.properties.ListName ? this.properties.ListName : "Employee FaQs"
       }
     );
 

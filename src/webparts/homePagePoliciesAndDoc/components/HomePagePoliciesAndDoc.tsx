@@ -6,9 +6,9 @@ import { sp } from '@pnp/sp/presets/all';
 import { PrimaryButton } from 'office-ui-fabric-react';
 
 export interface IHomePagePoliciesAndDocState {
-  PolicesData : any;
-  AddPoliciesDialog: boolean;
-  AddPoliciesDataDialog: boolean;
+  PolicesData: any;
+  IsAdmin: boolean;
+  CurrentUserEmail: any;
 }
 
 require('../assets/style.css');
@@ -20,9 +20,9 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
     super(props);
 
     this.state = {
-      PolicesData : "",
-      AddPoliciesDialog: true,
-      AddPoliciesDataDialog: true,
+      PolicesData: "",
+      IsAdmin: false,
+      CurrentUserEmail: ""
     };
 
   }
@@ -48,11 +48,19 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
               <div className="policy-underline"></div>
             </h2>
 
-            <div>
-              <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Policies%20Documents/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
-                <PrimaryButton className='Adddoc' text="Add Document" onClick={() => this.setState({ AddPoliciesDialog : false})} />
-              </a>
-            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div>
+                  <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Policies%20Documents/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                    <PrimaryButton className='Adddoc' text="Add Document" />
+                  </a>
+                </div>
+              </>
+              :
+              <>
+              </>
+            }
 
             {/* <button className="view-all">View all</button> */}
           </div>
@@ -133,6 +141,24 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
 
   public async componentDidMount() {
     this.getPoliciesData();
+    this.GetCurrentUser();
+  }
+
+  public async GetCurrentUser() {
+    try {
+      const currentUser = await sp.web.currentUser.get();
+      const userEmail = currentUser.Email.toLowerCase().trim();
+      const ownerGroup = await sp.web.associatedOwnerGroup();
+      const groupUsers = await sp.web.siteGroups.getById(ownerGroup.Id).users.get();
+
+      const isAdmin = groupUsers.some(user =>
+        user.LoginName.toLowerCase() === currentUser.LoginName.toLowerCase()
+      );
+      this.setState({ IsAdmin: true });
+      this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    } 
   }
 
   public async getPoliciesData() {
@@ -164,6 +190,5 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
       console.log("Error fetching Company Documents data: ", error);
     }
   }
-
 
 }
