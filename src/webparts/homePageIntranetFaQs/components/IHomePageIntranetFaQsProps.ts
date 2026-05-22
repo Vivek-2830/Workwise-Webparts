@@ -6,4 +6,5 @@ export interface IHomePageIntranetFaQsProps {
   userDisplayName: string;
   context: any;
   ListName: any;
+  faqbutton: any;
 }

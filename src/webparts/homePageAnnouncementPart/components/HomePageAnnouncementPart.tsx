@@ -255,23 +255,26 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={AddAnnouncementDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddAnnouncementDataDiaolg: false })} />
+          <div className='homeannouncement'>
+            <h2>Announcement Details</h2>
+              <div className='AddAnnouncmentData'>
+              <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddAnnouncementDataDiaolg: false })} />
+              </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Description</th>
-                  <th style={{ width: '30%' }}>Source</th>
-                  <th style={{ width: '15%' }}>Images</th>
-                  <th style={{ width: '15%' }}>Link</th>
-                  <th style={{ width: '15%' }}>Videos</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Source</th>
+                  <th>Images</th>
+                  <th>Link</th>
+                  <th>Videos</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -294,7 +297,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                             )
                           }
                         </td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
                         {/* <td>
@@ -314,9 +317,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                           }
                         </td> */}
 
-                        
-
-                       
                           <td>
                             {
                               item.Videos ? (
@@ -324,7 +324,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                                   <span></span>
                                 ) : (
                                   <a
-                                    href={item.Videos}
+                                    href={item.Videos.Url || item.Videos}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
@@ -383,11 +383,16 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={AddAnnouncementDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div className='adddetails'>
+            <h2>Add Announcement Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -399,20 +404,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Description'
-                  type='text'
-                  multiline rows={3}
-                  onChange={(value) =>
-                    this.setState({ Description: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Source'
@@ -424,11 +416,11 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
 
-                <input
+                <input className='AnnouncementImage'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -437,7 +429,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Link'
@@ -449,7 +441,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label="Video"
@@ -479,6 +471,19 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                     </p>
                   )
                 )}
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Description'
+                  type='text'
+                  multiline rows={3}
+                  onChange={(value) =>
+                    this.setState({ Description: value.target["value"] })
+                  }
+                />
               </div>
             </div>
 
@@ -522,11 +527,15 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           }
           dialogContentProps={UpdateAnnouncementDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div className='adddetails'>
+            <h2>Update Announcement Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -539,21 +548,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Description'
-                  type='text'
-                  multiline rows={3}
-                  value={this.state.EditDescription}
-                  onChange={(value) =>
-                    this.setState({ EditDescription: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Source'
@@ -566,11 +561,37 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
+              <div>
+                <TextField
+                  label='Link'
+                  type='text'
+                  value={this.state.EditLink}
+                  onChange={(value) =>
+                    this.setState({ EditLink: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
 
-                <input
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
+              <div>
+                <TextField
+                  label='Video'
+                  type='text'
+                  value={this.state.EditVideos}
+                  onChange={(value) =>
+                    this.setState({ EditVideos: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
+
+                <input className='AnnouncementImage'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -580,7 +601,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
                   this.state.EditUploadImages && (
                     <div className="Attached-img">
 
-                      {/* ✅ Handle BOTH string + file */}
                       <p>
                         {
                           typeof this.state.EditUploadImages === "string"
@@ -600,27 +620,15 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 AnnouncementSection'>
+              <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Description'
                   type='text'
-                  value={this.state.EditLink}
+                  multiline rows={3}
+                  value={this.state.EditDescription}
                   onChange={(value) =>
-                    this.setState({ EditLink: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
-                <TextField
-                  label='Video'
-                  type='text'
-                  value={this.state.EditVideos}
-                  onChange={(value) =>
-                    this.setState({ EditVideos: value.target["value"] })
+                    this.setState({ EditDescription: value.target["value"] })
                   }
                 />
               </div>
@@ -646,7 +654,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
               </div>
             </div>
-
 
           </div>
 

@@ -16,6 +16,7 @@ import { sp } from '@pnp/sp/presets/all';
 export interface IHomePageIntranetFaQsWebPartProps {
   description: string;
   ListName: any;
+  faqbutton: any;
 }
 
 export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<IHomePageIntranetFaQsWebPartProps> {
@@ -43,7 +44,8 @@ export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<I
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
-        ListName: this.properties.ListName ? this.properties.ListName : "Intranet FAQ"
+        ListName: this.properties.ListName ? this.properties.ListName : "Intranet FAQ",
+        faqbutton: this.properties.faqbutton ? this.properties.faqbutton : "Add FAQs"
       }
     );
 
@@ -94,6 +96,9 @@ export default class HomePageIntranetFaQsWebPart extends BaseClientSideWebPart<I
               groupFields: [
                 PropertyPaneTextField('ListName', {
                   label: "List Name"
+                }),
+                PropertyPaneTextField('faqbutton', {
+                  label: "Add Faq Button Name"
                 })
               ]
             }

@@ -87,74 +87,75 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
               <>
               </>
           }
-          <div className="stories-grid">
+         
 
             <Slider {...settings12}>
               {
                 this.state.PeopleStoriesData.length > 0 &&
                 this.state.PeopleStoriesData.map((item) => {
                   return (
-
-                    <div className="story-card">
-                      <div className="story-thumbnail">
-                        {
-                          item.Video ? (
-                            this.getYouTubeEmbedUrl(item.Video) ? (
-                              // ✅ YouTube iframe
-                              <iframe
-                                style={{
-                                  width: "400px",
-                                  borderRadius: "18px",
-                                  objectFit: "cover",
-                                  height: "203px"
-                                }}
-                                src={this.getYouTubeEmbedUrl(item.Video)!}
-                                title="YouTube video player"
-                                frameBorder="0"
-                                allow="autoplay; encrypted-media"
-                                allowFullScreen
-                                loading="lazy"
-                              />
-                            ) : (
-                              // ✅ Normal video file (mp4 etc.)
-                              <video
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                controls
-                                style={{
-                                  width: "400px",
-                                  borderRadius: "18px",
-                                  objectFit: "cover",
-                                  height: "203px"
-                                }}
-                              >
-                                <source src={item.Video} type="video/mp4" />
-                              </video>
-                            )
-                          ) :
-                            (
-                              <div className="story-card">
-                                <div className="story-thumbnail">
-                                  <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
-                                    <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                  </video>
-                                </div>
-                                <div className="story-content">
-                                  <div className="story-title">
-                                    Sarah’s Development - New Learning Program Participation
+                    <div className="stories-grid">
+                      <div className="story-card">
+                        <div className="story-thumbnail">
+                          {
+                            item.Video ? (
+                              this.getYouTubeEmbedUrl(item.Video) ? (
+                                // ✅ YouTube iframe
+                                <iframe
+                                  style={{
+                                    width: "400px",
+                                    borderRadius: "18px",
+                                    objectFit: "cover",
+                                    height: "203px"
+                                  }}
+                                  src={this.getYouTubeEmbedUrl(item.Video)!}
+                                  title="YouTube video player"
+                                  frameBorder="0"
+                                  allow="autoplay; encrypted-media"
+                                  allowFullScreen
+                                  loading="lazy"
+                                />
+                              ) : (
+                                // ✅ Normal video file (mp4 etc.)
+                                <video
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  controls
+                                  style={{
+                                    width: "400px",
+                                    borderRadius: "18px",
+                                    objectFit: "cover",
+                                    height: "203px"
+                                  }}
+                                >
+                                  <source src={item.Video} type="video/mp4" />
+                                </video>
+                              )
+                            ) :
+                              (
+                                <div className="story-card">
+                                  <div className="story-thumbnail">
+                                    <video autoPlay muted loop playsInline controls style={{ width: "100%", height: "149px", objectFit: "cover" }}>
+                                      <source src="https://cdn.pixabay.com/video/2026/03/02/337459_large.mp4" type="video/mp4" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  </div>
+                                  <div className="story-content">
+                                    <div className="story-title">
+                                      Sarah’s Development - New Learning Program Participation
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )
-                        }
+                              )
+                          }
 
-                      </div>
-                      <div className="story-content">
-                        <div className="story-title">
-                          {item.Title}
+                        </div>
+                        <div className="story-content">
+                          <div className="story-title">
+                            {item.Title}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -164,7 +165,6 @@ export default class EmployeeHubPeopleStories extends React.Component<IEmployeeH
             </Slider>
 
 
-          </div>
 
           {/* <div className="stories-grid">
 

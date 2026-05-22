@@ -26,24 +26,24 @@
 /* Cards Container */
 .stories-grid {
     margin-top: 22px;
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
+    gap: 7px; */
 }
 
 .story-card {
-    /* width: 116%; */
+    width: 94%;
     background: #f5f5f5;
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 5px 3px rgba(0, 0, 0, .08);
+    box-shadow: 0 4px 3px rgba(0, 0, 0, .08);
     border: 1px solid #f0f0f0;
     transition: transform .3s ease, box-shadow .3s ease
 }
 
 .story-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .story-thumbnail {
@@ -67,6 +67,10 @@
     font-weight: 600;
     line-height: 1.4;
     color: #222;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 /* Responsive */

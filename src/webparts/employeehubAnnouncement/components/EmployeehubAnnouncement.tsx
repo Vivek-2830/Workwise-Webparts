@@ -641,6 +641,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
           "Source",
           "link",
           "Videos",
+          "SlideOrder",
           "AttachmentFiles"
         )
         .expand("AttachmentFiles")

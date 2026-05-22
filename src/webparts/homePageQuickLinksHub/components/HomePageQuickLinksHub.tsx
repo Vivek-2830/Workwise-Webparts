@@ -138,20 +138,23 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
           }
           dialogContentProps={AddQuickLinkDetailsDialogContentProps}
           modalProps={addmodelProps}
-          maxWidth={1500}
+          maxWidth={1200}
         >
-
-          <div className='AddQuickdata'>
-            <PrimaryButton className='AddQuicklnfo' text='Add Data' onClick={() => this.setState({ AddQuicklinksDataDialog: false })} />
+          
+          <div className='linkhub'>
+            <h2>Quick Links Hub Details</h2>
+              <div className='AddQuickdata'>
+                <PrimaryButton className='AddQuicklnfo' text='Add Data' onClick={() => this.setState({ AddQuicklinksDataDialog: false })} />
+              </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Icons</th>
-                  <th style={{ width: '30%' }}>Links</th>
+                  <th>Title</th>
+                  <th>Icons</th>
+                  <th>Links</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -165,7 +168,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                       <tr key={item.ID}>
                         <td className="title">{item.Title}</td>
                         <td><img src={item.Icons} /></td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
 
@@ -212,11 +215,16 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
           }
           dialogContentProps={AddQuickLinksDataDialogContentProps}
           modalProps={addmodelProps2}
-          maxWidth={1200}
+          maxWidth={900}
         >
+
+          <div>
+            <h2>Add QuickLinks</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div className='Add-Form'>
                 <TextField
                   label='Quick Title'
@@ -228,20 +236,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e: any) => this.handleImageChange(e)}
-                />
-
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div className='Add-Form'>
                 <TextField
                   label='Link'
@@ -250,6 +245,19 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
                     this.setState({ Link: value.target["value"] })
                   }
                 />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label><br />
+
+                <input className='quicklinkicon'
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => this.handleImageChange(e)}
+                />
+
               </div>
             </div>
 
@@ -290,8 +298,12 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
           }
           dialogContentProps={UpdateQuickLinkDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          maxWidth={800}
+          maxWidth={900}
         >
+          <div>
+            <h2>Update QuickLinks</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
             <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
@@ -308,10 +320,23 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
             </div>
 
             <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Icons</b></label><br />
+              <div>
+                <TextField
+                  label='Link'
+                  type='text'
+                  value={this.state.EditLink}
+                  onChange={(value) =>
+                    this.setState({ EditLink: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
 
-                <input
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icons</b></label><br />
+
+                <input className='quicklinkicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -338,19 +363,6 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
-                <TextField
-                  label='Link'
-                  type='text'
-                  value={this.state.EditLink}
-                  onChange={(value) =>
-                    this.setState({ EditLink: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
             <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
               <div className='Announcement-Submit'>
                 <div className='Submit-Button'>
@@ -371,7 +383,6 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
 
               </div>
             </div>
-
 
           </div>
 

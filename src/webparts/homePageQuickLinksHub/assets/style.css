@@ -35,6 +35,17 @@
     color: #000;
 }
 
+.linkhub {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.quicklinkicon {
+    margin-top: 12px;
+}
+
 @media (max-width: 1024px) {
     .quick-links {
         grid-template-columns: repeat(3, 1fr);

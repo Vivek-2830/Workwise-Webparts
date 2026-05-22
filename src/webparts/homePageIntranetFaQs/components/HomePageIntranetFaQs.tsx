@@ -83,7 +83,8 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
       isDarkTheme,
       environmentMessage,
       hasTeamsContext,
-      userDisplayName
+      userDisplayName,
+      faqbutton
     } = this.props;
 
     return (
@@ -97,7 +98,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
             this.state.IsAdmin ?
               <>
                 <div className='AddAnnouncemt'>
-                  <PrimaryButton text='Add FAQs' onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
+                  <PrimaryButton text={faqbutton} onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
                 </div>
               </>
               :

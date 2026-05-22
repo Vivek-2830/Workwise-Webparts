@@ -57,6 +57,25 @@
     color: #007680;
 }
 
+.AnnouncementSection {
+  height: 70px;
+}
+
+.AnnouncementImage {
+  margin-top: 12px;
+}
+
+.ms-Dialog-header {
+  display: none;
+}
+
+.homeannouncement {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
@@ -136,15 +155,15 @@
     margin-bottom: 10px;
 }
 
-.AddAnnouncmentData {
+/* .AddAnnouncmentData {
   margin-bottom: 14px;
   display: flex;
   justify-content: right;
-}
+} */
 
 .Announcement-Submit {
   display: flex;
-  justify-content: left;
-  margin-top: 20px;
+  justify-content: center;
+  margin-top: 45px;
   gap: 10px;
 }
