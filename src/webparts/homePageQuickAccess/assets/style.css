@@ -96,3 +96,18 @@
         grid-template-columns: 1fr;
     }
 }
+
+.Quickbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.QuickAccessSection {
+    height: 70px;
+}
+
+.quickaccessicon {
+    margin-top: 12px;
+}

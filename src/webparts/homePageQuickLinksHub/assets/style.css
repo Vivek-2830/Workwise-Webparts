@@ -3,7 +3,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
     /* padding: 30px 50px; */
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .link-card {
@@ -44,6 +44,15 @@
 
 .quicklinkicon {
     margin-top: 12px;
+}
+
+.Addquick {
+    display: flex;
+    justify-content: end;
+}
+
+.QuicklinksInfo {
+    height: 70px;
 }
 
 @media (max-width: 1024px) {

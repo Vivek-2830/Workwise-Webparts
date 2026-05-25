@@ -211,20 +211,23 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
 
         <div className="user-widget">
 
-          <h3 className="hello">Hello {userDisplayName}</h3>
-          <div className="hello-underline"></div>
-
-          {
-            this.state.IsAdmin ?
-            <>
-                <div>
-                  <PrimaryButton text='Add' onClick={() => this.setState({ AddUserwidgetDialog: false })} />
-                </div>
-            </>
-            :
-            <>
-            </>
-          }
+          <div className='user-box'>
+            <div>
+              <h3 className="hello">Hello {userDisplayName}</h3>
+              <div className="hello-underline"></div>
+            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                  <div>
+                    <PrimaryButton text='Add' onClick={() => this.setState({ AddUserwidgetDialog: false })} />
+                  </div>
+              </>
+              :
+              <>
+              </>
+            }
+          </div>
 
           {
             this.state.UserWidgetData.length > 0 &&
@@ -251,23 +254,26 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             }
             dialogContentProps={AddUserwidgetDataDialogContentProps}
             modalProps={addmodelProps}
-            minWidth={1500}
+            minWidth={1200}
           >
 
             {/* -----------------------------Useful Widget-------------------------------- */}
 
-            <div className='AddAnnouncmentData'>
-              <PrimaryButton className='AddAnnounInfo' text='Add User Widget' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
+            <div className='userwidgetbox'>
+              <h2>User-Widget Details</h2>
+              <div className='AdduserData'>
+                <PrimaryButton className='AddusersInfo' text='Add User Widget' onClick={() => this.setState({ AdduserwidgetDataDialog: false })} />
+              </div>
             </div>
-
+           
             <div className="news-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
                 <thead>
                   <tr>
-                    <th style={{ width: '20%' }}>Title</th>
-                    <th style={{ width: '30%' }}>Icon</th>
-                    <th style={{ width: '30%' }}>Link</th>
-                    <th style={{ width: '15%' }}>Actions</th>
+                    <th>Title</th>
+                    <th>Icon</th>
+                    <th>Link</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -287,7 +293,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                               )
                             }
                           </td>
-                          <td>
+                          <td style={{ wordBreak: "break-all" }}>
                             <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                           </td>
 
@@ -322,21 +328,21 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
 
             {/* -----------------------------Useful Apps-------------------------------- */}
               
-            <div className='AddAnnouncmentData'>
+            <div className='AddusefullData'>
                 
               <h2>Useful Apps</h2>
 
-              <PrimaryButton className='AddAnnounInfo' text='Add Apps' onClick={() => this.setState({ AddUsefullDataDialog: false })} />
+              <PrimaryButton className='AddAappsInfo' text='Add Apps' onClick={() => this.setState({ AddUsefullDataDialog: false })} />
             </div>
 
             <div className="news-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
                 <thead>
                   <tr>
-                    <th style={{ width: '20%' }}>AppName</th>
-                    <th style={{ width: '30%' }}>AppIcon</th>
-                    <th style={{ width: '30%' }}>Applink</th>
-                    <th style={{ width: '15%' }}>Actions</th>
+                    <th>AppName</th>
+                    <th>AppIcon</th>
+                    <th>Applink</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -356,7 +362,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                               )
                             }
                           </td>
-                          <td>
+                          <td style={{ wordBreak: "break-all" }}>
                             <a href={item.Applink.Url} target="_blank" rel="noopener noreferrer">{item.Applink.Description}</a>
                           </td>
 
@@ -404,11 +410,16 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             }
             dialogContentProps={AddUserWidgetDetailsContentProps}
             modalProps={addmodelProps2}
-            minWidth={1100}
+            minWidth={900}
           >
+
+            <div className='adduserwidgetbox'>
+              <h2>Add User-Widget Details</h2>
+            </div>
+
             <div className="ms-Grid-row">
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Announcement Title'
@@ -420,19 +431,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload Image</b></label><br />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e: any) => this.handleUserWidgetIcomChange(e)}
-                  />
-
-                </div>
-              </div>
-
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Link'
@@ -441,6 +440,18 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                       this.setState({ Link: value.target["value"] })
                     }
                   />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
+                  <input className='usersicon'
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUserWidgetIcomChange(e)}
+                  />
+
                 </div>
               </div>
 
@@ -482,11 +493,15 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             }
             dialogContentProps={UpdateUserWidgetDetailsDialogContentProps}
             modalProps={updatemodelProps}
-            minWidth={1100}
+            minWidth={900}
           >
+            <div className='adduserwidgetbox'>
+              <h2>Update User-Widget Details</h2>
+            </div>
+
             <div className='ms-Grid-row'>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Title'
@@ -499,11 +514,24 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload Image</b></label><br />
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
+                <div>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    value={this.state.EditLink}
+                    onChange={(value) =>
+                      this.setState({ EditLink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
 
-                  <input
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserWidgetSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
+
+                  <input className='usersicon'
                     type="file"
                     accept="image/*"
                     onChange={(e: any) => this.handleUpdateUserWidgetIconChange(e)}
@@ -533,19 +561,6 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div>
-                  <TextField
-                    label='Link'
-                    type='text'
-                    value={this.state.EditLink}
-                    onChange={(value) =>
-                      this.setState({ EditLink: value.target["value"] })
-                    }
-                  />
-                </div>
-              </div>
-
               <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
                 <div className='Announcement-Submit'>
                   <div className='Submit-Button'>
@@ -567,12 +582,11 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-
             </div>
 
           </Dialog>
 
-          <h4>Useful Apps</h4>
+          <h3>Useful Apps</h3>
 
           <div className="apps-grid">
 
@@ -608,11 +622,16 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             }
             dialogContentProps={AddUseFullDataDialogContentProps}
             modalProps={addmodelProps3}
-            minWidth={1100}
+            minWidth={900}
           >
+
+            <div className='AddUseappbox'>
+              <h2>Add UseFull Apps</h2>
+            </div>
+
             <div className="ms-Grid-row">
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='AppName'
@@ -624,19 +643,7 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload AppIcon</b></label><br />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e: any) => this.handleUseFullappIconChange(e)}
-                  />
-
-                </div>
-              </div>
-
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='App Link'
@@ -645,6 +652,18 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                       this.setState({ Applink: value.target["value"] })
                     }
                   />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload AppIcon</b></label>
+                  <input className='Userappicon'
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleUseFullappIconChange(e)}
+                  />
+
                 </div>
               </div>
 
@@ -685,11 +704,16 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
             }
             dialogContentProps={UpdateUsefullappDetailsDialogContentProps}
             modalProps={updatemodelProps2}
-            minWidth={1100}
+            minWidth={900}
           >
+
+            <div className='AddUseappbox'>
+              <h2>Update UseFull Apps</h2>
+            </div>
+            
             <div className='ms-Grid-row'>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Title'
@@ -702,11 +726,24 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload AppIcon</b></label><br />
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
+                <div>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    value={this.state.EditApplink}
+                    onChange={(value) =>
+                      this.setState({ EditApplink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
 
-                  <input
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserAppSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload AppIcon</b></label>
+
+                  <input className='Userappicon'
                     type="file"
                     accept="image/*"
                     onChange={(e: any) => this.handleUpdateUserWidgetIconChange(e)}
@@ -733,19 +770,6 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
                     )
                   }
 
-                </div>
-              </div>
-
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div>
-                  <TextField
-                    label='Link'
-                    type='text'
-                    value={this.state.EditApplink}
-                    onChange={(value) =>
-                      this.setState({ EditApplink: value.target["value"] })
-                    }
-                  />
                 </div>
               </div>
 

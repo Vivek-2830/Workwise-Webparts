@@ -126,7 +126,7 @@
 /* ------------------------------------------------------------------------ */
 
 .user-widget {
-    width: 315px;
+    width: 343px;
     background: #E0EFF0;
     border-radius: 16px;
     padding: 22px 20px;
@@ -172,9 +172,9 @@
     margin: 16px 0;
 }
 
-.user-widget h4 {
-    margin: 0 0 10px;
-    font-size: 14px;
+.user-widget h3 {
+    margin: 18px 0 12px 0;
+    font-size: 18px;
 }
 
 .fav-list {
@@ -223,4 +223,40 @@
 .next-i {
     width: 15px;
     height: 15px;
+}
+
+.user-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userwidgetbox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.AddusefullData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.UserWidgetSection {
+    height: 70px;
+}
+
+.usersicon {
+    margin-top: 12px;
+}
+
+.UserAppSection {
+    height: 70px;   
+}
+
+.Userappicon {
+    margin-top: 12px;
 }

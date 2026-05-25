@@ -149,3 +149,8 @@
 .Training {
     background: #ffa07a;
 }
+
+.Events-box {
+    display: flex;
+    justify-content: space-between;
+}

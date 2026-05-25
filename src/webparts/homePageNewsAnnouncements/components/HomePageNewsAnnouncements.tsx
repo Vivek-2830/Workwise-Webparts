@@ -117,7 +117,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
               this.state.IsAdmin ?
               <>
                 <div className='AddNews'>
-                  <PrimaryButton text='Add News' onClick={() => this.setState({ AddNewsDialog: false })} />
+                  <PrimaryButton text='Add News Announcement' onClick={() => this.setState({ AddNewsDialog: false })} />
                 </div>
               </>
               :
@@ -188,23 +188,28 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={AddNewsDetailsDialogContentProps}
             modalProps={addmodelProps}
-            minWidth={1500}
+            minWidth={1200}
           >
 
-            <div className='AddnewsInfo'>
-              <PrimaryButton className='AddNewsData' text='Add News' onClick={() => this.setState({ AddNewsDataDialog: false })} />
+            <div className='newsbox'>
+              <div>
+                <h2>News Details</h2>
+              </div>
+              <div className='AddnewsInfo'>
+                <PrimaryButton className='AddNewsData' text='Add News' onClick={() => this.setState({ AddNewsDataDialog: false })} />
+              </div>
             </div>
 
             <div className="news-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
                 <thead>
                   <tr>
-                    <th style={{ width: '20%' }}>NewsTitle</th>
-                    <th style={{ width: '30%' }}>NewsCategory</th>
-                    <th style={{ width: '15%' }}>NewsPhoto</th>
-                    <th style={{ width: '15%' }}>NewsDate</th>
-                    <th style={{ width: '15%' }}>Link</th>
-                    <th style={{ width: '15%' }}>Actions</th>
+                    <th>NewsTitle</th>
+                    <th>NewsCategory</th>
+                    <th>NewsPhoto</th>
+                    <th>NewsDate</th>
+                    <th>Link</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -226,7 +231,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                             }
                           </td>
                           <td>{moment(item.NewsDate).format("DD-MM-YYYY")}</td>
-                          <td>
+                          <td style={{ wordBreak: "break-all" }}>
                             <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                           </td>
 
@@ -275,11 +280,15 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={AddNewsDataDialogContentProps}
             modalProps={addmodelProps2}
-            minWidth={1100}
+            minWidth={900}
           >
+            <div>
+              <h2>Add News</h2>
+            </div>
+
             <div className="ms-Grid-row">
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='News Title'
@@ -291,7 +300,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <Dropdown
                     options={this.state.Categorylist}
@@ -304,21 +313,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload NewsPhoto</b></label><br />
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e: any) => this.handleImageChange(e)}
-                  />
-
-                </div>
-              </div>
-
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <DatePicker
                     label='News Date'
@@ -330,7 +325,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Link'
@@ -339,6 +334,19 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                       this.setState({ Link: value.target["value"] })
                     }
                   />
+                </div>
+              </div>
+
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload NewsPhoto</b></label><br />
+
+                  <input className="newsicon"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e: any) => this.handleImageChange(e)}
+                  />
+
                 </div>
               </div>
 
@@ -381,11 +389,15 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             }
             dialogContentProps={UpdateNewsDetailsDialogContentProps}
             modalProps={updatemodelProps}
-            minWidth={1100}
+            minWidth={900}
           >
+            <div>
+              <h2>Update News Details</h2>
+            </div>
+
             <div className='ms-Grid-row'>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Announcement Title'
@@ -398,7 +410,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <Dropdown
                     options={this.state.Categorylist}
@@ -413,7 +425,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
                 <div className='Add-Form'>
                   <DatePicker
                     label='News Date'
@@ -425,11 +437,24 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
-                  <label><b>Upload NewsPhoto</b></label><br />
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
+                <div>
+                  <TextField
+                    label='Link'
+                    type='text'
+                    value={this.state.EditLink}
+                    onChange={(value) =>
+                      this.setState({ EditLink: value.target["value"] })
+                    }
+                  />
+                </div>
+              </div>
 
-                  <input
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 NewsSection'>
+                <div className='Add-Form'>
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload NewsPhoto</b></label>
+
+                  <input className='newsicon'
                     type="file"
                     accept="image/*"
                     onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -459,19 +484,6 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div>
-                  <TextField
-                    label='Link'
-                    type='text'
-                    value={this.state.EditLink}
-                    onChange={(value) =>
-                      this.setState({ EditLink: value.target["value"] })
-                    }
-                  />
-                </div>
-              </div>
-
               <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
                 <div className='Announcement-Submit'>
                   <div className='Submit-Button'>
@@ -497,7 +509,6 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
             </div>
 
           </Dialog>
-
 
         </div>
       </section>

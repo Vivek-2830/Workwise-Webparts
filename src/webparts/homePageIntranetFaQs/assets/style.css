@@ -6,7 +6,7 @@
     border-radius: 12px;
 }
 
-.faq-panel h2 {
+.FAQ-Home h2 {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 22px;
@@ -14,7 +14,7 @@
     margin-top: 5px;
 }
 
-.faq-panel h2::after {
+.FAQ-Home h2::after {
     content: "";
     width: 60px;
     height: 3px;
@@ -65,4 +65,22 @@
 .accordion__panel {
     padding: 0;
     animation: fadein .35s ease-in;
+}
+
+.FAQ-Home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.IntranetSection {
+    height: 70px;
+}
+
+.Intranetbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
 }

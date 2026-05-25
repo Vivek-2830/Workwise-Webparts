@@ -276,23 +276,28 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
           }
           dialogContentProps={AddQuickaccessDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddQuickAccessDataDialog: false })} />
+          <div className='Quickbox'>
+            <div>
+              <h2>Quick Access Information</h2>
+            </div>
+            <div className='AddquickData'>
+              <PrimaryButton className='AddquickInfo' text='Add Data' onClick={() => this.setState({ AddQuickAccessDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>QuickAccess Categories</th>
-                  <th style={{ width: '30%' }}>Access Title</th>
-                  <th style={{ width: '30%' }}>Access Description</th>
-                  <th style={{ width: '15%' }}>Icon</th>
-                  <th style={{ width: '15%' }}>Link</th>
-                  <th style={{ width: '15%' }}>Actions</th>
+                  <th>QuickAccess Categories</th>
+                  <th>Access Title</th>
+                  <th>Access Description</th>
+                  <th>Icon</th>
+                  <th>Link</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,13 +313,13 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
                         <td>
                           {
                             item.Icon ? (
-                              <img src={item.Icon} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
+                              <img src={item.Icon} alt="announcement" style={{ width: "80px", height: "80px", objectFit: "cover" }} />
                             ) : (
                               "No Icon"
                             )
                           }
                         </td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
 
@@ -363,11 +368,15 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
           }
           dialogContentProps={AddQuickaccessDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add QuickAccess Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                   <Dropdown
                     options={this.state.QuickAccessCategorieslist}
@@ -380,12 +389,11 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Access Title'
                   type='text'
-                  multiline rows={3}
                   onChange={(value) =>
                     this.setState({ AccessTitle: value.target["value"] })
                   }
@@ -393,23 +401,23 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Access Description'
+                  label='Link'
                   type='text'
                   onChange={(value) =>
-                    this.setState({ AccessDescription: value.target["value"] })
+                    this.setState({ Link: value.target["value"] })
                   }
                 />
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
-                <input
+                <input className='quickaccessicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -418,13 +426,13 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Access Description'
                   type='text'
                   onChange={(value) =>
-                    this.setState({ Link: value.target["value"] })
+                    this.setState({ AccessDescription: value.target["value"] })
                   }
                 />
               </div>
@@ -469,11 +477,16 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
           }
           dialogContentProps={UpdateQuickaccessDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Update QuickAccess Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                 <Dropdown
                   options={this.state.QuickAccessCategorieslist}
@@ -487,12 +500,11 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Access Title'
                   type='text'
-                  multiline rows={3}
                   value={this.state.EditAccessTitle}
                   onChange={(value) =>
                     this.setState({ EditAccessTitle: value.target["value"] })
@@ -501,24 +513,24 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
+              <div>
                 <TextField
-                  label='Access Description'
+                  label='Link'
                   type='text'
-                  value={this.state.EditAccessDescription}
+                  value={this.state.EditLink}
                   onChange={(value) =>
-                    this.setState({ EditAccessDescription: value.target["value"] })
+                    this.setState({ EditLink: value.target["value"] })
                   }
                 />
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
               <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
-                <input
+                <input className='quickaccessicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -548,14 +560,14 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuickAccessSection'>
+              <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Access Description'
                   type='text'
-                  value={this.state.EditLink}
+                  value={this.state.EditAccessDescription}
                   onChange={(value) =>
-                    this.setState({ EditLink: value.target["value"] })
+                    this.setState({ EditAccessDescription: value.target["value"] })
                   }
                 />
               </div>
@@ -581,7 +593,6 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
 
               </div>
             </div>
-
 
           </div>
 

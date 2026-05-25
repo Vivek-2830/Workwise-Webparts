@@ -40,21 +40,24 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
 
         <div className="events-panel">
 
-          <h2 className="section-title">Events</h2>
-          <div className="title-underline"></div>
-
-          {
-            this.state.IsAdmin ?
-            <>
-                <div>
-                  <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Events/calendar.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
-                    <PrimaryButton className='Adddoc' text="Add Event" />
-                  </a>
-                </div>
-            </>
-            :
-            <></>
-          }
+          <div className='Events-box'>
+            <div>
+              <h2 className="section-title">Events</h2>
+              <div className="title-underline"></div>
+            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                  <div>
+                    <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Events/calendar.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                      <PrimaryButton className='Adddoc' text="Add Event" />
+                    </a>
+                  </div>
+              </>
+              :
+              <></>
+            }
+          </div>
 
           <div className='events-scroll'>
 
