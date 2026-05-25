@@ -92,19 +92,22 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
         <div className="faq-panel">
 
-          <h2>Intranet FAQs</h2>
-
-          {
-            this.state.IsAdmin ?
-              <>
-                <div className='AddAnnouncemt'>
-                  <PrimaryButton text={faqbutton} onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
-                </div>
+          <div className='FAQ-Home'>
+            <div>
+              <h2>Intranet FAQs</h2>
+            </div>
+            {
+              this.state.IsAdmin ?
+                <>
+                  <div className='AddFaq'>
+                    <PrimaryButton text={faqbutton} onClick={() => this.setState({ AddIntranetFaqDialog: false })} />
+                  </div>
+                </>
+                :
+                <>
               </>
-              :
-              <>
-              </>
-          }
+            }
+          </div>
 
           {
             this.state.FaqsAnswersData.length > 0 &&
@@ -142,20 +145,24 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
           }
           dialogContentProps={AddIntranetFaqDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
-
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddInfo' text='Add IntranetFaq Info' onClick={() => this.setState({ AddIntranetFaqDataDialog: false })} />
+          <div className='Intranetbox'>
+            <div>
+              <h2>Intranet FAQ Details</h2>
+            </div>
+            <div className='AddfaqData'>
+              <PrimaryButton className='AddfaqInfo' text='Add IntranetFaq Info' onClick={() => this.setState({ AddIntranetFaqDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Questions</th>
-                  <th style={{ width: '30%' }}>Answers</th>
-                  <th style={{ width: '15%' }}>Actions</th>
+                  <th>Questions</th>
+                  <th>Answers</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -210,23 +217,27 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
           }
           dialogContentProps={AddAIntranetfaqDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add Intranet-FAQs Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
                   type='text'
                   onChange={(value) =>
-                    this.setState({ Answers: value.target["value"] })
+                    this.setState({ Questions: value.target["value"] })
                   }
                 />
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
               <div className='Add-Form'>
                 
               </div>
@@ -267,11 +278,16 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
           }
           dialogContentProps={UpdateIntranetFaqDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Update Intranet-FAQs Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -284,7 +300,7 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
               <div className='Add-Form'>
                 
               </div>
@@ -310,7 +326,6 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
               </div>
             </div>
-
 
           </div>
 

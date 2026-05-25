@@ -94,7 +94,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
         {
           this.state.IsAdmin ?
             <>
-              <div className='AddAnnouncemt'>
+              <div className='Addquick'>
                 <PrimaryButton text='Add Quicklinks' onClick={() => this.setState({ AddQuicklinkDialog: false })} />
               </div>
             </>
@@ -250,7 +250,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
 
             <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div className='Add-Form'>
-                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
                 <input className='quicklinkicon'
                   type="file"
@@ -306,7 +306,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
 
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -319,7 +319,7 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div>
                 <TextField
                   label='Link'
@@ -332,10 +332,10 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 QuicklinksInfo'>
               <div className='Add-Form'>
-                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icons</b></label><br />
-
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icons</b></label>
+                
                 <input className='quicklinkicon'
                   type="file"
                   accept="image/*"

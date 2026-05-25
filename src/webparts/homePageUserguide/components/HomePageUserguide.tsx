@@ -114,22 +114,24 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
         <div className="essential-section">
           <div className="essential-header">
             <h2 className="section-title">User guide</h2>
+
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='AddAguide'>
+                  <PrimaryButton text='Add UserGuides' onClick={() => this.setState({ AddUserGuideDialog: false })} />
+                </div>
+              </> 
+              :
+              <>
+              </>
+            }
+
             <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/User-Guides1.aspx' style={{ textDecoration: "none", color: "inherit" }} target="_blank" rel="noopener noreferrer">
               <button className="view-userguide">View all</button>
             </a>
-          </div>
 
-          {
-            this.state.IsAdmin ?
-            <>
-              <div className='AddAnnouncemt'>
-                <PrimaryButton text='Add UserGuides' onClick={() => this.setState({ AddUserGuideDialog: false })} />
-              </div>
-            </> 
-            :
-            <>
-            </>
-          }
+          </div>
 
           <Slider {...userguide}>
 
@@ -164,22 +166,27 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={AddUserguideDetailsDialogContentProps}
             modalProps={addmodelProps}
-            minWidth={1500}
+            minWidth={1200}
           >
 
-            <div className='AddUserData'>
-              <PrimaryButton className='Add Userguide' text='Add UserInfo' onClick={() => this.setState({ AddUserGuideDataDialog: false })} />
+            <div className='userguide'>
+              <div>
+                <h2>UserGuide Information</h2>
+              </div>
+              <div className='AddUserData'>
+                <PrimaryButton className='Add Userguide' text='Add UserInfo' onClick={() => this.setState({ AddUserGuideDataDialog: false })} />
+              </div>
             </div>
 
             <div className="news-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
                 <thead>
                   <tr>
-                    <th style={{ width: '20%' }}>Title</th>
-                    <th style={{ width: '30%' }}>Essential Description</th>
-                    <th style={{ width: '15%' }}>Images</th>
-                    <th style={{ width: '15%' }}>link</th>
-                    <th style={{ width: '15%' }}>Actions</th>
+                    <th>Title</th>
+                    <th>Essential Description</th>
+                    <th>Images</th>
+                    <th>link</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -200,7 +207,7 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                               )
                             }
                           </td>
-                          <td>
+                          <td style={{ wordBreak: "break-all" }}>
                             <a href={item.link.Url} target="_blank" rel="noopener noreferrer">{item.link.Description}</a>
                           </td>
 
@@ -248,11 +255,15 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={AddAnnouncementDataDialogContentProps}
             modalProps={addmodelProps2}
-            minWidth={1100}
+            minWidth={900}
           >
+            <div>
+              <h2>Add UserGuide Details</h2>
+            </div>
+
             <div className="ms-Grid-row">
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Title'
@@ -264,24 +275,23 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
                   <TextField
-                    label='Essential Description'
+                    label='Link'
                     type='text'
-                    multiline rows={3}
                     onChange={(value) =>
-                      this.setState({ EssentialDescription: value.target["value"] })
+                      this.setState({ link: value.target["value"] })
                     }
                   />
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
-                  <label><b>Upload Image</b></label><br />
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
 
-                  <input
+                  <input className='usericon'
                     type="file"
                     accept="image/*"
                     onChange={(e: any) => this.handleImageChange(e)}
@@ -290,13 +300,14 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
                   <TextField
-                    label='Link'
+                    label='Essential Description'
                     type='text'
+                    multiline rows={3}
                     onChange={(value) =>
-                      this.setState({ link: value.target["value"] })
+                      this.setState({ EssentialDescription: value.target["value"] })
                     }
                   />
                 </div>
@@ -340,11 +351,15 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
             }
             dialogContentProps={UpdateuserguideDataDialogContentProps}
             modalProps={updatemodelProps}
-            minWidth={1100}
+            minWidth={900}
           >
+            <div>
+              <h2>Update UserGuide Details</h2>
+            </div>
+
             <div className='ms-Grid-row'>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
                   <TextField
                     label='Title'
@@ -357,25 +372,24 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div className='Add-Form'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
+                <div>
                   <TextField
-                    label='Essential Description'
+                    label='Link'
                     type='text'
-                    multiline rows={3}
-                    value={this.state.EditEssentialDescription}
+                    value={this.state.Editlink}
                     onChange={(value) =>
-                      this.setState({ EditEssentialDescription: value.target["value"] })
+                      this.setState({ Editlink: value.target["value"] })
                     }
                   />
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
                 <div className='Add-Form'>
-                  <label><b>Upload Image</b></label><br />
+                  <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
 
-                  <input
+                  <input className='usericon'
                     type="file"
                     accept="image/*"
                     onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -403,14 +417,15 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
                 </div>
               </div>
 
-              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-                <div>
+              <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 UserGuideSection'>
+                <div className='Add-Form'>
                   <TextField
-                    label='Link'
+                    label='Essential Description'
                     type='text'
-                    value={this.state.Editlink}
+                    multiline rows={3}
+                    value={this.state.EditEssentialDescription}
                     onChange={(value) =>
-                      this.setState({ Editlink: value.target["value"] })
+                      this.setState({ EditEssentialDescription: value.target["value"] })
                     }
                   />
                 </div>
@@ -436,7 +451,6 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
 
                 </div>
               </div>
-
 
             </div>
 

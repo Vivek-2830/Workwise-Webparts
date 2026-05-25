@@ -9,6 +9,8 @@
 .essential-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
 .essential-title {
@@ -129,4 +131,23 @@
     .learning-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.userguide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.AddAguide {
+    margin-left: 820px;
+}
+
+.UserGuideSection {
+    height: 70px;
+}
+
+.usericon {
+    margin-top: 12px;
 }

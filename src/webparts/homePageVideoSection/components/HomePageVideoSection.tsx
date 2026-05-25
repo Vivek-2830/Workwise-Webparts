@@ -49,15 +49,17 @@ export default class HomePageVideoSection extends React.Component<IHomePageVideo
       <section className="homePageVideoSection">
 
         <div>
-          <div className="news-header">
+          <div className="video-header">
             <h2 className="section-video">Case Study Videos</h2>
 
-            <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Videos/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
-              <PrimaryButton className='Adddoc' text="Add Video" />
-            </a>
-
+            <div className='addvideo'>
+              <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Videos/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                <PrimaryButton className='Addvideos' text="Add Video" />
+              </a>
+            </div>
+            
             <a href='https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/SitePages/Company%20videos.aspx' style={{ textDecoration: "none", color: "black" }} target="_blank" rel="noopener noreferrer">
-              <button className="view-news">View all</button>
+              <button className="view-video">View all</button>
             </a>
           </div>
           <br />

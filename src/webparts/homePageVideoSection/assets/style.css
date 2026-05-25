@@ -1,6 +1,7 @@
-.news-header {
+.video-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .GalleryVideos{
@@ -24,4 +25,17 @@
     position: absolute;
     bottom: -6px;
     left: 0; 
+}
+
+.view-video {
+    background: #0aa3a3;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.addvideo {
+    margin-left: 787px;
 }
