@@ -15,6 +15,7 @@ import { sp } from '@pnp/sp/presets/all';
 
 export interface IEmployeehubInternalVacanciesWebPartProps {
   description: string;
+  InternalVacanciesLink : any;
 }
 
 export default class EmployeehubInternalVacanciesWebPart extends BaseClientSideWebPart<IEmployeehubInternalVacanciesWebPartProps> {
@@ -41,7 +42,8 @@ export default class EmployeehubInternalVacanciesWebPart extends BaseClientSideW
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+        context: this.context,
+        InternalVacanciesLink : this.properties.InternalVacanciesLink
       }
     );
 
@@ -90,8 +92,8 @@ export default class EmployeehubInternalVacanciesWebPart extends BaseClientSideW
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('InternalVacanciesLink', {
+                  label: "Add Link"
                 })
               ]
             }

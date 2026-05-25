@@ -105,7 +105,8 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
       isDarkTheme,
       environmentMessage,
       hasTeamsContext,
-      userDisplayName
+      userDisplayName,
+      InternalVacanciesLink
     } = this.props;
 
     return (
@@ -130,7 +131,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               <></>
             }
 
-            <a href='https://www.axisclc.com/work-with-us/' style={{ textDecoration: 'none', color: 'black' }}><button className="view-all">View all</button></a>
+            <a href={InternalVacanciesLink} style={{ textDecoration: 'none', color: 'black' }}><button className="view-all">View all</button></a>
           </div>
 
           <div className="jobs-grid">

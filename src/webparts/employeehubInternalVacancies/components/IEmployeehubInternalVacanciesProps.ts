@@ -5,4 +5,5 @@ export interface IEmployeehubInternalVacanciesProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: any;
+  InternalVacanciesLink : any;
 }
