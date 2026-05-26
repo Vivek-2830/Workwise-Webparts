@@ -12,6 +12,7 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import { DefaultButton, Dialog, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
 
 export interface IBusinessResourcesFaQsState {
   BusinessFaQsData: any;
@@ -90,20 +91,24 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
       <section className="businessResourcesFaQs">
 
         <div className="Business-contents">
-          <h2>Frequently Asked Questions</h2>
-          <div className='Faq-underline'></div>
 
-          {
+          <div className='BusinessPart'>
+            <div>
+              <h2>Frequently Asked Questions</h2>
+              <div className='Faq-underline'></div>
+            </div>
+            {
             this.state.IsAdmin ?
               <>
-                <div className='AddHRInfo'>
+                <div className='AddBusinessInfo'>
                   <PrimaryButton text='Add ResourceFAQs' onClick={() => this.setState({ BusinessResourceFaQDialog: false })} />
                 </div>
               </>
               :
               <>
               </>
-          }
+            }
+          </div>
 
           {
             this.state.BusinessFaQsData.length > 0 &&
@@ -140,19 +145,23 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
           }
           dialogContentProps={BusinessResourceFAQsDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
-
-          <div className='AddResourceData'>
-            <PrimaryButton className='AddResourceFAQ' text='Add Data' onClick={() => this.setState({ AddBusinessResourceDataFaqDialog: false })} />
+          <div className='BusinessBox'>
+            <div>
+              <h2>Business Resource FAQ Details</h2>
+            </div>
+            <div className='AddResourceData'>
+              <PrimaryButton className='AddResourceFAQ' text='Add Data' onClick={() => this.setState({ AddBusinessResourceDataFaqDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Question</th>
-                  <th style={{ width: '30%' }}>Answer</th>
+                  <th>Question</th>
+                  <th>Answer</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -205,11 +214,15 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
           }
           dialogContentProps={AddBusinessResourceFAQsDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add FAQ Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BusinessfaqSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Question'
@@ -221,15 +234,15 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BusinessAns'>
               <div className='Add-Form'>
-                <TextField
-                  label='Answers'
-                  type='text'
-                  multiline rows={3}
-                  onChange={(value) =>
-                    this.setState({ Answer: value.target["value"] })
-                  }
+                <label><b style={{ fontWeight: '600' }}>Answer</b></label>
+                <RichText
+                  value={this.state.Answer}
+                  onChange={(text: string) => {
+                    this.setState({ Answer: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -269,11 +282,15 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
           }
           dialogContentProps={UpdateBusinessResourceFAQsDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update FAQ Details</h2>
+          </div>
+          
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BusinessfaqSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Question'
@@ -286,16 +303,15 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BusinessAns'>
               <div className='Add-Form'>
-                <TextField
-                  label='Answers'
-                  type='text'
-                  multiline rows={3}
+                <label><b style={{ fontWeight: '600' }}>Answer</b></label>
+                <RichText
                   value={this.state.EditAnswer}
-                  onChange={(value) =>
-                    this.setState({ EditAnswer: value.target["value"] })
-                  }
+                  onChange={(text: string) => {
+                    this.setState({ EditAnswer: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -320,7 +336,6 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
 
               </div>
             </div>
-
 
           </div>
 
@@ -359,7 +374,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
       "Answer"
     ).get().then((data) => {
       let AllData = [];
-      console.log(data);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -374,7 +389,6 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
       console.log("Error fetching Business FaQs data: ", error);
     });
   }
-
 
   public async AddResourceFAQsItem() {
     if (this.state.Question.length == 0) {
@@ -397,7 +411,7 @@ export default class BusinessResourcesFaQs extends React.Component<IBusinessReso
         return item;
       }
     });
-    console.log(EditFaqs);
+    // console.log(EditFaqs);
     this.setState({
       EditQuestion: EditFaqs[0].Question,
       EditAnswer: EditFaqs[0].Answer

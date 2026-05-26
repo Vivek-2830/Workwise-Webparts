@@ -92,19 +92,23 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
       <section className="employeeHubShoutOutAnnouncement">
 
         <div className="shoutouts-section">
-          <h2 className="shoutouts-title">Shout Out's</h2>
-
-          {
-            this.state.IsAdmin ?
-              <>
-                <div className='AddAnnouncemt'>
-                  <PrimaryButton text='Add ShoutOut Announcement' onClick={() => this.setState({ ShoutOutAnnouncementDialog: false })} />
-                </div>
-              </>
-              :
-              <>
-              </>
-          }
+          
+          <div className='shoutoutsAnnouncement'>
+            <div>
+              <h2 className="shoutouts-title">Shout Out's</h2>
+            </div>
+              {
+              this.state.IsAdmin ?
+                <>
+                  <div className='Addshouout'>
+                    <PrimaryButton text='Add ShoutOut' onClick={() => this.setState({ ShoutOutAnnouncementDialog: false })} />
+                  </div>
+                </>
+                :
+                <>
+                </>
+              }
+          </div>
 
           {
             this.state.ShoutOutAnnouncementData.length > 0 &&
@@ -134,20 +138,25 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
           }
           dialogContentProps={ShoutOutAnnouncementDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddshoutData'>
-            <PrimaryButton className='AddshoutInfo' text='Add Data' onClick={() => this.setState({ AddShoutoutAnnouncementDialog: false })} />
-          </div>
+          <div className='shoutoutbox'>
+            <div>
+              <h2>ShoutOut Announcement Information</h2>
+            </div>
+            <div className='AddshoutData'>
+              <PrimaryButton className='AddshoutInfo' text='Add Data' onClick={() => this.setState({ AddShoutoutAnnouncementDialog: false })} />
+            </div>
+          </div>  
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Description</th>
-                  <th style={{ width: '15%' }}>Icon</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Icon</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -213,11 +222,16 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
           }
           dialogContentProps={AddShoutOutAnnouncementDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Add ShoutOut Announcement</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Title'
@@ -229,7 +243,7 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Description'
@@ -242,11 +256,11 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
-                <input
+                <input className='shoutouticon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -255,7 +269,7 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12 ShoutOutSection'>
               <div className='Announcement-Submit'>
                 <div className='Submit-Button'>
                   <PrimaryButton
@@ -292,11 +306,15 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
           }
           dialogContentProps={UpdateShoutOutAnnouncementDataDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update ShoutOut Announcement</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Title'
@@ -309,7 +327,7 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Description'
@@ -323,11 +341,11 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 ShoutOutSection'>
               <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
 
-                <input
+                <input className='shoutouticon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -357,7 +375,7 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12'>
+            <div className='ms-Grid-col ms-sm12 ms-md12 ms-lg12 '>
               <div className='Announcement-Submit'>
                 <div className='Submit-Button'>
                   <PrimaryButton

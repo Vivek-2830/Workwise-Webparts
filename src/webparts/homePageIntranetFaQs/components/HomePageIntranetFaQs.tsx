@@ -12,6 +12,8 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 import { DefaultButton, Dialog, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
+
 
 export interface IHomePageIntranetFaQsState {
   FaqsAnswersData: any;
@@ -225,10 +227,10 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 IntranetSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Announcement Title'
+                  label='Question'
                   type='text'
                   onChange={(value) =>
                     this.setState({ Questions: value.target["value"] })
@@ -237,9 +239,16 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 IntranetAns'>
               <div className='Add-Form'>
-                
+                <label><b style={{ fontWeight : '600' }}>Answer</b></label>
+                <RichText
+                  value={this.state.Answers}
+                  onChange={(text: string) => {
+                    this.setState({ Answers: text });
+                    return text;
+                  }}
+                />
               </div>
             </div>
 
@@ -287,10 +296,10 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
 
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 IntranetSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Announcement Title'
+                  label='Question'
                   type='text'
                   value={this.state.EditQuestions}
                   onChange={(value) =>
@@ -300,9 +309,16 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 IntranetSection'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 IntranetAns'>
               <div className='Add-Form'>
-                
+                <label><b style={{ fontWeight : '600' }}>Answer</b></label>
+                <RichText
+                  value={this.state.EditAnswers}
+                  onChange={(text: string) => {
+                    this.setState({ EditAnswers: text });
+                    return text;
+                  }}
+                />
               </div>
             </div>
 

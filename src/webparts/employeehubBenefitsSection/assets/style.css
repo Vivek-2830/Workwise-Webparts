@@ -85,3 +85,30 @@
         grid-template-columns: 1fr;
     }
 }
+
+.benefitbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.benefiticon {
+    margin-top: 12px;
+}
+
+.BenefitsSection {
+    height: 70px;
+}
+
+.benefits-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Announcement-Submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    gap: 10px;
+}

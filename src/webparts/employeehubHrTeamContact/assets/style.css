@@ -100,3 +100,24 @@
         grid-template-columns: 1fr;
     }
 }
+
+.hrteambox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.hr-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.HRTeamSection {
+    height: 70px;
+}
+
+.teamicon {
+    margin-top: 12px;
+}

@@ -36,6 +36,7 @@ export interface IEmployeehubAnnouncementState {
 }
 
 require('../assets/style.css');
+require("../assets/fabric.min.css");
 
 const AddEmpAnnouncementDetailsDialogContentProps = {
   title: "Add Announcement Details",
@@ -125,9 +126,9 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
       <section className="employeehubAnnouncement">
 
         {
-          this.state.IsAdmin ? 
+          this.state.IsAdmin ?
           <>
-            <div className='AddAnnouncemt'>
+            <div className='AddempAnnouncement'>
               <PrimaryButton text='Add Announcements' onClick={() => this.setState({ AddEmpAnnouncementDialog: false })} />
             </div>
           </>
@@ -226,23 +227,28 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
           }
           dialogContentProps={AddEmpAnnouncementDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddEmpAnnouncementDataDialog: false })} />
+          <div className='empannouncementbox'>
+            <div>
+              <h2>Employee Announcement Information</h2>
+            </div>
+            <div className='AddAnnouncmentData'>
+              <PrimaryButton className='AddAnnounInfo' text='Add Data' onClick={() => this.setState({ AddEmpAnnouncementDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Description</th>
-                  <th style={{ width: '30%' }}>Source</th>
-                  <th style={{ width: '15%' }}>Images</th>
-                  <th style={{ width: '15%' }}>link</th>
-                  <th style={{ width: '15%' }}>Videos</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Source</th>
+                  <th>Images</th>
+                  <th>link</th>
+                  <th>Videos</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -265,7 +271,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                             )
                           }
                         </td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.link.Url} target="_blank" rel="noopener noreferrer">{item.link.Description}</a>
                         </td>
 
@@ -333,11 +339,16 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
           }
           dialogContentProps={AddEmpAnnouncementDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Add Employee Announcement</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -349,20 +360,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Description'
-                  type='text'
-                  multiline rows={3}
-                  onChange={(value) =>
-                    this.setState({ Description: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Source'
@@ -374,20 +372,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e: any) => this.handleImageChange(e)}
-                />
-
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Link'
@@ -399,7 +384,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label="Video"
@@ -429,6 +414,32 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                     </p>
                   )
                 )}
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
+
+                <input className='empicon'
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => this.handleImageChange(e)}
+                />
+
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Description'
+                  type='text'
+                  multiline rows={3}
+                  onChange={(value) =>
+                    this.setState({ Description: value.target["value"] })
+                  }
+                />
               </div>
             </div>
 
@@ -472,11 +483,16 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
           }
           dialogContentProps={UpdateEmpAnnouncementDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Update Employee Announcement</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Announcement Title'
@@ -489,21 +505,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Description'
-                  type='text'
-                  multiline rows={3}
-                  value={this.state.EditDescription}
-                  onChange={(value) =>
-                    this.setState({ EditDescription: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Source'
@@ -516,11 +518,37 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload Image</b></label><br />
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div>
+                <TextField
+                  label='Link'
+                  type='text'
+                  value={this.state.Editlink}
+                  onChange={(value) =>
+                    this.setState({ Editlink: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
 
-                <input
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div>
+                <TextField
+                  label='Video'
+                  type='text'
+                  value={this.state.EditVideos}
+                  onChange={(value) =>
+                    this.setState({ EditVideos: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Image</b></label>
+
+                <input className='empicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -550,27 +578,15 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 EmployeeHubAnnouncementSection'>
+              <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Description'
                   type='text'
-                  value={this.state.Editlink}
+                  multiline rows={3}
+                  value={this.state.EditDescription}
                   onChange={(value) =>
-                    this.setState({ Editlink: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
-                <TextField
-                  label='Video'
-                  type='text'
-                  value={this.state.EditVideos}
-                  onChange={(value) =>
-                    this.setState({ EditVideos: value.target["value"] })
+                    this.setState({ EditDescription: value.target["value"] })
                   }
                 />
               </div>
@@ -596,7 +612,6 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
 
               </div>
             </div>
-
 
           </div>
 
@@ -778,7 +793,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
         return item;
       }
     });
-    console.log(EditEmpAnnouncement);
+    // console.log(EditEmpAnnouncement);
     this.setState({
       EditTitle: EditEmpAnnouncement[0].Title,
       EditDescription: EditEmpAnnouncement[0].Description,

@@ -53,3 +53,28 @@
 .accordion__button:hover {
     color: #006c7a;
 }
+
+.faqPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hrfaqBox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.HRFAQsSection {
+    height: 70px;
+}
+
+.quill {
+    border: 1px solid;
+}
+
+.HRFAqAnswer {
+    margin-top: 20px;
+}

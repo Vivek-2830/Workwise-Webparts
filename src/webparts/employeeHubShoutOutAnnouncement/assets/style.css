@@ -105,3 +105,24 @@
         font-size: 13px;
     }
 }
+
+.shoutoutsAnnouncement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shoutoutbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ShoutOutSection {
+    height: 70px;
+}
+
+.shoutouticon {
+    margin-top: 12px;
+}

@@ -12,6 +12,8 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
+import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
+ 
 
 export interface IEmployeehubHrfaQsState {
   EmployeeFaQData: any;
@@ -91,22 +93,25 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
 
         <div className="faq-wrapper">
 
-          <h2 className="faq-title">
-            HR FAQs
-            <span className="underline"></span>
-          </h2>
-
-          {
-            this.state.IsAdmin ?
-            <>
-              <div className='AddHRInfo'>
-                <PrimaryButton text='Add HRFAQs' onClick={() => this.setState({ EmployeeHRFAQsDialog: false })} />
-              </div>
-            </>
-            :
-            <>
-            </>
-          }
+          <div className='faqPart'>
+            <div>
+              <h2 className="faq-title">
+              HR FAQs
+              <span className="underline"></span>
+              </h2>
+            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='AddHRInfo'>
+                  <PrimaryButton text='Add HRFAQs' onClick={() => this.setState({ EmployeeHRFAQsDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+            }
+          </div>
 
           {
             this.state.EmployeeFaQData.length > 0 &&
@@ -144,19 +149,24 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
           }
           dialogContentProps={EmployeeHubFAQsDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddfaqsData'>
-            <PrimaryButton className='Addhrfaqs' text='Add Data' onClick={() => this.setState({ AddEmployeeHRFAQsDialog: false })} />
+          <div className='hrfaqBox'>
+            <div>
+              <h2>HR FAQs Information</h2>
+            </div>
+            <div className='AddfaqsData'>
+              <PrimaryButton className='Addhrfaqs' text='Add Data' onClick={() => this.setState({ AddEmployeeHRFAQsDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Question</th>
-                  <th style={{ width: '30%' }}>Answers</th>
+                  <th>Question</th>
+                  <th>Answers</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -209,11 +219,15 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
           }
           dialogContentProps={AddEmployeeHubFAQsDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add HR FAQs</h2>
+          </div>
+          
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 HRFAQsSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Question'
@@ -225,15 +239,15 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 HRFAqAnswer'>
               <div className='Add-Form'>
-                <TextField
-                  label='Answers'
-                  type='text'
-                  multiline rows={3}
-                  onChange={(value) =>
-                    this.setState({ Answers: value.target["value"] })
-                  }
+                <label><b style={{ fontWeight : '600' }}>Answers</b></label>
+                <RichText
+                  value={this.state.Answers}
+                  onChange={(text: string) => {
+                    this.setState({ Answers: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -273,11 +287,15 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
           }
           dialogContentProps={UpdateEmployeeHubFAQsDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update HR FAQs</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 HRFAQsSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Question'
@@ -290,16 +308,15 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 HRFAqAnswer'>
               <div className='Add-Form'>
-                <TextField
-                  label='Answers'
-                  type='text'
-                  multiline rows={3}
+                <label><b style={{ fontWeight : '600' }}>Answers</b></label>
+                <RichText
                   value={this.state.EditAnswers}
-                  onChange={(value) =>
-                    this.setState({ EditAnswers: value.target["value"] })
-                  }
+                  onChange={(text: string) => {
+                    this.setState({ EditAnswers: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -324,8 +341,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
 
               </div>
             </div>
-
-
+            
           </div>
 
         </Dialog>
@@ -363,8 +379,8 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
       "Answers"
     ).get().then((data) => {
       let AllData = [];
-      console.log(faq);
-      console.log(data);
+      // console.log(faq);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -401,7 +417,7 @@ export default class EmployeehubHrfaQs extends React.Component<IEmployeehubHrfaQ
         return item;
       }
     });
-    console.log(EditFaqs);
+    // console.log(EditFaqs);
     this.setState({
       EditQuestion: EditFaqs[0].Question,
       EditAnswers: EditFaqs[0].Answers

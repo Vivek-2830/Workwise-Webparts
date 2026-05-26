@@ -5,6 +5,7 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import * as moment from 'moment';
 import { sp } from '@pnp/sp/presets/all';
 import { DatePicker, DefaultButton, Dialog, Dropdown, IconButton, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
 
 export interface IEmployeehubInternalVacanciesState {
   InternalVacanciesData: any;
@@ -191,25 +192,30 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
           }
           dialogContentProps={AddInternalVacanciesDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddvacancieData'>
-            <PrimaryButton className='AddInternalInfo' text='Add Data' onClick={() => this.setState({ AddInternalvacancieDataDialog: false })} />
+          <div className='Internalbox'>
+            <div>
+              <h2>InternalVacancies Details</h2>
+            </div>
+            <div className='AddvacancieData'>
+              <PrimaryButton className='AddInternalInfo' text='Add Data' onClick={() => this.setState({ AddInternalvacancieDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>JobTitle</th>
-                  <th style={{ width: '30%' }}>Department</th>
-                  <th style={{ width: '30%' }}>LocationType</th>
-                  <th style={{ width: '15%' }}>EmploymentType</th>
-                  <th style={{ width: '15%' }}>Salary</th>
-                  <th style={{ width: '15%' }}>KeyRequirements</th>
-                  <th style={{ width: '15%' }}>ApplicationDeadline</th>
-                  <th style={{ width: '15%' }}>Link</th>
+                  <th>JobTitle</th>
+                  <th>Department</th>
+                  <th>LocationType</th>
+                  <th>EmploymentType</th>
+                  <th>Salary</th>
+                  <th>KeyRequirements</th>
+                  <th>ApplicationDeadline</th>
+                  <th>Link</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -227,7 +233,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
                         <td>{item.Salary}</td>
                         <td  dangerouslySetInnerHTML={{ __html: item.KeyRequirements }}></td>
                         <td>{moment(item.ApplicationDeadline).format("MMM DD, YYYY")}</td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
                         <td>
@@ -276,17 +282,83 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
           }
           dialogContentProps={AddEInternalVacanciesDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add InternalVacancies Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <TextField
                   label='JobTitle'
                   type='text'
                   onChange={(value) =>
                     this.setState({ JobTitle: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
+              <div className='Add-Form'>
+                <Dropdown
+                  options={this.state.LocationTypelist}
+                  label='Location Type'
+                  required
+                  onChange={(e, option, text) =>
+                    this.setState({ LocationType: option.text })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
+              <div className='Add-Form'>
+                <Dropdown
+                  options={this.state.EmploymentTypelist}
+                  label='Employment Type'
+                  required
+                  onChange={(e, option, text) =>
+                    this.setState({ EmploymentType: option.text })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Salary'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Salary: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
+              <div className='Add-Form'>
+                <DatePicker
+                  label='ApplicationDeadline'
+                  allowTextInput={false}
+                  value={this.state.ApplicationDeadline ? this.state.ApplicationDeadline : null}
+                  onSelectDate={(date: any) => this.setState({ ApplicationDeadline: date })}
+                  aria-label="Select Date" placeholder='Select Date' isRequired
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Link'
+                  type='text'
+                  onChange={(value) =>
+                    this.setState({ Link: value.target["value"] })
                   }
                 />
               </div>
@@ -305,77 +377,15 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 KeySection'>
               <div className='Add-Form'>
-                <Dropdown
-                  options={this.state.LocationTypelist}
-                  label='Location Type'
-                  required
-                  onChange={(e, option, text) =>
-                    this.setState({ LocationType: option.text })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <Dropdown
-                  options={this.state.EmploymentTypelist}
-                  label='Employment Type'
-                  required
-                  onChange={(e, option, text) =>
-                    this.setState({ EmploymentType: option.text })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Salary'
-                  type='text'
-                  onChange={(value) =>
-                    this.setState({ Salary: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Key Requirements'
-                  type='text'
-                  multiline rows={3}
-                  onChange={(value) =>
-                    this.setState({ KeyRequirements: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <DatePicker
-                  label='ApplicationDeadline'
-                  allowTextInput={false}
-                  value={this.state.ApplicationDeadline ? this.state.ApplicationDeadline : null}
-                  onSelectDate={(date: any) => this.setState({ ApplicationDeadline: date })}
-                  aria-label="Select Date" placeholder='Select Date' isRequired
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Link'
-                  type='text'
-                  onChange={(value) =>
-                    this.setState({ Link: value.target["value"] })
-                  }
+                <label><b style={{ fontWeight: '600' }}>KeyRequirements</b></label>
+                <RichText
+                  value={this.state.KeyRequirements}
+                  onChange={(text: string) => {
+                    this.setState({ KeyRequirements: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -421,11 +431,15 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
           }
           dialogContentProps={UpdateInternalVacanciesDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update InternalVacancies Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <TextField
                   label='JobTitle'
@@ -438,20 +452,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Department'
-                  type='text'
-                  value={this.state.EditDepartment}
-                  onChange={(value) =>
-                    this.setState({ EditDepartment: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <Dropdown
                   options={this.state.LocationTypelist}
@@ -465,7 +466,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <Dropdown
                   options={this.state.EmploymentTypelist}
@@ -479,7 +480,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <TextField
                   label='Salary'
@@ -492,22 +493,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <TextField
-                  label='Key Requirements'
-                  type='text'
-                  dangerouslySetInnerHTML={{__html: this.state.EditKeyRequirements || "" }}
-                  multiline rows={3}
-                  value={this.state.EditKeyRequirements}
-                  onChange={(value) =>
-                    this.setState({ EditKeyRequirements: value.target["value"] })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div className='Add-Form'>
                 <DatePicker
                   label='ApplicationDeadline'
@@ -519,7 +505,7 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurInternalVacancies'>
               <div>
                 <TextField
                   label='Link'
@@ -528,6 +514,33 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
                   onChange={(value) =>
                     this.setState({ EditLink: value.target["value"] })
                   }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+              <div className='Add-Form'>
+                <TextField
+                  label='Department'
+                  type='text'
+                  value={this.state.EditDepartment}
+                  multiline rows={3}
+                  onChange={(value) =>
+                    this.setState({ EditDepartment: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg12 KeySection'>
+              <div className='Add-Form'>
+                <label><b style={{ fontWeight: '600' }}>KeyRequirements</b></label>
+                <RichText
+                  value={this.state.EditKeyRequirements}
+                  onChange={(text: string) => {
+                    this.setState({ EditKeyRequirements: text });
+                    return text;
+                  }}
                 />
               </div>
             </div>
@@ -552,7 +565,6 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
 
               </div>
             </div>
-
 
           </div>
 

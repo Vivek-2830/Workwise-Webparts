@@ -560,3 +560,33 @@
         height: auto;
     }
 }
+
+.BrochureButton {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.HsButton {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.InsuranceButton {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.TemplateButton {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.DocPolicieButton {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}

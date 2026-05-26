@@ -92,3 +92,9 @@
         width: 180px;
     }
 }
+
+.storiesbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

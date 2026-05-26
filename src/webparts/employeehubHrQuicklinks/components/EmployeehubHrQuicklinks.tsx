@@ -93,23 +93,26 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
 
         <div className="tools-wrapper">
 
-          <h2 className="tools-title">
-            HR Quick Links
-            <span className="underline"></span>
+          <div className='toolsPart'>
+            <div>
+              <h2 className="tools-title">
+                HR Quick Links
+                <span className="underline"></span>
+              </h2>
+            </div>
 
             {
-              this.state.IsAdmin ?
-              <>
-                <div className='Addquicklink'>
-                  <PrimaryButton text='Add HRQuicklink' onClick={() => this.setState({ EmployeeHRQuickDialog: false })} />
-                </div>
-              </>
-              :
-              <>
-              </>
-            }
-
-          </h2>
+                this.state.IsAdmin ?
+                <>
+                  <div className='Addquicklink'>
+                    <PrimaryButton text='Add HRQuicklink' onClick={() => this.setState({ EmployeeHRQuickDialog: false })} />
+                  </div>
+                </>
+                :
+                <>
+                </>
+              }
+          </div>
 
           <div className="tools-grid">
 
@@ -142,20 +145,24 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
           }
           dialogContentProps={HRQuicklinkDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
-        >
-
-          <div className='AddHrInfo'>
-            <PrimaryButton className='AddQuickInfo' text='Add Data' onClick={() => this.setState({ AddEmployeeHRQuicklinkDialog: false })} />
+          minWidth={1200}
+        > 
+          <div className='hrquickbox'>
+            <div>
+              <h2>Employee QuickLink Details</h2>
+            </div>
+            <div className='AddHrInfo'>
+              <PrimaryButton className='AddQuickInfo' text='Add Data' onClick={() => this.setState({ AddEmployeeHRQuicklinkDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>RecruitmentTitle</th>
-                  <th style={{ width: '30%' }}>RecruitmentImage</th>
-                  <th style={{ width: '30%' }}>Link</th>
+                  <th>RecruitmentTitle</th>
+                  <th>RecruitmentImage</th>
+                  <th>Link</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -170,13 +177,13 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
                         <td>
                           {
                             item.RecruitmentImage ? (
-                              <img src={item.RecruitmentImage} alt="announcement" style={{ width: "120px", height: "80px", objectFit: "cover" }} />
+                              <img src={item.RecruitmentImage} alt="announcement" style={{ width: "50px", height: "50px", objectFit: "cover" }} />
                             ) : (
                               "No Image"
                             )
                           }
                         </td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
 
@@ -222,11 +229,16 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
           }
           dialogContentProps={AddHRQuicklinkDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Add Employee QuickLink</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
               <div className='Add-Form'>
                 <TextField
                   label='RecruitmentTitle'
@@ -238,20 +250,7 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload RecruitmentImage</b></label><br />
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e: any) => this.handleImageChange(e)}
-                />
-
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Link'
@@ -260,6 +259,19 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
                     this.setState({ Link: value.target["value"] })
                   }
                 />
+              </div>
+            </div>
+
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload RecruitmentImage</b></label>
+
+                <input className='hrquickicon'
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => this.handleImageChange(e)}
+                />
+
               </div>
             </div>
 
@@ -300,11 +312,15 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
           }
           dialogContentProps={UpdateHRQuicklinkDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update Employee QuickLink </h2>
+          </div>
+          
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
               <div className='Add-Form'>
                 <TextField
                   label='RecruitmentTitle'
@@ -317,11 +333,24 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
-                <label><b>Upload RecruitmentImage</b></label><br />
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
+              <div>
+                <TextField
+                  label='Link'
+                  type='text'
+                  value={this.state.EditLink}
+                  onChange={(value) =>
+                    this.setState({ EditLink: value.target["value"] })
+                  }
+                />
+              </div>
+            </div>
 
-                <input
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRQuickSection'>
+              <div className='Add-Form'>
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload RecruitmentImage</b></label>
+
+                <input className='hrquickicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -348,19 +377,6 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
                   )
                 }
 
-              </div>
-            </div>
-
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
-                <TextField
-                  label='Link'
-                  type='text'
-                  value={this.state.EditLink}
-                  onChange={(value) =>
-                    this.setState({ EditLink: value.target["value"] })
-                  }
-                />
               </div>
             </div>
 

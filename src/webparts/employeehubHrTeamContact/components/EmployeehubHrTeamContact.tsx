@@ -104,13 +104,14 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
         <div className="hr-wrapper">
 
           <div className="hr-title">
-            <h3>HR Team Contact Details</h3>
-            <span className="underline"></span>
-
+            <div>
+              <h3>HR Team Contact Details</h3>
+              <span className="underline"></span>
+            </div>
             {
               this.state.IsAdmin ?
               <>
-                <div className='AddAnnouncemt'>
+                <div className='Addteam'>
                   <PrimaryButton text='Add TeamContact' onClick={() => this.setState({ AddHRTemaDialog: false })} />
                 </div>
               </>
@@ -167,22 +168,27 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
           }
           dialogContentProps={AddHRTeamContactDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddHRInfo' text='Add Data' onClick={() => this.setState({ AddHRTeamDataDialog: false })} />
+          <div className='hrteambox'>
+            <div>
+              <h2>HR Team Contact Details</h2>
+            </div>
+            <div className='AddHRData'>
+              <PrimaryButton className='AddHRInfo' text='Add Data' onClick={() => this.setState({ AddHRTeamDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Name</th>
-                  <th style={{ width: '30%' }}>JobTitle</th>
-                  <th style={{ width: '30%' }}>Phone</th>
-                  <th style={{ width: '15%' }}>Email</th>
-                  <th style={{ width: '15%' }}>Photo</th>
+                  <th>Name</th>
+                  <th>JobTitle</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Photo</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -251,11 +257,16 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
           }
           dialogContentProps={AddHRTeamContactDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Add HR Team Contact Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label="Name"
@@ -267,12 +278,11 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Job Title'
                   type='text'
-                  multiline rows={3}
                   onChange={(value) =>
                     this.setState({ JobTitle: value.target["value"] })
                   }
@@ -280,7 +290,7 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Phone'
@@ -292,7 +302,7 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Email'
@@ -304,11 +314,11 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
-                <label><b>Upload Photo</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Photo</b></label>
 
-                <input
+                <input className='teamicon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -356,11 +366,15 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
           }
           dialogContentProps={UpdateHRTeamContactDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update HR Team Contact Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Name'
@@ -373,12 +387,11 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Job Title'
                   type='text'
-                  multiline rows={3}
                   value={this.state.EditJobTitle}
                   onChange={(value) =>
                     this.setState({ EditJobTitle: value.target["value"] })
@@ -387,7 +400,7 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Phone'
@@ -399,9 +412,8 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
                 />
               </div>
             </div>
-
             
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div>
                 <TextField
                   label='Email'
@@ -414,12 +426,12 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 HRTeamSection'>
               <div className='Add-Form'>
-                <label><b>Upload Photo</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Photo</b></label>
 
-                <input
-                  type="file"
+                <input className='teamicon'
+                  type="file" 
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
                 />

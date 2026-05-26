@@ -99,19 +99,22 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
 
         <div className='Trust-sec'>
 
-          <h2 className='Value-Title'>Our Values</h2>
-
-          {
-            this.state.IsAdmin ?
-            <>
-              <div className='Addvalue'>
-                <PrimaryButton text='Add OurValue' onClick={() => this.setState({ AddOurvalueDialog: false })} />
-              </div>
-            </>
-            :
-            <>
-            </>
-          }
+          <div className='OurValuePart'>
+            <div>
+              <h2 className='Value-Title'>Our Values</h2>
+            </div>
+            {
+              this.state.IsAdmin ?
+              <>
+                <div className='Addvalue'>
+                  <PrimaryButton text='Add OurValue' onClick={() => this.setState({ AddOurvalueDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+            }
+          </div>
 
           <div className="trust-wrapper">
 
@@ -149,21 +152,26 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
           }
           dialogContentProps={AddOurvalueDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddvalueData'>
-            <PrimaryButton className='AddourValue' text='Add Data' onClick={() => this.setState({ AddOurvalueDataDialog: false })} />
+          <div className='ourvaluebox'>
+            <div>
+              <h2>Employee Our Value Details</h2>
+            </div>
+            <div className='AddvalueData'>
+              <PrimaryButton className='AddourValue' text='Add Data' onClick={() => this.setState({ AddOurvalueDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>Title</th>
-                  <th style={{ width: '30%' }}>Tag</th>
-                  <th style={{ width: '30%' }}>Description</th>
-                  <th style={{ width: '15%' }}>Icon</th>
+                  <th>Title</th>
+                  <th>Tag</th>
+                  <th>Description</th>
+                  <th>Icon</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -230,11 +238,16 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
           }
           dialogContentProps={AddOurValuesDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Add Employee Our Value Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Title'
@@ -246,12 +259,11 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Tag'
                   type='text'
-                  multiline rows={3}
                   onChange={(value) =>
                     this.setState({ Tag: value.target["value"] })
                   }
@@ -259,11 +271,12 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Description'
                   type='text'
+                  multiline rows={3}
                   onChange={(value) =>
                     this.setState({ Description: value.target["value"] })
                   }
@@ -271,11 +284,11 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
-                <input
+                <input className='ouricon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -322,11 +335,15 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
           }
           dialogContentProps={UpdateOurValuesDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update Employee Our Value Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Title'
@@ -339,12 +356,11 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Tag'
                   type='text'
-                  multiline rows={3}
                   value={this.state.EditTag}
                   onChange={(value) =>
                     this.setState({ EditTag: value.target["value"] })
@@ -353,11 +369,12 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Description'
                   type='text'
+                  multiline rows={3}
                   value={this.state.EditDescription}
                   onChange={(value) =>
                     this.setState({ EditDescription: value.target["value"] })
@@ -366,11 +383,11 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 OurValueSection'>
               <div className='Add-Form'>
-                <label><b>Upload Icon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload Icon</b></label>
 
-                <input
+                <input className='ouricon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -420,7 +437,6 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
 
               </div>
             </div>
-
 
           </div>
 

@@ -99,9 +99,10 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
         <div className="benefits-wrapper">
 
           <div className="benefits-title">
-            <h3>Benefits Section</h3>
-            <span className="underline"></span>
-
+            <div>
+              <h3>Benefits Section</h3>
+              <span className="underline"></span>
+            </div>
             {
               this.state.IsAdmin ?
               <>
@@ -113,22 +114,12 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
               :
               <></>
             }
-
           </div>
 
           <div className="benefits-grid">
-
             {
               this.state.BenefitsData.length > 0 &&
               this.state.BenefitsData.map((item, index) => {
-                // let imagePath = "";
-                // let ImageInfo = JSON.parse(item.BenefitsIcon);
-                // if (ImageInfo && ImageInfo["serverRelativeUrl"]) {
-                //   imagePath = ImageInfo["serverRelativeUrl"];
-                // }
-                // else {
-                //   imagePath = `${this.props.context.pageContext.site.absoluteUrl}/Lists/Benefits Section/Attachments/${item.ID}/${ImageInfo.fileName}`;
-                // }
                 return (
                   <a href={item.Link.Url} style={{ textDecoration: "none", color: "black" }}>
                     <div className="benefit-card" key={index}>
@@ -153,21 +144,26 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
           }
           dialogContentProps={AddBenefitsDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddAnnouncmentData'>
-            <PrimaryButton className='AddBenefits' text='Add Data' onClick={() => this.setState({ AddBenefitsDataDialog: false })} />
+          <div className="benefitbox">
+            <div>
+              <h2>Benefits Information</h2>
+            </div>
+            <div className='AddempbenefitData'>
+              <PrimaryButton className='AddBenefits' text='Add Data' onClick={() => this.setState({ AddBenefitsDataDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>BenefitsTitle</th>
-                  <th style={{ width: '30%' }}>BenefitsDescription</th>
-                  <th style={{ width: '30%' }}>BenefitsIcon</th>
-                  <th style={{ width: '15%' }}>Link</th>
+                  <th>BenefitsTitle</th>
+                  <th>BenefitsDescription</th>
+                  <th>BenefitsIcon</th>
+                  <th>Link</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -189,7 +185,7 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
                             )
                           }
                         </td>
-                        <td>
+                        <td style={{ wordBreak: "break-all" }}>
                           <a href={item.Link.Url} target="_blank" rel="noopener noreferrer">{item.Link.Description}</a>
                         </td>
 
@@ -237,11 +233,15 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
           }
           dialogContentProps={AddBenefitsDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add Employee Benefits Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Benefits Title'
@@ -253,24 +253,23 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Benefits Description'
+                  label='Link'
                   type='text'
-                  multiline rows={3}
                   onChange={(value) =>
-                    this.setState({ BenefitsDescription: value.target["value"] })
+                    this.setState({ Link: value.target["value"] })
                   }
                 />
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
-                <label><b>Upload BenefitsIcon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload BenefitsIcon</b></label>
 
-                <input
+                <input className='benefiticon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleImageChange(e)}
@@ -279,13 +278,14 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Benefits Description'
                   type='text'
+                  multiline rows={3}
                   onChange={(value) =>
-                    this.setState({ Link: value.target["value"] })
+                    this.setState({ BenefitsDescription: value.target["value"] })
                   }
                 />
               </div>
@@ -329,11 +329,16 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
           }
           dialogContentProps={UpdateBenefitsDetailsDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+
+          <div>
+            <h2>Update Employee Benefits Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Benefits Title'
@@ -346,25 +351,24 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div className='Add-Form'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
+              <div>
                 <TextField
-                  label='Benefits Description'
+                  label='Link'
                   type='text'
-                  multiline rows={3}
-                  value={this.state.EditBenefitsDescrition}
+                  value={this.state.EditLink}
                   onChange={(value) =>
-                    this.setState({ EditBenefitsDescrition: value.target["value"] })
+                    this.setState({ EditLink: value.target["value"] })
                   }
                 />
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
               <div className='Add-Form'>
-                <label><b>Upload BenefitsIcon</b></label><br />
+                <label style={{ display: 'flex' }}><b style={{ fontWeight : '600'}}>Upload BenefitsIcon</b></label>
 
-                <input
+                <input className='benefiticon'
                   type="file"
                   accept="image/*"
                   onChange={(e: any) => this.handleUpdateImageChange(e)}
@@ -394,14 +398,15 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
-              <div>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 BenefitsSection'>
+              <div className='Add-Form'>
                 <TextField
-                  label='Link'
+                  label='Benefits Description'
                   type='text'
-                  value={this.state.EditLink}
+                  multiline rows={3}
+                  value={this.state.EditBenefitsDescrition}
                   onChange={(value) =>
-                    this.setState({ EditLink: value.target["value"] })
+                    this.setState({ EditBenefitsDescrition: value.target["value"] })
                   }
                 />
               </div>
@@ -468,8 +473,8 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
       "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(data);
-      console.log(benefit);
+      // console.log(data);
+      // console.log(benefit);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -547,7 +552,7 @@ export default class EmployeehubBenefitsSection extends React.Component<IEmploye
         return item;
       }
     });
-    console.log(EditbenefitsItem);
+    // console.log(EditbenefitsItem);
     this.setState({
       EditBenefitsTitle: EditbenefitsItem[0].BenefitsTitle,
       EditBenefitsDescrition: EditbenefitsItem[0].BenefitsDescription,

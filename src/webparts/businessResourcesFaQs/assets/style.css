@@ -88,3 +88,97 @@
         padding-right: 36px;
     }
 }
+
+.ms-Dialog-header {
+    display: none;
+}
+
+.quill {
+    border: 1px solid;
+}
+
+.news-container {
+    width: 100%;
+    overflow-x: auto;
+    font-family: Arial, sans-serif;
+}
+
+.news-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.news-table thead {
+    background-color: #f5f5f5;
+}
+
+.news-table th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+}
+
+.news-table td {
+    padding: 12px;
+    vertical-align: top;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.news-table .title {
+    font-weight: bold;
+    color: #333;
+}
+
+.news-table img {
+    width: 120px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.news-table a {
+    color: #0078d4;
+    text-decoration: none;
+}
+
+.news-table a:hover {
+    text-decoration: underline;
+}
+
+/* Optional: Scroll style like your UI */
+.news-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.BusinessPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.BusinessBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.BusinessfaqSection {
+    height: 70px;
+}
+
+.BusinessAns {
+    margin-top: 15px;
+}
+
+.Announcement-Submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    gap: 10px;
+}

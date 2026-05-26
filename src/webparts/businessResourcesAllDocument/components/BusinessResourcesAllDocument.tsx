@@ -175,9 +175,11 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           {
             this.state.IsAdmin ?
             <>
+              <div className='DocPolicieButton'>
                 <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Documents%20and%20Policies/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
                   <PrimaryButton className='AddDocPolicie' text="Add Documents and Policies" />
                 </a>
+              </div>
             </>
             :
             <>
@@ -268,9 +270,11 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           {
             this.state.IsAdmin ?
             <>
+              <div className='TemplateButton'>
                 <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Templates%20and%20Branding/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
                   <PrimaryButton className='AddTemplates' text="Add Templates and Branding" />
                 </a>
+              </div>
             </>
             :
             <>
@@ -464,9 +468,11 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           {
             this.state.IsAdmin ?
             <>
+              <div className='InsuranceButton'>
                 <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Insurance%20and%20Certificates/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
                   <PrimaryButton className='AddInsurance' text="Add Insurance and Certificates" />
                 </a>
+              </div>
             </>
             :
             <>
@@ -480,9 +486,6 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
               <PivotItem headerText="CLC Certificates" itemKey="CLC Certificates" />
               <PivotItem headerText="Concept Certificates" itemKey="Concept Certificates" />
               <PivotItem headerText="Insurances" itemKey="Insurances" />
-              <PivotItem headerText="SHEQ Axis" itemKey="SHEQ Axis" />
-              <PivotItem headerText=" SHEQ CLC" itemKey=" SHEQ CLC" />
-              <PivotItem headerText="SHEQ Concept" itemKey="SHEQ Concept" />
             </Pivot>
           </div>
 
@@ -542,7 +545,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           </div>
         </div>
 
-        {/* -------------------------------Business Application Catalogue------------------------------------- */}
+        {/* -------------------------------Business Application Catalogue (H&S) ------------------------------------- */}
         <div id='HSTab' className="Business-wrapper">
 
           <h2 className="page-title">H&S Documents</h2>
@@ -550,9 +553,11 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           {
             this.state.IsAdmin ?
             <>
+              <div className='HsButton'>
                 <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Business%20Application%20Catalogue/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
                   <PrimaryButton className='AddBusinessDoc' text="Add H&S Documents" />
                 </a>
+              </div>
             </>
             :
             <>
@@ -571,6 +576,9 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
               <PivotItem headerText="Work Equipment" itemKey="HS Risk Information – Work Equipment" />
               <PivotItem headerText="HSF Axis CLC" itemKey="HSF Axis CLC" />
               <PivotItem headerText="HSP Axis CLC" itemKey="hsp axis clc" />
+              <PivotItem headerText="SHEQ Axis" itemKey="SHEQ Axis" />
+              <PivotItem headerText=" SHEQ CLC" itemKey=" SHEQ CLC" />
+              <PivotItem headerText="SHEQ Concept" itemKey="SHEQ Concept" />
             </Pivot>
           </div>
 
@@ -639,9 +647,11 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           {
             this.state.IsAdmin ?
             <>
+              <div className='BrochureButton'>
                 <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Lists/Brochures/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
                   <PrimaryButton className='AddDocPolicie' text="Add Brochures" />
                 </a>
+              </div>
             </>
             :
             <>
@@ -750,9 +760,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
           </div>
 
-
         </div>
-
 
       </section>
     );
@@ -1053,8 +1061,8 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
       "Category"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(data);
-      console.log(brouchers);
+      // console.log(data);
+      // console.log(brouchers);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

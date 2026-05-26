@@ -51,3 +51,24 @@
     font-weight: 600;
     color: #222;
 }
+
+.toolsPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hrquickbox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.HRQuickSection {
+    height: 70px;
+}
+
+.hrquickicon {
+    margin-top: 12px;
+}

@@ -84,3 +84,11 @@
     align-items: center;
     margin-bottom: 13px;
 }
+
+.quill {
+    border: 1px solid;
+}
+
+.IntranetAns {
+    margin-top: 15px;
+}

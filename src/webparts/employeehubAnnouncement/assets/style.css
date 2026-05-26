@@ -125,3 +125,36 @@
     max-height: 400px;
     overflow-y: auto;
 }
+
+
+.ms-Dialog-header {
+  display: none;
+}
+
+.AddempAnnouncement {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+}
+
+.empannouncementbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.empicon {
+    margin-top: 12px;
+}
+
+.EmployeeHubAnnouncementSection {
+    height: 70px;
+}
+
+.Announcement-Submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    gap: 10px;
+}

@@ -92,3 +92,24 @@
     }
 
 }
+
+.OurValuePart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ourvaluebox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ouricon {
+    margin-top: 12px;  
+}
+
+.OurValueSection {
+    height: 70px;
+}

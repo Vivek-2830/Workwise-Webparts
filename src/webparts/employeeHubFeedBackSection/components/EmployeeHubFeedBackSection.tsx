@@ -84,22 +84,26 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
     return (
       <section className="employeeHubFeedBackSection">
 
-        <h1 className="section-feed">Hearts & Minds - Our Culture, Our People</h1>
+        <div className='feedbackheader'>
+          <div>
+            <h1 className="section-feed">Hearts & Minds - Our Culture, Our People</h1>
+          </div>
+            {
+            this.state.IsAdmin ?
+              <>
+                <div className='Addfeed'>
+                  <PrimaryButton text='Add Feedback' onClick={() => this.setState({ FeedbackResponseDialog: false })} />
+                </div>
+              </>
+              :
+              <>
+              </>
+          }
+        </div>
+        
         <p className="section-subtitle">
           Join us in shaping a more engaged, connected, and vibrant workplace ready for our Investors in People survey!
         </p>
-
-        {
-          this.state.IsAdmin ?
-            <>
-              <div className='Addfeed'>
-                <PrimaryButton text='Add Feedback' onClick={() => this.setState({ FeedbackResponseDialog: false })} />
-              </div>
-            </>
-            :
-            <>
-            </>
-        }
 
         <div className="feedback-panel">
           <div className="feedback-grid">
@@ -145,20 +149,25 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
           }
           dialogContentProps={FeedbackDetailsDialogContentProps}
           modalProps={addmodelProps}
-          minWidth={1500}
+          minWidth={1200}
         >
 
-          <div className='AddUserData'>
-            <PrimaryButton className='Add Userguide' text='Add Feedbacks' onClick={() => this.setState({ AddFeedbackResponseDialog: false })} />
+          <div className='feedbackbox'>
+            <div>
+              <h2>Feedback & OurResponse Details</h2>
+            </div>
+            <div className='AddUserData'>
+              <PrimaryButton className='Add Userguide' text='Add Feedbacks' onClick={() => this.setState({ AddFeedbackResponseDialog: false })} />
+            </div>
           </div>
 
           <div className="news-container">
             <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }} className="news-table">
               <thead>
                 <tr>
-                  <th style={{ width: '20%' }}>YourFeedback</th>
-                  <th style={{ width: '30%' }}>OurResponse</th>
-                  <th style={{ width: '15%' }}>Actions</th>
+                  <th>YourFeedback</th>
+                  <th>OurResponse</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -213,14 +222,18 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
           }
           dialogContentProps={AddAFeedbackDataDialogContentProps}
           modalProps={addmodelProps2}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Add Details</h2>
+          </div>
+
           <div className="ms-Grid-row">
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 FeedBackSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Title'
+                  label='YourFeedback'
                   type='text'
                   onChange={(value) =>
                     this.setState({ YourFeedback: value.target["value"] })
@@ -229,12 +242,11 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 FeedBackSection'>
               <div className='Add-Form'>
                 <TextField
-                  label='Essential Description'
+                  label='OurResponse'
                   type='text'
-                  multiline rows={3}
                   onChange={(value) =>
                     this.setState({ OurResponse: value.target["value"] })
                   }
@@ -277,11 +289,15 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
           }
           dialogContentProps={UpdateFeedbackDataDialogContentProps}
           modalProps={updatemodelProps}
-          minWidth={1100}
+          minWidth={900}
         >
+          <div>
+            <h2>Update Details</h2>
+          </div>
+
           <div className='ms-Grid-row'>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 FeedBackSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Title'
@@ -294,12 +310,11 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
               </div>
             </div>
 
-            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6'>
+            <div className='ms-Grid-col ms-sm12 ms-md6 ms-lg6 FeedBackSection'>
               <div className='Add-Form'>
                 <TextField
                   label='Essential Description'
                   type='text'
-                  multiline rows={3}
                   value={this.state.EditOurResponse}
                   onChange={(value) =>
                     this.setState({ EditOurResponse: value.target["value"] })
@@ -328,7 +343,6 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
 
               </div>
             </div>
-
 
           </div>
 
@@ -367,8 +381,8 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
       "OurResponse"
     ).get().then((data) => {
       let AllData = [];
-      console.log(data);
-      console.log(response);
+      // console.log(data);
+      // console.log(response);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -405,7 +419,7 @@ export default class EmployeeHubFeedBackSection extends React.Component<IEmploye
         return item;
       }
     });
-    console.log(Edituserguide);
+    // console.log(Edituserguide);
     this.setState({
       EditYourFeedback: Edituserguide[0].YourFeedback,
       EditOurResponse: Edituserguide[0].OurResponse

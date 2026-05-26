@@ -313,7 +313,7 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
                         <td>
                           {
                             item.Icon ? (
-                              <img src={item.Icon} alt="announcement" style={{ width: "80px", height: "80px", objectFit: "cover" }} />
+                              <img src={item.Icon} alt="announcement" style={{ width: "20px", height: "20px", objectFit: "cover" }} />
                             ) : (
                               "No Icon"
                             )
