@@ -493,8 +493,8 @@ export default class HomePageUserguide extends React.Component<IHomePageUserguid
       "link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(roadmap);
-      console.log(data);
+      // console.log(roadmap);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

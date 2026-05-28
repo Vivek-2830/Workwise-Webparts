@@ -713,10 +713,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
           let imageUrl: string = "";
           let videoUrl: string = "";
 
-          /* ===========================
-             CHECK ATTACHMENTS FIRST
-          ============================ */
-
           if (item.AttachmentFiles && item.AttachmentFiles.length > 0) {
 
             const file = item.AttachmentFiles[0];
@@ -729,10 +725,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
               videoUrl = file.ServerRelativeUrl;
             }
           }
-
-          /* ===========================
-             CHECK HYPERLINK VIDEO FIELD
-          ============================ */
 
           let videoColumnUrl: string = "";
 
@@ -749,9 +741,6 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
             }
           }
 
-          /* ===========================
-             PUSH CLEAN DATA
-          ============================ */
 
           AllData.push({
             ID: item.ID || "",

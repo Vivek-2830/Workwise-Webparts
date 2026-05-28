@@ -135,12 +135,47 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
           <div className="news-filters">
             <Pivot onLinkClick={this._onPivotChange}>
               <PivotItem headerText="All News" itemKey="all" />
-              <PivotItem headerText="Company" itemKey="company" />
+              {/* <PivotItem headerText="Company" itemKey="company" />
               <PivotItem headerText="Community" itemKey="community" />
               <PivotItem headerText="Charity" itemKey="charity" />
               <PivotItem headerText="Colleagues" itemKey="colleagues" />
               <PivotItem headerText="Contracts" itemKey="contracts" />
-              <PivotItem headerText="Case Studies" itemKey="case studies" />
+              <PivotItem headerText="Case Studies" itemKey="case studies" /> */}
+             {/* Dynamic Categories */}
+              {
+                this.state.NewsAnnouncementsData &&
+                this.state.NewsAnnouncementsData.length > 0 &&
+                this.state.NewsAnnouncementsData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.NewsCategory) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].NewsCategory === item.NewsCategory
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.NewsCategory}
+                      headerText={item.NewsCategory}
+                      itemKey={item.NewsCategory.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
           </div>
 
@@ -602,6 +637,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
         return acc;
       }, {});
 
+
       // // Convert object → array (ES5 safe)
       // const latestPerCategory: any[] = [];
 
@@ -620,42 +656,68 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
   }
 
   private _onPivotChange = (item?: PivotItem): void => {
+    // if (!item) return;
+
+    // let filterdata = this.state.NewsAnnouncementsData;
+
+    // switch (item.props.itemKey) {
+
+    //   case "company":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Company");
+    //     break;
+
+    //   case "community":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Community");
+    //     break;
+
+    //   case "charity":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Charity");
+    //     break;
+
+    //   case "colleagues":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Colleagues");
+    //     break;
+
+    //   case "contracts":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Contracts");
+    //     break;
+
+    //   case "case studies":
+    //     filterdata = filterdata.filter(t => t.NewsCategory === "Case Studies");
+    //     break;
+
+    //   case "all":
+    //   default:
+    //     filterdata = this.state.NewsAnnouncementsData;
+    // }
+
+    // this.setState({ NewsFilterdData: filterdata });
+
     if (!item) return;
 
-    let filterdata = this.state.NewsAnnouncementsData;
+    const selectedKey = item.props.itemKey || "all";
 
-    switch (item.props.itemKey) {
+    let filterdata = [...this.state.NewsAnnouncementsData];
 
-      case "company":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Company");
-        break;
+    // Filter Dynamic Category
 
-      case "community":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Community");
-        break;
+    if (selectedKey !== "all") {
 
-      case "charity":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Charity");
-        break;
+      filterdata = filterdata.filter((t: any) =>
 
-      case "colleagues":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Colleagues");
-        break;
+        t.NewsCategory &&
+        t.NewsCategory.toLowerCase() === selectedKey.toLowerCase()
 
-      case "contracts":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Contracts");
-        break;
+      );
 
-      case "case studies":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Case Studies");
-        break;
-
-      case "all":
-      default:
-        filterdata = this.state.NewsAnnouncementsData;
     }
 
-    this.setState({ NewsFilterdData: filterdata });
+    this.setState({
+
+      NewsFilterdData: filterdata
+
+    });
+
   }
 
   public async AddNewsAnnouncementInfo() {

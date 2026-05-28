@@ -380,8 +380,8 @@ export default class HomePageIntranetFaQs extends React.Component<IHomePageIntra
       "Answers"
     ).get().then((data) => {
       let AllData = [];
-      console.log(data);
-      console.log(faqs);
+      // console.log(data);
+      // console.log(faqs);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

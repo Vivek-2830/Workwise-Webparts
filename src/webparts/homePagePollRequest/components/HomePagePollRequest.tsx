@@ -923,35 +923,6 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
     await this.loadResults();
   }
 
-  /* Load aggregated results */
-  // private async loadResults() {
-
-  //   const items = await sp.web.lists
-  //     .getByTitle("Survey Response")
-  //     .items
-  //     .select("Option")
-  //     .get();
-
-  //   let counts = [0, 0, 0, 0];
-
-  //   items.forEach((item: any) => {
-
-  //     if (item.Option === "test 1") counts[0]++;
-  //     if (item.Option === "test 2") counts[1]++;
-  //     if (item.Option === "Option 3") counts[2]++;
-  //     if (item.Option === "Option 4") counts[3]++;
-
-  //   });
-
-  //   this.setState({ counts: counts }, () => {
-
-  //     if (this.state.hasVoted) {
-  //       this.renderChart();
-  //     }
-
-  //   });
-  // }
-
   private async loadResults() {
 
     const items = await sp.web.lists
@@ -1031,8 +1002,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       "Options"
     ).get().then((data) => {
       let AllData = [];
-      console.log(poll);
-      console.log(data);
+      // console.log(poll);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -1057,8 +1028,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       "PersonName"
     ).get().then((data) => {
       let AllData = [];
-      console.log(response);
-      console.log(data);
+      // console.log(response);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({
@@ -1081,8 +1052,8 @@ export default class HomePagePollRequest extends React.Component<IHomePagePollRe
       "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(widgetdata);
-      console.log(data);
+      // console.log(widgetdata);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

@@ -477,8 +477,8 @@ export default class EmployeehubOurValues extends React.Component<IEmployeehubOu
       "Icon"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(data);
-      console.log(value);
+      // console.log(data);
+      // console.log(value);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

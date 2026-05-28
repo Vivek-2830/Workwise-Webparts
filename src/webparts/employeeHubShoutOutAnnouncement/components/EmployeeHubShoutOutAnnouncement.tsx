@@ -435,8 +435,8 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
       "Icon"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(info);
-      console.log(data);
+      // console.log(info);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

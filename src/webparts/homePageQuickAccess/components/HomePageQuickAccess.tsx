@@ -635,8 +635,8 @@ export default class HomePageQuickAccess extends React.Component<IHomePageQuickA
       "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(quickdata);
-      console.log(data);
+      // console.log(quickdata);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

@@ -522,8 +522,7 @@ export default class EmployeehubHrTeamContact extends React.Component<IEmployeeh
       "Photo"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(details);
-      console.log(data);
+      
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

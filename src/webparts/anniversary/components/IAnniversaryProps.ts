@@ -1,9 +1,7 @@
-export interface IRelatedNewsProps {
+export interface IAnniversaryProps {
   description: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  context: any;
-  category: string;
 }

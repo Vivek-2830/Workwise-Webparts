@@ -611,8 +611,6 @@ export default class EmployeehubInternalVacancies extends React.Component<IEmplo
       "Link"
     ).get().then((data) => {
       let AllData = [];
-      console.log(vacancies);
-      console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

@@ -422,8 +422,8 @@ export default class HomePageQuickLinksHub extends React.Component<IHomePageQuic
       "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(links);
-      console.log(data);
+      // console.log(links);
+      // console.log(data);
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

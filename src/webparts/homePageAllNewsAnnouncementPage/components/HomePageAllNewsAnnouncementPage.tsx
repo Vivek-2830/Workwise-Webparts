@@ -49,13 +49,40 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
 
           <div className="news-filters">
             <Pivot onLinkClick={this._onPivotChange}>
-              <PivotItem headerText="All News" itemKey="all" />
-              <PivotItem headerText="Company" itemKey="company" />
-              <PivotItem headerText="Community" itemKey="community" />
-              <PivotItem headerText="Charity" itemKey="charity" />
-              <PivotItem headerText="Colleagues" itemKey="colleagues" />
-              <PivotItem headerText="Contracts" itemKey="contracts" />
-              <PivotItem headerText="Case Studies" itemKey="case studies" />
+              {
+                this.state.NewsAnnouncementsData &&
+                this.state.NewsAnnouncementsData.length > 0 &&
+                this.state.NewsAnnouncementsData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.NewsCategory) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].NewsCategory === item.NewsCategory
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.NewsCategory}
+                      headerText={item.NewsCategory}
+                      itemKey={item.NewsCategory.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
           </div>
 
@@ -106,8 +133,7 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
         "NewsPhoto",
         "NewsCategory",
         "NewsDate",
-        "Link",
-        "AttachmentFiles"
+        "Link"
       )
       .expand("AttachmentFiles")
       .orderBy("NewsDate", false)
@@ -161,6 +187,7 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
         return acc;
       }, {});
 
+
       // // Convert object → array (ES5 safe)
       // const latestPerCategory: any[] = [];
 
@@ -179,44 +206,33 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
   }
 
   private _onPivotChange = (item?: PivotItem): void => {
+
+
     if (!item) return;
 
-    let filterdata = this.state.NewsAnnouncementsData;
+    const selectedKey = item.props.itemKey || "all";
 
+    let filterdata = [...this.state.NewsAnnouncementsData];
 
+    // Filter Dynamic Category
 
-    switch (item.props.itemKey) {
+    if (selectedKey !== "all") {
 
-      case "company":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Company");
-        break;
+      filterdata = filterdata.filter((t: any) =>
 
-      case "community":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Community");
-        break;
+        t.NewsCategory &&
+        t.NewsCategory.toLowerCase() === selectedKey.toLowerCase()
 
-      case "charity":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Charity");
-        break;
+      );
 
-      case "colleagues":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Colleagues");
-        break;
-
-      case "contracts":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Contracts");
-        break;
-
-      case "case studies":
-        filterdata = filterdata.filter(t => t.NewsCategory === "Case Studies");
-        break;
-
-      case "all":
-      default:
-        filterdata = this.state.NewsAnnouncementsData;
     }
 
-    this.setState({ NewsFilterdData: filterdata });
+    this.setState({
+
+      NewsFilterdData: filterdata
+
+    });
+
   }
 
 }

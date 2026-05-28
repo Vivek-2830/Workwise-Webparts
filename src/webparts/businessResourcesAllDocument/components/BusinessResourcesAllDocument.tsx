@@ -1093,48 +1093,6 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
   }
 
-  // private _onPivotChange = (item?: PivotItem): void => {
-  //   if (!item) return;
-
-  //   let filterdata = this.state.DocumentsAndPoliciesData;
-  //   let templatedata = this.state.TemplatesandBrandingData;
-
-  //   switch (item.props.itemKey) {
-
-  //     case "hr":
-  //       filterdata = filterdata.filter(t => t.Category === "HR");
-  //       break;
-
-  //     case "finance":
-  //       filterdata = filterdata.filter(t => t.Category === "Finance");
-  //       break;
-
-  //     case "safety":
-  //       filterdata = filterdata.filter(t => t.Category === "Safety");
-  //       break;
-
-  //     case "it":
-  //       filterdata = filterdata.filter(t => t.Category === "IT");
-  //       break;
-
-  //     case "fleet":
-  //       filterdata = filterdata.filter(t => t.Category === "Fleet");
-  //       break;
-
-  //     case "procurement":
-  //       filterdata = filterdata.filter(t => t.Category === "Procurement");
-  //       break;
-
-  //     case "all":
-  //     default:
-  //       filterdata = this.state.DocumentsAndPoliciesData;
-  //       templatedata = this.state.TemplatesandBrandingData;
-  //   }
-
-  //   this.setState({ DocumentsAndPoliciesFilterdData: filterdata });
-  //   this.setState({ TemplatesandBrandingFilterdData: templatedata });
-  // }
-
   private _onPivotChange = (
     section:
       | "docs"

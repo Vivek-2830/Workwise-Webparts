@@ -440,8 +440,7 @@ export default class EmployeehubHrQuicklinks extends React.Component<IEmployeehu
       "Link"
     ).expand("AttachmentFiles").get().then((data) => {
       let AllData = [];
-      console.log(tools);
-      console.log(data);
+      
       if (data.length > 0) {
         data.forEach((item) => {
           AllData.push({

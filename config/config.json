@@ -249,6 +249,14 @@
           "manifest": "./src/webparts/businessResourcesImage/BusinessResourcesImageWebPart.manifest.json"
         }
       ]
+    },
+    "anniversary-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/anniversary/AnniversaryWebPart.js",
+          "manifest": "./src/webparts/anniversary/AnniversaryWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -285,6 +293,7 @@
     "BusinessResourcesAllDocumentWebPartStrings": "lib/webparts/businessResourcesAllDocument/loc/{locale}.js",
     "BusinessResourcesFaQsWebPartStrings": "lib/webparts/businessResourcesFaQs/loc/{locale}.js",
     "BusinessResourcesImageWebPartStrings": "lib/webparts/businessResourcesImage/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "AnniversaryWebPartStrings": "lib/webparts/anniversary/loc/{locale}.js"
   }
 }
