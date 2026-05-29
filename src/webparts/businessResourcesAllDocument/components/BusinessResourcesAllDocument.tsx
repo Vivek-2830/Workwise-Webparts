@@ -192,16 +192,45 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
               selectedKey={this.state.SelectedDocsPivot}
               onLinkClick={(item) => this._onPivotChange("docs", item)}
             >
-              <PivotItem headerText="All" itemKey="all" />
-              <PivotItem headerText="HR" itemKey="hr" />
-              <PivotItem headerText="Finance" itemKey="finance" />
-              <PivotItem headerText="Safety" itemKey="safety" />
-              <PivotItem headerText="IT" itemKey="it" />
-              <PivotItem headerText="Fleet" itemKey="fleet" />
-              <PivotItem headerText="Procurement" itemKey="procurement" />
-              <PivotItem headerText="Axis" itemKey="axis" />
-              <PivotItem headerText="CLC" itemKey="clc" />
-              <PivotItem headerText="Concept" itemKey="concept" />
+              <PivotItem
+                headerText="All"
+                itemKey="all"
+              />
+
+              {
+                this.state.DocumentsAndPoliciesData &&
+                this.state.DocumentsAndPoliciesData.length > 0 &&
+                this.state.DocumentsAndPoliciesData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.Category) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].Category ===  item.Category
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
 
           </div>
@@ -284,13 +313,44 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           <div className="category-tabs">
             
             <Pivot selectedKey={this.state.SelectedTemplatesPivot} onLinkClick={(item) => this._onPivotChange("templates", item)}>
-              <PivotItem headerText="All" itemKey="all" />
-              <PivotItem headerText="Logos" itemKey="logos" />
-              <PivotItem headerText="Logo Lockups" itemKey="logo lockups" />
-              <PivotItem headerText="Branding Guidelines" itemKey="Branding Guidelines" />
-              <PivotItem headerText="Presentations" itemKey="Presentations" />
-              <PivotItem headerText="Teams Backgrounds" itemKey="Teams Backgrounds" />
-              <PivotItem headerText="LinkedIn Banners" itemKey="LinkedIn Banners" />
+            <PivotItem
+                headerText="All"
+                itemKey="all"
+              />
+
+              {
+                this.state.TemplatesandBrandingData &&
+                this.state.TemplatesandBrandingData.length > 0 &&
+                this.state.TemplatesandBrandingData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.Category) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].Category ===  item.Category
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
+
+                  ))
+              }
             </Pivot>
           </div>
 
@@ -482,10 +542,41 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           <div className="category-tabs">
             <Pivot selectedKey={this.state.SelectInsuranceCertificatePivot} onLinkClick={(item) => this._onPivotChange("insurance", item)}>
               <PivotItem headerText="All" itemKey="all" />
-              <PivotItem headerText="Axis Certificates" itemKey="Axis Certificates" />
-              <PivotItem headerText="CLC Certificates" itemKey="CLC Certificates" />
-              <PivotItem headerText="Concept Certificates" itemKey="Concept Certificates" />
-              <PivotItem headerText="Insurances" itemKey="Insurances" />
+
+              {
+                this.state.InsuranceandCertificateData &&
+                this.state.InsuranceandCertificateData.length > 0 &&
+                this.state.InsuranceandCertificateData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.Category) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].Category ===  item.Category
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
           </div>
 
@@ -567,18 +658,40 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           <div className="category-tabs">
             <Pivot selectedKey={this.state.SelectBusinessApplicationPivot} onLinkClick={(item) => this._onPivotChange("business", item)}>
               <PivotItem headerText="All" itemKey="all" />
-              <PivotItem headerText="Access" itemKey="HS Risk Information – Access" />
-              <PivotItem headerText="Asbestos" itemKey="HS Risk Information – Asbestos" />
-              <PivotItem headerText="Construction" itemKey="HS Risk Information – Construction" />
-              <PivotItem headerText="Demolition" itemKey="HS Risk Information – Demolition" />
-              <PivotItem headerText="Electrical" itemKey="HS Risk Information – Electrical" />
-              <PivotItem headerText="Kitchen & Bathroom" itemKey="HS Risk Information – Kitchen & Bathroom" />
-              <PivotItem headerText="Work Equipment" itemKey="HS Risk Information – Work Equipment" />
-              <PivotItem headerText="HSF Axis CLC" itemKey="HSF Axis CLC" />
-              <PivotItem headerText="HSP Axis CLC" itemKey="hsp axis clc" />
-              <PivotItem headerText="SHEQ Axis" itemKey="SHEQ Axis" />
-              <PivotItem headerText=" SHEQ CLC" itemKey=" SHEQ CLC" />
-              <PivotItem headerText="SHEQ Concept" itemKey="SHEQ Concept" />
+              {
+                this.state.BusinessApplicationData &&
+                this.state.BusinessApplicationData.length > 0 &&
+                this.state.BusinessApplicationData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.Category) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].Category ===  item.Category
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
           </div>
 
@@ -639,7 +752,6 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
         </div>
 
         {/* ---------------------------------------Brochures-------------------------------------------------- */}
-
         <div id="TempCatalog" className="temps-wrapper">
 
           <h2 className="page-title">Brochures</h2>
@@ -661,14 +773,45 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           <div className="category-tabs">
 
             <Pivot selectedKey={this.state.SelectBrochurePivot} onLinkClick={(item) => this._onPivotChange("brochure", item)}>
-              <PivotItem headerText="All" itemKey="all" />
-              <PivotItem headerText="General Brochure" itemKey="general brochure" />
-              <PivotItem headerText="Decarbonisation" itemKey="decarbonisation" />
-              <PivotItem headerText="Fire Safety" itemKey="fire safety" />
-              <PivotItem headerText="Damp and Mould" itemKey="damp and mould" />
-              <PivotItem headerText="M&E" itemKey="m&e" />
-              <PivotItem headerText="Healthcare" itemKey="healthcare" />
-              <PivotItem headerText="Education" itemKey="education" />
+            <PivotItem
+                headerText="All"
+                itemKey="all"
+              />
+
+              {
+                this.state.BrochuresData &&
+                this.state.BrochuresData.length > 0 &&
+                this.state.BrochuresData
+                  .filter(function (item: any, index: number, array: any[]) {
+
+                    if (!item.Category) {
+                      return false;
+                    }
+
+                    for (var i = 0; i < index; i++) {
+
+                      if (
+                        array[i].Category ===  item.Category
+                      ) {
+                        return false;
+                      }
+
+                    }
+
+                    return true;
+
+                  })
+                  .map((item: any) => (
+
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
+
+                  ))
+              }
+
             </Pivot>
           </div>
 
@@ -1106,12 +1249,26 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
     if (!item) return;
 
-    const key = item.props.itemKey || "all";
+    // const key = item.props.itemKey || "all";
 
-    const filterByCategory = (data: any[]) =>
-      key === "all"
-        ? data
-        : data.filter(d => d.Category?.toLowerCase() === key.toLowerCase());
+    // const filterByCategory = (data: any[]) =>
+    //   key === "all"
+    //     ? data
+    //     : data.filter(d => d.Category?.toLowerCase() === key.toLowerCase());
+
+    const key = (item.props.itemKey || "all").toLowerCase();
+
+    const filterByCategory = (data: any[]) => {
+  
+      if (key === "all") {
+        return data;
+      }
+  
+      return (data || []).filter((d: any) =>
+        d.Category &&
+        d.Category.toLowerCase() === key
+      );
+    };
 
     switch (section) {
 

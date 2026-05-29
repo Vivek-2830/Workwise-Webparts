@@ -156,7 +156,4 @@ export default class RelatedNews extends React.Component<IRelatedNewsProps, IRel
     }
   }
 
-    
-  
-
 }

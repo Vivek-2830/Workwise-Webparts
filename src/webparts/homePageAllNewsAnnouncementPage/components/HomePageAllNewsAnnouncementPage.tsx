@@ -207,7 +207,6 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
 
   private _onPivotChange = (item?: PivotItem): void => {
 
-
     if (!item) return;
 
     const selectedKey = item.props.itemKey || "all";
