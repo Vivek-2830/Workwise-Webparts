@@ -124,6 +124,13 @@
     font-weight: 600;
 }
 
+.req-row p, .req-row span, .req-row div, .req-row li {
+    font-family: inherit !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    color: #323130 !important;
+}
+
 @media (max-width: 1200px) {
     .jobs-grid {
         grid-template-columns: repeat(2, 1fr);
