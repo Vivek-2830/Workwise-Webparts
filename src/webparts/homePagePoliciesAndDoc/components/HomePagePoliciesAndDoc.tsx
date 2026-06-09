@@ -50,16 +50,16 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
 
             {
               this.state.IsAdmin ?
-              <>
-                <div>
-                  <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Policies%20Documents/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
-                    <PrimaryButton className='Adddoc' text="Add Document" />
-                  </a>
-                </div>
-              </>
-              :
-              <>
-              </>
+                <>
+                  <div>
+                    <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Policies%20Documents/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                      <PrimaryButton className='Adddoc' text="Add Document" />
+                    </a>
+                  </div>
+                </>
+                :
+                <>
+                </>
             }
 
             {/* <button className="view-all">View all</button> */}
@@ -68,28 +68,6 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
           <div className="policy-grid">
 
             {/* {
-                this.state.PolicesData.length > 0 &&
-                this.state.PolicesData.map((item) => {
-                  // let imagePath = "";
-                  // let ImageInfo = JSON.parse(item.PolicesImage);
-                  // if (ImageInfo && ImageInfo["serverRelativeUrl"]) {
-                  //   imagePath = ImageInfo["serverRelativeUrl"];
-                  // }
-                  // else {
-                  //   imagePath = `${this.props.context.pageContext.site.absoluteUrl}/Lists/Policies Documents/Attachments/${item.ID}/${ImageInfo.fileName}`;
-                  // }
-                  return (
-                    <div className="policy-card">
-                      <a href={item.FileRef} target="_blank" data-interception="off" style={{ textDecoration: "none" }} >
-                        <img src={item.PolicesImage} />
-                        <span>{item.FileLeafRef}</span>
-                      </a>
-                    </div>
-                  );
-                })
-              } */}
-
-            {
               this.state.PolicesData.length > 0 &&
               this.state.PolicesData.map((item: any) => {
 
@@ -128,7 +106,22 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
                   </div>
                 );
               })
+            } */}
+
+            {
+              this.state.PolicesData.length > 0 &&
+              this.state.PolicesData.map((item) => {
+                
+                return (
+                  <div className="policy-card">
+                    <a href={item.Link.Url} target="_blank" data-interception="off" style={{ textDecoration: "none" }}>
+                      <span>{item.Title}</span>
+                    </a>
+                  </div>
+                );
+              })
             }
+
 
           </div>
 
@@ -158,37 +151,59 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
       this.setState({ IsAdmin: isAdmin, CurrentUserEmail: userEmail });
     } catch (error) {
       console.error("Error checking admin status:", error);
-    } 
+    }
   }
 
+  // public async getPoliciesData() {
+  //   try {
+
+  //     const libraryRoot = "/sites/GroupIntranet/Policies Documents"; // update site path
+
+  //     const doc = await sp.web.lists
+  //       .getByTitle("Policies Documents")
+  //       .items
+  //       .select(
+  //         "Id",
+  //         "FileLeafRef",
+  //         "FileRef",
+  //         "Modified",
+  //         "Editor/Title",
+  //         "File_x0020_Type",
+  //         "PolicesImage",
+  //         "FSObjType",
+  //         "FileDirRef"
+  //       )
+  //       .expand("Editor")
+  //       .filter(`FSObjType eq 1 and FileDirRef eq '${libraryRoot}'`)
+  //       .get();
+
+  //     this.setState({ PolicesData: doc });
+
+  //   } catch (error) {
+  //     console.log("Error fetching Company Documents data: ", error);
+  //   }
+  // }
+
   public async getPoliciesData() {
-    try {
-
-      const libraryRoot = "/sites/GroupIntranet/Policies Documents"; // update site path
-
-      const doc = await sp.web.lists
-        .getByTitle("Policies Documents")
-        .items
-        .select(
-          "Id",
-          "FileLeafRef",
-          "FileRef",
-          "Modified",
-          "Editor/Title",
-          "File_x0020_Type",
-          "PolicesImage",
-          "FSObjType",
-          "FileDirRef"
-        )
-        .expand("Editor")
-        .filter(`FSObjType eq 1 and FileDirRef eq '${libraryRoot}'`)
-        .get();
-
-      this.setState({ PolicesData: doc });
-
-    } catch (error) {
-      console.log("Error fetching Company Documents data: ", error);
-    }
+    const policie = await sp.web.lists.getByTitle("Policies Document").items.select(
+      "ID",
+      "Title",
+      "Link"
+    ).get().then((data) => {
+      let AllData = [];
+      console.log(policie);
+      console.log(data);
+      if (data.length > 0) {
+        data.forEach((item) => {
+          AllData.push({
+            ID: item.ID ? item.ID : "",
+            Title: item.Title ? item.Title : "",
+            Link: item.Link ? item.Link : ""
+          });
+        });
+        this.setState({ PolicesData: AllData });
+      }
+    })
   }
 
 }
