@@ -46,18 +46,22 @@ export default class EmployeeHubAxisClcGallery extends React.Component<IEmployee
             Life at Axis CLC (Photo Gallery)
           </div>
 
-          <div className="gallery-grid">
-            {
-              this.state.AxisGalleryData.length > 0 &&
+          <div className='gallery-scroll'>
+
+            <div className="gallery-grid">
+              {
+                this.state.AxisGalleryData.length > 0 &&
                 this.state.AxisGalleryData.map((item) => {
                   return (
                     <div className="gallery-item" key={item.Id}>
                       <img src={item.EncodedAbsUrl} alt={item.FileLeafRef} />
                     </div>
-                  );     
+                  );
                 })
 
-            }
+              }
+            </div>
+
           </div>
 
           {

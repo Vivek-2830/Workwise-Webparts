@@ -40,7 +40,7 @@ export default class EmployeeHubShoutOutAcknowledge extends React.Component<IEmp
 
         <div className="shoutout-card">
           <div className="card-top">
-            📣
+            <img className='sharedImage' src={require('../assets/sharedimage.jpg')}/>
           </div>
           <div className="card-body">
             <h3 className="card-title">

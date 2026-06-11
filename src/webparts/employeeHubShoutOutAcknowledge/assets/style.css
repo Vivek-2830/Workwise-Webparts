@@ -9,7 +9,7 @@
 }
 
 .card-top {
-    background: #f9fbfb;
+    /* background: #f9fbfb; */
     height: 162px;
     display: flex;
     justify-content: center;
@@ -18,7 +18,12 @@
 }
 
 .card-body {
-    padding: 20px;
+    padding: 6px 20px 20px;
+}
+
+.sharedImage {
+    height: 163px;
+    width: 381px;
 }
 
 .card-title {

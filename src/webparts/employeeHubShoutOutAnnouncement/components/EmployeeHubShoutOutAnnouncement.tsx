@@ -110,22 +110,26 @@ export default class EmployeeHubShoutOutAnnouncement extends React.Component<IEm
               }
           </div>
 
-          {
-            this.state.ShoutOutAnnouncementData.length > 0 &&
-            this.state.ShoutOutAnnouncementData.map((item) => {
-              return (
-                <div className="shout-card">
-                  <div className="shout-icon">📣</div>
-                  <div className="shout-content">
-                    <div className="shout-name">{item.Title}</div>
-                    <div className="shout-message">
-                      {item.Description}
+          <div className='shoutout-scroll'>
+
+            {
+              this.state.ShoutOutAnnouncementData.length > 0 &&
+              this.state.ShoutOutAnnouncementData.map((item) => {
+                return (
+                  <div className="shout-card">
+                    <div className="shout-icon">📣</div>
+                    <div className="shout-content">
+                      <div className="shout-name">{item.Title}</div>
+                      <div className="shout-message">
+                        {item.Description}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })
-          }
+                );
+              })
+            }
+
+          </div>
 
         </div>
 
