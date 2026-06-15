@@ -169,66 +169,6 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
               })
             }
 
-            {/* <div className="event-card active">
-          <div className="event-date">
-            <h3>27</h3>
-            <span>FEB</span>
-          </div>
-
-          <div className="event-info">
-            <p>Meet &amp; Greet</p>
-            <p className='event-time'>4:00 PM - 5:00 PM</p>
-            <a href="#">+ RSVP</a>
-          </div>
-
-          <span className="event-tag week">Week Two</span>
-        </div>
-
-        <div className="event-card">
-          <div className="event-date">
-            <h3>27</h3>
-            <span>FEB</span>
-          </div>
-
-          <div className="event-info">
-            <p>Lunch &amp; Learn</p>
-            <p className='event-time'>4:00 PM - 5:00 PM</p>
-            <a href="#">+ RSVP</a>
-          </div>
-
-          <span className="event-tag meeting">Meeting</span>
-        </div>
-
-        <div className="event-card">
-          <div className="event-date">
-            <h3>27</h3>
-            <span>FEB</span>
-          </div>
-
-          <div className="event-info">
-            <p>New Hire Orientation</p>
-            <p className='event-time'>4:00 PM - 5:00 PM</p>
-            <a href="#">+ RSVP</a>
-          </div>
-
-          <span className="event-tag business">Business</span>
-        </div>
-
-        <div className="event-card">
-          <div className="event-date">
-            <h3>27</h3>
-            <span>FEB</span>
-          </div>
-
-          <div className="event-info">
-            <p>New Hire Orientation</p>
-            <p className='event-time'>4:00 PM - 5:00 PM</p>
-            <a href="#">+ RSVP</a>
-          </div>
-
-          <span className="event-tag business">Business</span>
-        </div> */}
-
           </div>
 
         </div>
@@ -292,27 +232,50 @@ export default class HomePageEvents extends React.Component<IHomePageEventsProps
   //   });
   // }
 
+  // private getEventsDetails = async () => {
+  //   try {
+  //     const EventsDetails = await sp.web.lists.getByTitle("Events").items.select("*").filter(`EventDate ge '${moment.parseZone().format('YYYY-MM-DD')}'`).top(5).get();
+
+  //     if (EventsDetails.length > 0) {
+  //       this.setState({
+  //         EventsAllDate: EventsDetails.sort((o1, o2) => {
+  //           if (moment(moment.parseZone(o1.EventDate).format("YYYY-MM-DD")).isBefore(moment.parseZone(o2.EventDate).format("YYYY-MM-DD"))) {
+  //             return -1;
+  //           }
+  //           else {
+  //             return 1;
+  //           }
+  //         })
+  //       });
+  //     }
+  //   }
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+
   private getEventsDetails = async () => {
     try {
-      const EventsDetails = await sp.web.lists.getByTitle("Events").items.select("*").filter(`EventDate ge '${moment.parseZone().format('YYYY-MM-DD')}'`).top(5).get();
-
-      if (EventsDetails.length > 0) {
-        this.setState({
-          EventsAllDate: EventsDetails.sort((o1, o2) => {
-            if (moment(moment.parseZone(o1.EventDate).format("YYYY-MM-DD")).isBefore(moment.parseZone(o2.EventDate).format("YYYY-MM-DD"))) {
-              return -1;
-            }
-            else {
-              return 1;
-            }
-          })
-        });
-      }
-    }
-    catch (error) {
+  
+      const today = moment().startOf("day").toISOString();
+  
+      const EventsDetails = await sp.web.lists
+        .getByTitle("Events")
+        .items
+        .select("*")
+        .filter(`EndDate ge datetime'${today}'`)
+        .orderBy("EventDate", true)
+        .top(5)
+        .get();
+  
+      this.setState({
+        EventsAllDate: EventsDetails
+      });
+  
+    } catch (error) {
       console.log(error);
     }
   }
-
 
 }
