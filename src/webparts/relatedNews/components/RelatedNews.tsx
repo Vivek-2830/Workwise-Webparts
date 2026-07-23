@@ -42,7 +42,6 @@ export default class RelatedNews extends React.Component<IRelatedNewsProps, IRel
 
           <div className="relatedNews-underline"></div>
 
-
           <div className="relatedNews-list">
 
             {
@@ -73,8 +72,6 @@ export default class RelatedNews extends React.Component<IRelatedNewsProps, IRel
             }
 
           </div>
-
-
 
         </div>
 

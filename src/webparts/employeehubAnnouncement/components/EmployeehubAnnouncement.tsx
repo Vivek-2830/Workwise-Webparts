@@ -158,7 +158,7 @@ export default class EmployeehubAnnouncement extends React.Component<IEmployeehu
                     </p>
 
                     <div className='announcement-read'>
-                      <a href={item.link.Url} className='anno-read'>Read more...</a>
+                      <a href={item.link ? item.link.Url : ""} className='anno-read'>Read more...</a>
                     </div>
 
                   </div>

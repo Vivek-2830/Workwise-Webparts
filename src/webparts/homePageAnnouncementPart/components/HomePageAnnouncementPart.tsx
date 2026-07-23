@@ -168,7 +168,7 @@ export default class HomePageAnnouncementPart extends React.Component<IHomePageA
 
                     {item.Link && (
                       <div className='announcement-read'>
-                        <a href={item.Link.Url} className='anno-read' target="_blank" rel="noopener noreferrer">
+                        <a href={item.Link ? item.Link.Url : ""} className='anno-read' target="_blank" rel="noopener noreferrer">
                           Read more...
                         </a>
                       </div>
