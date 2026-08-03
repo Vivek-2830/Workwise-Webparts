@@ -21,7 +21,7 @@ export default class RelatedNews extends React.Component<IRelatedNewsProps, IRel
     this.state = {
       NewsAnnouncementsData: "",
       NewsFilterdData: ""
-    }
+    };
 
   }
 
@@ -106,9 +106,8 @@ export default class RelatedNews extends React.Component<IRelatedNewsProps, IRel
       .expand("AttachmentFiles")
       .orderBy("NewsDate", false)
       .top(3)
-      .filter(`NewsCategory eq '${this.props.category}'`)
+      .filter(`NewsCategory eq '${this.props.category}' and NewsDate le '${new Date().toISOString()}'` )
       .get();
-
 
     let formattedData: any[] = [];
 

@@ -203,7 +203,7 @@ export default class HomePagePoliciesAndDoc extends React.Component<IHomePagePol
         });
         this.setState({ PolicesData: AllData });
       }
-    })
+    });
   }
 
 }

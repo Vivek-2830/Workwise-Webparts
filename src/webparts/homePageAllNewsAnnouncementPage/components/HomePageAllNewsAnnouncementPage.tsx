@@ -49,6 +49,7 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
 
           <div className="news-filters">
             <Pivot onLinkClick={this._onPivotChange}>
+              <PivotItem headerText="All News" itemKey="all" />
               {
                 this.state.NewsAnnouncementsData &&
                 this.state.NewsAnnouncementsData.length > 0 &&
@@ -135,7 +136,7 @@ export default class HomePageAllNewsAnnouncementPage extends React.Component<IHo
         "NewsDate",
         "Link"
       )
-      .expand("AttachmentFiles")
+      .expand("AttachmentFiles").filter(`NewsDate le '${new Date().toISOString()}'`)
       .orderBy("NewsDate", false)
       .get();
 

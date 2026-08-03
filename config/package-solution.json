@@ -3,7 +3,7 @@
   "solution": {
     "name": "workwise-webparts-client-side-solution",
     "id": "e4dcbdae-fe01-4709-816a-e71b5e96843c",
-    "version": "1.0.0.3",
+    "version": "1.0.0.4",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

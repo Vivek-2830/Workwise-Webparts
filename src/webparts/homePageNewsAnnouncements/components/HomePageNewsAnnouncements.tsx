@@ -585,7 +585,7 @@ export default class HomePageNewsAnnouncements extends React.Component<IHomePage
         "NewsDate",
         "Link"
       )
-      .expand("AttachmentFiles")
+      .expand("AttachmentFiles").filter(`NewsDate le '${new Date().toISOString()}'`)
       .orderBy("NewsDate", false)
       .get();
 
