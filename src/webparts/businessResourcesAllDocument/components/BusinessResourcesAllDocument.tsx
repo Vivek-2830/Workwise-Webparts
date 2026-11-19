@@ -39,6 +39,8 @@ export interface IBusinessResourcesAllDocumentState {
   AddBrochuresDialog: boolean;
   IsAdmin: boolean;
   CurrentUserEmail: any;
+  PresentationData: any;
+  PresentationFilterData: any;
 } 
 
 const SearchIconProps: IIconProps = { iconName: 'Search' };
@@ -81,7 +83,9 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
       AddHSDocumentsDialog: true,
       AddBrochuresDialog: true,
       IsAdmin: false,
-      CurrentUserEmail: ""
+      CurrentUserEmail: "",
+      PresentationData: "",
+      PresentationFilterData: ""
     };
 
   }
@@ -905,6 +909,124 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
         </div>
 
+        {/* ---------------------------------------Presenatation-------------------------------------------------- */}
+        <div id="PrentTab">
+          <section className="Presen-section">
+
+            <h2 className="section-title">Presentation</h2>
+
+            {/* Main Content */}
+            <div className="content-wrapper">
+
+              {/* Latest Documents */}
+              <div className="latest-panel">
+
+                <div className="latest-header">
+                  Latest
+                </div>
+
+                <div className="document-list">
+
+                  <div className="document-item">
+                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                    <span className="document-name">Company handbook</span>
+                    <span className="document-details">File/Location/Details</span>
+                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                  </div>
+
+                  <div className="document-item">
+                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                    <span className="document-name">Company handbook</span>
+                    <span className="document-details">File/Location/Details</span>
+                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                  </div>
+
+                  <div className="document-item">
+                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                    <span className="document-name">Company handbook</span>
+                    <span className="document-details">File/Location/Details</span>
+                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                  </div>
+
+                  <div className="document-item">
+                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                    <span className="document-name">Company handbook</span>
+                    <span className="document-details">File/Location/Details</span>
+                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                  </div>
+
+                  <div className="document-item">
+                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                    <span className="document-name">Company handbook</span>
+                    <span className="document-details">File/Location/Details</span>
+                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Right Content */}
+              <div className="right-content">
+
+                {/* Category Filters */}
+                <div className="category-filters">
+
+                  <button className="filter-btn">All</button>
+                  <button className="filter-btn">HR</button>
+                  <button className="filter-btn">Finance</button>
+
+                </div>
+
+                {/* All Documents */}
+                <div className="all-documents">
+
+                  <div className="scroll-documents">
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                    <div className="document-item">
+                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
+                      <span className="document-name">Company handbook</span>
+                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </section>
+        </div>
+        
       </section>
     );
   }
