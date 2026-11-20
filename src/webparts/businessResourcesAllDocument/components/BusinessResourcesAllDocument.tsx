@@ -915,6 +915,15 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
             <h2 className="section-title">Presentation</h2>
 
+            {/* Category Filters */}
+                <div className="category-filters">
+
+                  <button className="filter-btn">All</button>
+                  <button className="filter-btn">HR</button>
+                  <button className="filter-btn">Finance</button>
+
+                </div>
+
             {/* Main Content */}
             <div className="content-wrapper">
 
@@ -930,35 +939,30 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
                   <div className="document-item">
                     <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
                     <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
                     <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
                   </div>
 
                   <div className="document-item">
                     <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
                     <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
                     <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
                   </div>
 
                   <div className="document-item">
                     <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
                     <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
                     <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
                   </div>
 
                   <div className="document-item">
                     <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
                     <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
                     <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
                   </div>
 
                   <div className="document-item">
                     <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
                     <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
                     <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
                   </div>
 
@@ -967,15 +971,6 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
               {/* Right Content */}
               <div className="right-content">
-
-                {/* Category Filters */}
-                <div className="category-filters">
-
-                  <button className="filter-btn">All</button>
-                  <button className="filter-btn">HR</button>
-                  <button className="filter-btn">Finance</button>
-
-                </div>
 
                 {/* All Documents */}
                 <div className="all-documents">
