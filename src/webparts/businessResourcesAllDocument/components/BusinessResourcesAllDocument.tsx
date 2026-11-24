@@ -30,6 +30,7 @@ export interface IBusinessResourcesAllDocumentState {
   SelectHowtoGuidePivot: string;
   SelectBusinessApplicationPivot: string;
   SelectBrochurePivot: string;
+  SelectPresentationPivot: string;
   results: any;
   searchText: any;
   AddDocumentsandPoliciesDialog : boolean;
@@ -75,6 +76,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
       SelectHowtoGuidePivot: "all",
       SelectBusinessApplicationPivot: "all",
       SelectBrochurePivot: "all",
+      SelectPresentationPivot: "all",
       searchText: [],
       results: [],
       AddDocumentsandPoliciesDialog : true,
@@ -919,121 +921,236 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
         </div>
 
         {/* ---------------------------------------Presenatation-------------------------------------------------- */}
-        <div id="PrentTab">
-          <section className="Presen-section">
+        <div id="PrentTab" className="temps-wrapper">
 
+<<<<<<< HEAD
             <h2 className="section-title">Presentations</h2>
+=======
+          <h2 className="page-title">Presenatation</h2>
+>>>>>>> 5d2f61e13b048dabd79d5d26ac8a4ba8f2ed7774
 
-            {/* Main Content */}
-            <div className="content-wrapper">
-
-              {/* Latest Documents */}
-              <div className="latest-panel">
-
-                <div className="latest-header">
-                  Latest
+          {
+            this.state.IsAdmin ?
+              <>
+                <div className='presentationButton'>
+                  <a href="https://axiseuropeplc.sharepoint.com/sites/GroupIntranet/Presentation/Forms/AllItems.aspx" target="_blank" data-interception="off" style={{ textDecoration: "none", color: 'inherit' }}>
+                    <PrimaryButton className='AddPresentation' text="Add Templates and Branding" />
+                  </a>
                 </div>
+              </>
+              :
+              <>
+              </>
+          }
 
-                <div className="document-list">
+          <div className="category-tabs">
 
-                  <div className="document-item">
-                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                    <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
-                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                  </div>
+            <Pivot selectedKey={this.state.SelectPresentationPivot} onLinkClick={(item) => this._onPivotChange("presentations", item)}>
+              <PivotItem
+                headerText="All"
+                itemKey="all"
+              />
 
-                  <div className="document-item">
-                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                    <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
-                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                  </div>
+              {
+                this.state.PresentationData &&
+                this.state.PresentationData.length > 0 &&
+                this.state.PresentationData
+                  .filter(function (item: any, index: number, array: any[]) {
 
-                  <div className="document-item">
-                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                    <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
-                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                  </div>
+                    if (!item.Category) {
+                      return false;
+                    }
 
-                  <div className="document-item">
-                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                    <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
-                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                  </div>
+                    for (var i = 0; i < index; i++) {
 
-                  <div className="document-item">
-                    <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                    <span className="document-name">Company handbook</span>
-                    <span className="document-details">File/Location/Details</span>
-                    <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                  </div>
+                      if (
+                        array[i].Category === item.Category
+                      ) {
+                        return false;
+                      }
 
-                </div>
-              </div>
+                    }
 
-              {/* Right Content */}
-              <div className="right-content">
+                    return true;
 
-                {/* Category Filters */}
-                <div className="category-filters">
+                  })
+                  .map((item: any) => (
 
-                  <button className="filter-btn">All</button>
-                  <button className="filter-btn">HR</button>
-                  <button className="filter-btn">Finance</button>
+                    <PivotItem
+                      // key={item.Category.toLowerCase()}
+                      headerText={item.Category}
+                      itemKey={item.Category.toLowerCase()}
+                    />
 
-                </div>
+                  ))
+              }
+            </Pivot>
+          </div>
 
-                {/* All Documents */}
-                <div className="all-documents">
+          <div className="content-grid">
 
-                  <div className="scroll-documents">
+            {/* ================= LEFT: LATEST ================= */}
+            <div className="category-card">
+              <div className="doc-header">Latest</div>
 
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
+              <ul className="doclist">
+                {
+                  Array.isArray(this.state.PresentationData)
+                    ? [...this.state.PresentationData]
+                      .sort((a, b) => {
+                        var dateA = a.Modified ? new Date(a.Modified).getTime() : 0;
+                        var dateB = b.Modified ? new Date(b.Modified).getTime() : 0;
+                        return dateB - dateA;
+                      })
+                      .slice(0, 5)
+                      .map((doc) => (
+                        <li key={doc.Id} className="docs-items">
 
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
+                          <div className="docfile-info">
+                            <span className="doc-icon">
+                              <img src={require('../assets/Vector.png')} />
+                            </span>
+                            <div className="doc-name">{doc.FileLeafRef}</div>
+                          </div>
 
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
+                          <a
+                            href={doc.FileRef}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-interception="off"
+                            download
+                            className="download"
+                          >
+                            <img src={require('../assets/DownloadIcon.png')} />
+                          </a>
 
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
-
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
-
-                    <div className="document-item">
-                      <img src={require('../assets/Vector.png')} alt="Document" className="file-icon" />
-                      <span className="document-name">Company handbook</span>
-                      <img src={require('../assets/DownloadIcon.png')} alt="Download" className="download-icon" />
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
+                        </li>
+                      ))
+                    : null
+                }
+              </ul>
             </div>
 
-          </section>
+
+            {/* ================= RIGHT: PREVIEW ================= */}
+            <div className="categorys-card">
+              <ul className="doc-list scroll TemplatesandBranding">
+
+                {
+                  this.state.PresentationFilterData.length > 0 &&
+                  this.state.PresentationFilterData.map((doc) => {
+
+                    var type = doc.File_x0020_Type
+                      ? doc.File_x0020_Type.toLowerCase()
+                      : "";
+
+                    var videoTypes = ["mp4", "mov", "mkv", "wmv", "flv"];
+                    var imageTypes = ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"];
+                    var officeTypes = ["ppt", "pptx", "doc", "docx", "xls", "xlsx"];
+                    var templateTypes = ["pot", "potx"];
+
+                    var fileUrl = doc.EncodedAbsUrl;
+                    var previewUrl = fileUrl;
+
+                    // ✅ OFFICE FILES
+                    if (officeTypes.indexOf(type) > -1 && doc.UniqueId) {
+                      previewUrl =
+                        this.props.context.pageContext.web.absoluteUrl +
+                        "/_layouts/15/Doc.aspx?sourcedoc=" + doc.UniqueId +
+                        "&file=" + encodeURIComponent(doc.FileLeafRef) +
+                        "&action=embedview&wdStartOn=1";
+                    }
+
+                    // ✅ TEMPLATE FILES (POTX FIX)
+                    else if (templateTypes.indexOf(type) > -1 && doc.UniqueId) {
+                      previewUrl =
+                        this.props.context.pageContext.web.absoluteUrl +
+                        "/_layouts/15/WopiFrame.aspx?sourcedoc=" + doc.UniqueId +
+                        "&action=interactivepreview";
+                    }
+
+                    // ✅ PDF
+                    else if (type === "pdf") {
+                      previewUrl = fileUrl;
+                    }
+
+                    // fallback
+                    else {
+                      previewUrl = fileUrl.replace("interactivepreview", "embedview");
+                    }
+
+                    return (
+                      <li key={doc.Id} className="docsPolice-items">
+
+                        <div className="docsPolice-info">
+
+                          <span className="docsPolice-icon">
+
+                            {/* VIDEO */}
+                            {
+                              videoTypes.indexOf(type) > -1 ? (
+                                <video width="100%" height="580" controls>
+                                  <source src={fileUrl} />
+                                </video>
+                              )
+
+                                /* IMAGE */
+                                : imageTypes.indexOf(type) > -1 ? (
+                                  <img
+                                    className="fileimage"
+                                    src={fileUrl}
+                                    style={{
+                                      width: "100%",
+                                      maxHeight: "580px",
+                                      objectFit: "contain"
+                                    }}
+                                    alt={doc.FileLeafRef}
+                                  />
+                                )
+
+                                  /* OFFICE + TEMPLATE PREVIEW */
+                                  : (
+                                    <iframe
+                                      src={previewUrl}
+                                      style={{ width: "100%", height: "580px" }}
+                                      frameBorder="0"
+                                      allowFullScreen
+                                      title={doc.FileLeafRef}
+                                    ></iframe>
+                                  )
+                            }
+
+                          </span>
+
+                          <div className="docsPolice-name">
+                            {doc.FileLeafRef}
+                          </div>
+
+                        </div>
+
+                        {/* DOWNLOAD */}
+                        <a
+                          href={doc.FileRef}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-interception="off"
+                          download
+                          className="download"
+                        >
+                          <img src={require('../assets/DownloadIcon.png')} />
+                        </a>
+
+                      </li>
+                    );
+                  })
+                }
+
+              </ul>
+            </div>
+
+          </div>
+
+
         </div>
         
       </section>
@@ -1050,6 +1167,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
     this.getBusinessAppData();
     this.getBrochuresData();
     this.GetCurrentUser();
+    this.getPresetationData();
   }
 
   public async GetCurrentUser() {
@@ -1367,6 +1485,36 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
   }
 
+  public async getPresetationData() {
+    try {
+      const presendoc = await sp.web.lists
+        .getByTitle("Presentation")
+        .items.select(
+          "Id",
+          "FileLeafRef",
+          "FileRef",
+          "UniqueId",
+          "Modified",
+          "Editor/Title",
+          "File_x0020_Type",
+          "Category",
+          "EncodedAbsUrl"
+        )
+        .expand("Editor")
+        .getAll();
+
+      this.setState({
+        PresentationData: presendoc,
+        PresentationFilterData: presendoc
+      });
+
+      console.log("Presentation: ", presendoc);
+
+    } catch (error) {
+      console.log("Error fetching Presentation: ", error);
+    }
+  }
+
   private _onPivotChange = (
     section:
       | "docs"
@@ -1374,7 +1522,8 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
       | "insurance"
       | "howto"
       | "business"
-      | "brochure",
+      | "brochure"
+      | "presentations",
     item?: PivotItem
   ): void => {
 
@@ -1448,6 +1597,14 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
           SelectBrochurePivot: key,
           BrochuresFilterdData:
             filterByCategory(this.state.BrochuresData)
+        });
+        break;
+
+      case "presentations":
+        this.setState({
+          SelectPresentationPivot: key,
+          PresentationFilterData:
+            filterByCategory(this.state.PresentationData)
         });
     }
   }
