@@ -167,6 +167,15 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
               </div>
             </a>
 
+            <a href='#PrentTab' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="quick-item">
+                <div className="icon-circle">
+                  <img src={require('../assets/presentation.png')} />
+                </div>
+                <p>Presentations</p>
+              </div>
+            </a>
+
           </div>
 
         </div>
@@ -913,7 +922,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
         <div id="PrentTab">
           <section className="Presen-section">
 
-            <h2 className="section-title">Presentation</h2>
+            <h2 className="section-title">Presentations</h2>
 
             {/* Main Content */}
             <div className="content-wrapper">
