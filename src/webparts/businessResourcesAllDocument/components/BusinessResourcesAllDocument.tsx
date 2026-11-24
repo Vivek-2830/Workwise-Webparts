@@ -922,13 +922,8 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
 
         {/* ---------------------------------------Presenatation-------------------------------------------------- */}
         <div id="PrentTab" className="temps-wrapper">
-
-<<<<<<< HEAD
+          
             <h2 className="section-title">Presentations</h2>
-=======
-          <h2 className="page-title">Presenatation</h2>
->>>>>>> 5d2f61e13b048dabd79d5d26ac8a4ba8f2ed7774
-
           {
             this.state.IsAdmin ?
               <>
