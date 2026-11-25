@@ -1613,7 +1613,8 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
       "Insurance and Certificates",
       // "How to Guides",
       "H&S Documents",
-      "Brochures"
+      "Brochures",
+      "Presentation"
     ];
 
     let allResults: any[] = [];
