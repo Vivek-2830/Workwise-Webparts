@@ -169,6 +169,15 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
               </div>
             </a>
 
+            <a href='#BrochTab' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="quick-item">
+                <div className="icon-circle">
+                  <img src={require('../assets/brochure.png')} />
+                </div>
+                <p>Brochures</p>
+              </div>
+            </a>
+
             <a href='#PrentTab' style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="quick-item">
                 <div className="icon-circle">
@@ -767,7 +776,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
         </div>
 
         {/* ---------------------------------------Brochures-------------------------------------------------- */}
-        <div id="TempCatalog" className="temps-wrapper">
+        <div id="BrochTab" className="temps-wrapper">
 
           <h2 className="page-title">Brochures</h2>
 
@@ -923,7 +932,7 @@ export default class BusinessResourcesAllDocument extends React.Component<IBusin
         {/* ---------------------------------------Presenatation-------------------------------------------------- */}
         <div id="PrentTab" className="temps-wrapper">
           
-            <h2 className="section-title">Presentations</h2>
+            <h2 className="prese-title">Presentations</h2>
           {
             this.state.IsAdmin ?
               <>
